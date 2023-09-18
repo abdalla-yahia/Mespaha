@@ -58,7 +58,7 @@ btn[1].onclick = ()=>{
     window.localStorage.setItem('page',e)
 }
 box_2.onclick = ()=>{
-    
+    if(btn[0].style.display == 'block'&&btn[1].style.display == 'block'){
     e+=2
     img_1.setAttribute('src',`./quran-images/${e }.jpg`)
     img_2.setAttribute('src',`./quran-images/${e + 1}.jpg`)
@@ -74,8 +74,13 @@ box_2.onclick = ()=>{
 
 }
 window.localStorage.setItem('page',e)
+    }else {
+        return false
+    }
 }
 box_1.onclick = ()=>{
+    if(btn[0].style.display == 'block'&&btn[1].style.display == 'block'){
+
     
     img_1.setAttribute('src',`./quran-images/${e -2}.jpg`)
     img_2.setAttribute('src',`./quran-images/${e -1}.jpg`)
@@ -91,6 +96,9 @@ box_1.onclick = ()=>{
     
     }
     window.localStorage.setItem('page',e)
+}else {
+    return false
+}
 }
 btn_fhrs.onclick =()=>{
     fehres_1.style.visibility == 'hidden'? fehres_1.style.visibility = 'visible':fehres_1.style.visibility = 'hidden'
@@ -140,6 +148,7 @@ document.documentElement.scrollTo({
     left:0,
     behavior:'smooth'
 })
+if(btn[0].style.display == 'block'&&btn[1].style.display == 'block'){
 if(e%2 === 0){
     e-=1
     img_1.setAttribute('src',`./quran-images/${e}.jpg`)
@@ -151,7 +160,13 @@ if(e%2 === 0){
     window.localStorage.setItem('page',e)
 }
     fehres_1.style.visibility = 'hidden'
+}else{
+    img_1.setAttribute('src',`./quran-images/${e}.jpg`)
+    fehres_1.style.visibility = 'hidden'
+    window.localStorage.setItem('page',e)
+}
 })
+
     if(k== 1){
         let td = document.createElement('td');
         td.append(btn_bage)
@@ -191,3 +206,31 @@ page_number.onchange=(el)=>{
     el.target.value = ''
 }
 
+btn[2].onclick = ()=>{
+    e++
+    img_1.setAttribute('src',`./quran-images/${e}.jpg`)
+    if(e >= 604){
+        e=604
+        img_1.setAttribute('src',`./quran-images/604.jpg`)
+        btn[3].style.display = 'none'
+    }else {
+        btn[2].style.display = 'block'
+        btn[3].style.display = 'block'
+    
+    }
+    window.localStorage.setItem('page',e)
+}
+btn[3].onclick = ()=>{
+    e--
+    img_1.setAttribute('src',`./quran-images/${e}.jpg`)
+    if(e <=0){
+        e=1
+        img_1.setAttribute('src',`./quran-images/1.jpg`)
+        btn[3].style.display = 'none'
+    }else {
+        btn[2].style.display = 'block'
+        btn[3].style.display = 'block'
+    
+    }
+    window.localStorage.setItem('page',e)
+}

@@ -302,7 +302,7 @@ span.sp {
 
 .times {
   background-color: #cfcdcd;
-  width: 80%;
+  width: 100%;
   color: #361111;
   font-size: 30px;
   display: flex;
@@ -336,7 +336,7 @@ span.sp {
 .times-span:nth-child(4){
   color: #ff07c1;
 }
-@media (min-width:851px) {
+@media (min-width:1051px) {
   .container {
     position: relative;
     display: grid;
@@ -346,10 +346,8 @@ span.sp {
     
   }
 }
-@media (max-width:850px) {
-  body {
-    overflow: visible;
-  }
+@media (max-width:1050px) {
+
   .container {
     position: relative;
     display: grid;

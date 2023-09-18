@@ -50,6 +50,12 @@ background-color: rgba(0, 0, 0, 0.77);
     width: 68%;
     gap: 5px 50px;
 }
+.btn.lg {
+    display: block;
+}
+.btn.sm {
+    display: none;
+}
 .buttons button {
 padding: 20px;
 border: none;
@@ -63,11 +69,7 @@ cursor: pointer;
 .buttons button:nth-of-type(2){
     color: red;
 }
-@media (max-width:650px) {
-    .container .box {
-        flex-direction: column-reverse;
-    }
-}
+
 .fh-btn {
     padding: 10px;
     border: 2px dotted red;
@@ -189,4 +191,96 @@ tbody td {
     padding: 10px;
     color: rgb(46, 20, 32);
     
+}
+
+@media (max-width:650px) {
+    .container {
+
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .container .box {
+        width: 100%;
+        height: 90vh;
+    }
+    .container .box .box-1 {
+        background-color: black;
+        width: 100%;
+        position: absolute;
+    }
+    .container .box .box-1 {
+        background-color: red;
+    }
+    .box img {
+        object-fit:cover;
+        width: 100%;
+        cursor: pointer;
+        pointer-events: none;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: absolute;
+        width: 68%;
+        gap: 5px 50px;
+        bottom: 20px;
+    }
+    .btn.lg{
+        display: none;
+    }
+    .btn.sm {
+    padding: 20px;
+    border: none;
+    color: black;
+    border-radius: 10px;
+    background-color: #eee;
+    font-size: 25px;
+    width: 50%;
+    cursor: pointer;
+    display: block;
+    }
+    .buttons button:nth-of-type(4)
+    {
+        color: rgb(201, 5, 5);
+    }
+    .fh-btn {
+        padding: 10px;
+        border: 2px dotted red;
+        color: rgb(37, 210, 230);
+        font-size: larger;
+        font-weight: 700;
+        cursor: pointer;
+        border-radius: 10px;
+        position: fixed;
+        background-color: transparent;
+        left: 20px;
+        top: 20px;
+        z-index: 1;
+        text-align: center;
+        width: 170px;
+    }
+    .sahm {
+        left: 200px;
+        top: 0px;
+        color: rgb(134, 37, 230);
+    }
+    label,
+    input {
+    display: none;
+    }
+    table thead{
+        position: static;
+        
+    }
+    .close {
+        z-index: 9999;
+    }
+    body {
+        overflow: auto;
+    }
 }
