@@ -1,0 +1,192 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+body {
+height: auto;
+background-color: rgba(0, 0, 0, 0.77);
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.container .box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 15px 2px;
+    margin: 5px 170px 5px 0px;
+}
+.container .box .box-1,
+.container .box .box-2 {
+    width: calc(42% - 15px);
+    background-color: black;
+    overflow: hidden;
+    
+}
+.container .box .box-1 {
+    background-color: red;
+}
+.box img {
+    object-fit:cover;
+    width: 100%;
+    height: 70%;
+    user-zoom: zoom;
+    cursor: pointer;
+    filter: hue-rotate(110deg);
+}
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 68%;
+    gap: 5px 50px;
+}
+.buttons button {
+padding: 20px;
+border: none;
+color: black;
+border-radius: 10px;
+background-color: #eee;
+font-size: 25px;
+width: 25%;
+cursor: pointer;
+}
+.buttons button:nth-of-type(2){
+    color: red;
+}
+@media (max-width:650px) {
+    .container .box {
+        flex-direction: column-reverse;
+    }
+}
+.fh-btn {
+    padding: 10px;
+    border: 2px dotted red;
+    color: rgb(37, 210, 230);
+    font-size: larger;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 10px;
+    position: fixed;
+    background-color: transparent;
+    left: 20px;
+    top: 20px;
+    z-index: 1;
+    text-align: center;
+    width: 170px;
+}
+.sahm {
+    left: 20px;
+    top: 50px;
+    color: rgb(134, 37, 230);
+    margin-top: 20px;
+}
+label {
+    color: #fff;
+    width: 180px;
+    text-align: center;
+    padding: 15px;
+}
+input {
+    margin-top: 10px;
+    padding: 15px;
+    border: none;
+    color: red;
+    width: 180px;
+    text-align: center;
+    border-radius: 10px;
+    background: transparent;
+    border: 2px dotted rgb(0, 255, 174);
+    font-size: 20px;
+}
+input:focus {
+    outline: 2px solid rgb(33, 152, 168);
+    border: none;
+
+}
+.bage-btn {
+    padding: 10px;
+    border: none;
+    color: blue;
+    font-size: larger;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: transparent;
+}
+.fehres {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: rgba(0,0,0,.9);
+    min-height: 100vh;
+    z-index: 9999;
+    overflow: auto;
+}
+.close {
+    color: red;
+    font-size: 30px;
+    line-height: 1px;
+    background-color: rgb(95, 95, 95);
+    width: 40px;
+    height: 40px;
+    border: none;
+    text-align: center;
+    padding: 5px;
+    border-radius: 50%;
+    position: fixed;
+    top: 10px;
+    right: 0px;
+    cursor: pointer;
+}
+table {
+    padding: 10px;
+    margin-top: 40px;
+}
+table tbody {
+    margin-top: 0px;
+}
+table thead{
+    margin: auto;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 120px;
+}
+table thead th {
+    background-color: #f9f8f8;
+    border: 2px solid rgb(246, 245, 245);
+    padding: 10px;
+    color: rgb(180, 24, 24);
+    gap: 10px;
+    width: 250px;
+    padding: 10px;
+    text-align: center;
+    
+}
+
+tbody td {
+    text-align: center;
+    font-size: large;
+    font-weight: 700;
+    background-color: rgb(182, 225, 225);
+    gap: 10px;
+    width: 250px;
+    padding: 10px;
+    color: rgb(46, 20, 32);
+    
+}
