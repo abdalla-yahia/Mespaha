@@ -280,9 +280,9 @@ setInterval(() => {
     let houres_2 = date.getHours()
     if(houres_2 > 12){
         houres_2 -= 12
-        time_pm.innerText = "مـسـاءً"
+        time_pm.innerText = "PM"
     }else{
-        time_pm.innerText = "صـباحـاً"
+        time_pm.innerText = "AM"
     }
     if(houres_2 < 9){
         houres_2 = '0' + houres_2
