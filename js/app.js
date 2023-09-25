@@ -332,7 +332,7 @@ setInterval(() => {
         minutes_2 = '0' + minutes_2
     }
     let seconds_2 = date.getSeconds()
-    if(seconds_2 < 9){
+    if(seconds_2 <= 9){
         seconds_2 = '0' + seconds_2
     }
     times_span[1].innerHTML = houres_2
