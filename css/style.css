@@ -32,6 +32,20 @@ body {
   top: 80px;
   left: 25%;
   font-family: 'Times New Roman', Times, serif;
+  animation: move 5s linear 1;
+}
+@keyframes move {
+  0%{
+    left:25%
+  }
+  100%{
+    left:-25%;
+    opacity: 0;
+
+  }
+}
+.audio2 {
+  display: none;
 }
 .notifaction {
   width: 25%;

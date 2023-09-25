@@ -24,16 +24,18 @@ let pray_name = document.querySelectorAll('.pray-name')
 let net_pray_name = document.querySelector('.net-pray-name')
 let azan = document.querySelector('.azan')
 let azan_title = document.querySelector('.azan-title')
+let audio2 = document.querySelector('.audio2')
 
 
 let arr = ['الله أكبر  الله أكبر ','أشهد أن لا إله إلا الله','أشهد أن محمداً رسول الله','حي على الصلاة ',' حي على الفلاح','الله أكبر  الله أكبر','لا إله إلا الله']
 let moaqeet ={
-    fajr:[5,19],
-    zohr:[12,48],
+    fajr:[1,23],
+    zohr:[12,47],
     asr:[16,14],
     maqgreeb:[18,50],
     isha:[20,7]
 }
+
 
     pra_time_houres[0].innerText =moaqeet.fajr[0]
     pra_time_houres[1].innerText =moaqeet.zohr[0]
@@ -340,13 +342,16 @@ setInterval(() => {
 }, 1000);
 
 
-
-setInterval(()=>{
-    let dateTime = new Date()
-    let TimeNowHoures = dateTime.getHours()
-    let TimeNowMinutes= dateTime.getMinutes()
-    let TimeNowSeconds= dateTime.getSeconds()
-    let TimeNowHouresByMinues = ((TimeNowHoures * 60)+TimeNowMinutes)
+    
+    setInterval(()=>{
+        let dateTime = new Date()
+        let TimeNowHoures = dateTime.getHours()
+        let TimeNowMinutes= dateTime.getMinutes()
+        let TimeNowSeconds= dateTime.getSeconds()
+        let TimeNowHouresByMinues = ((TimeNowHoures * 60)+TimeNowMinutes)
+        
+        let x = TimeNowHoures*60 + TimeNowMinutes
+        let y = 0;
 
 let Fajr =  (moaqeet.fajr[0] * 60 ) +  moaqeet.fajr[1]
 let Zohr =  (moaqeet.zohr[0] * 60 ) +  moaqeet.zohr[1]
@@ -360,12 +365,13 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
         net_time_pray[2].innerText = '0' + +net_time_pray[2].innerText
     }
     let name = '';
-    if(TimeNowHouresByMinues < Fajr || TimeNowHouresByMinues > Ishaa){
+    if(TimeNowHouresByMinues <= Fajr || TimeNowHouresByMinues > Ishaa){
         name ='الفجر'
         let hTm = (moaqeet.fajr[0] * 60)+ moaqeet.fajr[1]
-
         let tt  = ((TimeNowHoures * 60)+TimeNowMinutes)
+        y=hTm
         if(tt > hTm){
+            
             let fullHoures = (24 * 60) - tt
             let NetHoures = fullHoures + hTm
             let Houres= Math.trunc(NetHoures / 60)
@@ -378,10 +384,12 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
             net_time_pray[1].innerText =Minutes
             net_time_pray[2].innerText = 59 - TimeNowSeconds
         }else{
+            
 
             let NetHoures = ((((TimeNowHoures * 60)+TimeNowMinutes)-hTm )* -1)
             let Houres= Math.trunc(NetHoures / 60)
-    
+            
+            
             let NetMinutes = ((NetHoures / 60) - Math.trunc(NetHoures / 60))
             let Minutes = Math.trunc(NetMinutes * 60)
     
@@ -390,13 +398,14 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
             net_time_pray[1].innerText =Minutes
             net_time_pray[2].innerText = 59 - TimeNowSeconds
         }
-
+        
     }
-    if(TimeNowHouresByMinues < Zohr && TimeNowHouresByMinues > Fajr){
+    if(TimeNowHouresByMinues <= Zohr && TimeNowHouresByMinues > Fajr){
         name ='الظهر'
         let hTm = (moaqeet.zohr[0] * 60)+ moaqeet.zohr[1] 
-
+        y=hTm
         let NetHoures = ((((TimeNowHoures * 60)+TimeNowMinutes)-hTm )* -1)
+
         let Houres= Math.trunc(NetHoures / 60)
 
         let NetMinutes = ((NetHoures / 60) - Math.trunc(NetHoures / 60))
@@ -408,12 +417,12 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
         net_time_pray[2].innerText = 59 - TimeNowSeconds
 
     }
-    if(TimeNowHouresByMinues < Asr && TimeNowHouresByMinues > Zohr){
+    if(TimeNowHouresByMinues <= Asr && TimeNowHouresByMinues > Zohr){
         name ='العصر'
 
 
         let hTm = (moaqeet.asr[0] * 60)+ moaqeet.asr[1] 
-
+        y=hTm
         let NetHoures = ((((TimeNowHoures * 60)+TimeNowMinutes)-hTm )* -1)
         let Houres= Math.trunc(NetHoures / 60)
 
@@ -428,10 +437,10 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
 
 
 }
-    if(TimeNowHouresByMinues < Maqhreeb && TimeNowHouresByMinues > Asr){
+    if(TimeNowHouresByMinues <= Maqhreeb && TimeNowHouresByMinues > Asr){
         name ='المغرب'
         let hTm = (moaqeet.maqgreeb[0] * 60)+ moaqeet.maqgreeb[1] 
-
+        y=hTm
         let NetHoures = ((((TimeNowHoures * 60)+TimeNowMinutes)-hTm )* -1)
         let Houres= Math.trunc(NetHoures / 60)
 
@@ -445,10 +454,10 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
      
  
     }
-    if( TimeNowHouresByMinues < Ishaa && TimeNowHouresByMinues > Maqhreeb){
+    if( TimeNowHouresByMinues <= Ishaa && TimeNowHouresByMinues > Maqhreeb){
         name ='العشاء'
         let hTm = (moaqeet.isha[0] * 60)+ moaqeet.isha[1] 
-
+        y=hTm
         let NetHoures = ((((TimeNowHoures * 60)+TimeNowMinutes)-hTm )* -1)
         let Houres= Math.trunc(NetHoures / 60)
 
@@ -473,5 +482,30 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
            if(net_time_pray[2].innerText <=9){
                net_time_pray[2].innerText = '0' + +net_time_pray[2].innerText
            }
-},1 * 1000)
 
+            
+            if(x == y){
+                azan.style.display = 'block';
+                
+                // for(let i=0 ; i < arr.length ; i++){
+                //     setTimeout(() => {
+                        
+                //         azan_title.innerText = arr[i]
+                //     }, 3*1000);
+                //     }
+                
+                    
+                setTimeout(() => {
+                    audio2.style.display = 'block';
+                    audio2.setAttribute('controls','')
+                    audio2.setAttribute('autoplay','')
+                    audio2.style.visibility = 'hidden'
+                    azan.style.display = 'none';
+                },  60 * 1000);
+                
+            }
+            console.log(x)
+            console.log(y)
+            
+        },1 * 1000)
+        
