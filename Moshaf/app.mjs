@@ -9,7 +9,8 @@ let btn_fhrs = document.querySelector('.fh-btn')
 let close = document.querySelector('.close')
 let one = document.querySelector('.one')
 let two = document.querySelector('.two')
-let page_number = document.querySelector('.page-number')
+let page_number = document.querySelector('.page-number');
+
 let e = 1
 
 if(window.localStorage.getItem('page')){
@@ -234,3 +235,4 @@ btn[3].onclick = ()=>{
     }
     window.localStorage.setItem('page',e)
 }
+
