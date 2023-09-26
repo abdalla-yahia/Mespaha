@@ -399,6 +399,16 @@ span.sp {
   margin: 3px;
   border-radius: 5px;
   font-size: 1.7rem;
+  position: relative;
+  border: 1px solid rgb(5, 100, 122);
+}
+.times .mwaqeet .pray .bg{
+position: absolute;
+background-color: #47363e;
+bottom: 0;
+left: 0;
+width: 100%;
+opacity: .5;
 }
 .times .mwaqeet .pray .pray-name{
 color: red;

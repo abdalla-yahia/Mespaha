@@ -22,6 +22,7 @@ let pra_time_houres = document.querySelectorAll('.pra-time-houres')
 let pra_time_minutes = document.querySelectorAll('.pra-time-minutes')
 let net_time_pray = document.querySelectorAll('.net-time-pray')
 let pray_name = document.querySelectorAll('.pray-name')
+let bg = document.querySelectorAll('.bg')
 let net_pray_name = document.querySelector('.net-pray-name')
 let azan = document.querySelector('.azan')
 let audio = document.querySelector('.audio')
@@ -363,7 +364,13 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
     let name = '';
     if(TimeNowHouresByMinues <= Fajr || TimeNowHouresByMinues > Ishaa){
         name ='الفجر'
-        pray[0].style.backgroundColor = '#16c27a'
+        // pray[0].style.backgroundColor = '#16c27a'
+
+        bg.forEach((e)=>{
+            e.style.display = 'none'
+        })
+        bg[0].style.display='block'
+        bg[0].style.height=`${(Fajr - ((TimeNowHoures *60) + TimeNowMinutes))/(Fajr - Ishaa)*100}%`
         let hTm = (moaqeet.fajr[0] * 60)+ moaqeet.fajr[1]
         let tt  = ((TimeNowHoures * 60)+TimeNowMinutes)
         y=hTm
@@ -399,7 +406,13 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
     }
     if(TimeNowHouresByMinues <= Zohr && TimeNowHouresByMinues > Fajr){
         name ='الظهر'
-        pray[1].style.backgroundColor = '#16c27a'
+        // pray[1].style.backgroundColor = '#16c27a'
+
+            bg.forEach((e)=>{
+            e.style.display = 'none'
+        })
+        bg[1].style.display='block'
+        bg[1].style.height=`${(Zohr - ((TimeNowHoures *60) + TimeNowMinutes))/(Zohr - Fajr)*100}%`
         let hTm = (moaqeet.zohr[0] * 60)+ moaqeet.zohr[1] 
         y=hTm
         let NetHoures = ((((TimeNowHoures * 60)+TimeNowMinutes)-hTm )* -1)
@@ -417,16 +430,21 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
     }
     if(TimeNowHouresByMinues <= Asr && TimeNowHouresByMinues > Zohr){
         name ='العصر'
-        pray[2].style.backgroundColor = '#16c27a'
-
+        // pray[2].style.backgroundColor = '#16c27a'
         let hTm = (moaqeet.asr[0] * 60)+ moaqeet.asr[1] 
         y=hTm
         let NetHoures = ((((TimeNowHoures * 60)+TimeNowMinutes)-hTm )* -1)
         let Houres= Math.trunc(NetHoures / 60)
-
+        
         let NetMinutes = ((NetHoures / 60) - Math.trunc(NetHoures / 60))
         let Minutes = Math.trunc(NetMinutes * 60)
-
+        
+        
+        bg.forEach((e)=>{
+            e.style.display = 'none'
+        })
+        bg[2].style.display='block'
+        bg[2].style.height=`${(Asr - ((TimeNowHoures *60) + TimeNowMinutes))/(Asr - Zohr)*100}%`
         
         net_time_pray[0].innerText = Houres
         net_time_pray[1].innerText =Minutes
@@ -437,7 +455,12 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
 }
     if(TimeNowHouresByMinues <= Maqhreeb && TimeNowHouresByMinues > Asr){
         name ='المغرب'
-        pray[3].style.backgroundColor = '#16c27a'
+        // pray[3].style.backgroundColor = '#16c27a'
+        bg.forEach((e)=>{
+            e.style.display = 'none'
+        })
+        bg[3].style.display='block'
+        bg[3].style.height=`${(Maqhreeb - ((TimeNowHoures *60) + TimeNowMinutes))/(Maqhreeb - Asr)*100}%`
         let hTm = (moaqeet.maqgreeb[0] * 60)+ moaqeet.maqgreeb[1] 
         y=hTm
         let NetHoures = ((((TimeNowHoures * 60)+TimeNowMinutes)-hTm )* -1)
@@ -455,7 +478,12 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
     }
     if( TimeNowHouresByMinues <= Ishaa && TimeNowHouresByMinues > Maqhreeb){
         name ='العشاء'
-        pray[4].style.backgroundColor = '#16c27a'
+        // pray[4].style.backgroundColor = '#16c27a'
+        bg.forEach((e)=>{
+            e.style.display = 'none'
+        })
+        bg[4].style.display='block'
+        bg[4].style.height=`${(Ishaa - ((TimeNowHoures *60) + TimeNowMinutes))/(Ishaa - Maqhreeb)*100}%`
         let hTm = (moaqeet.isha[0] * 60)+ moaqeet.isha[1] 
         y=hTm
         let NetHoures = ((((TimeNowHoures * 60)+TimeNowMinutes)-hTm )* -1)
