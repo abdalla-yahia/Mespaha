@@ -1,5 +1,6 @@
 import data from "../data/data.js";
 let counter = document.getElementById('counter');
+let container = document.querySelector('.container');
 let tasbeh = document.querySelectorAll('.tasbeh')
 let btn = document.getElementsByClassName('btn')
 let span = document.querySelector('.sp')
@@ -28,14 +29,16 @@ let azan = document.querySelector('.azan')
 let audio = document.querySelector('.audio')
 let audio2 = document.querySelector('.audio2')
 
-
+let arrImage = ['./Images/1.jpg','./Images/2.jpg','./Images/3.jpg','./Images/4.jpg','./Images/5.jpg','./Images/6.jpg','./Images/7.jpg','./Images/8.jpg']
+let arrAzan = ['./Audio/azan2.mp3','./Audio/azan12.mp3','./Audio/azan14.mp3','./Audio/azan15.mp3','./Audio/azan16.mp3','./Audio/azan20.mp3',]
 let moaqeet ={
     fajr:[5,20],
     zohr:[12,47],
     asr:[16,13],
-    maqgreeb:[18,50],
+    maqgreeb:[18,48],
     isha:[20,7]
 }
+container.style.backgroundImage = `url(${arrImage[Math.floor(Math.random() * arrImage.length)]})`
 
 
     pra_time_houres[0].innerText =moaqeet.fajr[0]
@@ -109,6 +112,9 @@ btn[2].onclick = ()=>{
 
 tasbeh.forEach((e,ind)=>{
     e.addEventListener('click',(es)=>{
+        container.style.backgroundImage = `url(${arrImage[Math.floor(Math.random() * arrImage.length)]})`
+        
+        console.log(e)
         cover.innerText = e.innerText
         window.localStorage.getItem(e.innerText)?span.innerHTML = window.localStorage.getItem(e.innerText):span.innerHTML = 0
         co.innerText = e.innerText + '=' + span.innerText
@@ -515,10 +521,8 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
             if(x == y){
                 azan.style.display = 'block';
                 audio2.play()
-
                 setTimeout(() => {
                     azan.style.display = 'none';
-                    audio2.clear()
                 }, 3.36* 60 * 1000);
                 
             }
@@ -526,3 +530,7 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
             
         },1 * 1000)
         
+        setInterval(()=>{
+    azan.style.backgroundImage = `url(${arrImage[Math.floor(Math.random() * arrImage.length)]})`
+            audio2.src= arrAzan[Math.floor(Math.random()* arrAzan.length - 1)]
+},5*60*1000)
