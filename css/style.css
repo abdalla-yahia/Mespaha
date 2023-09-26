@@ -23,6 +23,7 @@ body {
   background-size: cover;
   z-index: 9999;
   display: none;
+  overflow: hidden;
 }
 .azan .azan-title {
   color: red;
@@ -32,11 +33,18 @@ body {
   top: 80px;
   left: 25%;
   font-family: 'Times New Roman', Times, serif;
-  animation: move 5s linear 1;
+  animation: move 15s linear 1;
+  animation-delay: calc(18s * var(--i));
+
+  opacity: 0;
 }
 @keyframes move {
   0%{
-    left:25%
+    left:25%;
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
   }
   100%{
     left:-25%;
@@ -44,8 +52,8 @@ body {
 
   }
 }
-.audio2 {
-  display: none;
+.audio2,audio {
+  opacity: 0;
 }
 .notifaction {
   width: 25%;
@@ -219,7 +227,7 @@ p span {
 
 button,
 .tasbeh {
-  padding: 20px;
+  padding: 20px 10px;
   border-radius: 10px;
   background-color: #2196f3;
   color: #2196f3;
@@ -382,7 +390,6 @@ span.sp {
   color: #076eff;
 }
 .times .mwaqeet .pray {
-  font-family: Arial, Helvetica, sans-serif;
   width: 100px;
   display: flex;
   justify-content: center;
@@ -391,6 +398,7 @@ span.sp {
   background-color: #ddd;
   margin: 3px;
   border-radius: 5px;
+  font-size: 1.7rem;
 }
 .times .mwaqeet .pray .pray-name{
 color: red;

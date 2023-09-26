@@ -17,21 +17,21 @@ let time_pm = document.querySelector('.time-pm')
 let hadith = document.querySelector('.hadith');
 let rawy = document.querySelector('.rawy');
 let num = document.querySelector('.num');
+let pray = document.querySelectorAll('.pray')
 let pra_time_houres = document.querySelectorAll('.pra-time-houres')
 let pra_time_minutes = document.querySelectorAll('.pra-time-minutes')
 let net_time_pray = document.querySelectorAll('.net-time-pray')
 let pray_name = document.querySelectorAll('.pray-name')
 let net_pray_name = document.querySelector('.net-pray-name')
 let azan = document.querySelector('.azan')
-let azan_title = document.querySelector('.azan-title')
+let audio = document.querySelector('.audio')
 let audio2 = document.querySelector('.audio2')
 
 
-let arr = ['الله أكبر  الله أكبر ','أشهد أن لا إله إلا الله','أشهد أن محمداً رسول الله','حي على الصلاة ',' حي على الفلاح','الله أكبر  الله أكبر','لا إله إلا الله']
 let moaqeet ={
     fajr:[5,20],
     zohr:[12,47],
-    asr:[16,14],
+    asr:[16,13],
     maqgreeb:[18,50],
     isha:[20,7]
 }
@@ -74,22 +74,17 @@ setInterval(() => {
 }, 10 * 1000)
 
 setInterval(() => {
-    let audio = document.createElement('audio');
-audio.src='../نغمة جوال صلي على محمد(MP3_160K).mp3'
-audio.setAttribute('autoplay','')
-audio.setAttribute('controls','')
-audio.style.visibility = 'hidden'
-    document.body.appendChild(audio)
+
+    audio.play()
     notifaction.style.display = 'block'
     notifaction.style.display = 'block'
     setTimeout(() => {
         notifaction.style.display = 'none'
-        document.body.removeChild(audio)
-        
+        audio.clear()
     }, 7000);
     
 
-}, 600 * 1000);
+}, 10 * 60 * 1000);
 
 
 
@@ -311,7 +306,8 @@ function gmod(n,m){
     let getMonths = writeIslamicDate().split(',')[1]
     times_span[0].innerHTML =`<div><span style=" text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2),
     10px 10px 10px rgba(0, 0, 0, 0.2),
-    10px 10px 10px rgba(0, 0, 0, 0.2);;font-family:arial;color:red;display:block;background:#ddd;height:250px;text-align:center;line-height:250px;font-size:80px">${getDay}</span> ${getMonths} </div>` ;
+    10px 10px 10px rgba(0, 0, 0, 0.2);border-radius:15px;
+    ;font-family:arial;color:red;display:block;background:#ddd;height:250px;text-align:center;line-height:250px;font-size:80px">${getDay}</span> ${getMonths} </div>` ;
 
 setInterval(() => {
 
@@ -367,6 +363,7 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
     let name = '';
     if(TimeNowHouresByMinues <= Fajr || TimeNowHouresByMinues > Ishaa){
         name ='الفجر'
+        pray[0].style.backgroundColor = '#16c27a'
         let hTm = (moaqeet.fajr[0] * 60)+ moaqeet.fajr[1]
         let tt  = ((TimeNowHoures * 60)+TimeNowMinutes)
         y=hTm
@@ -402,6 +399,7 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
     }
     if(TimeNowHouresByMinues <= Zohr && TimeNowHouresByMinues > Fajr){
         name ='الظهر'
+        pray[1].style.backgroundColor = '#16c27a'
         let hTm = (moaqeet.zohr[0] * 60)+ moaqeet.zohr[1] 
         y=hTm
         let NetHoures = ((((TimeNowHoures * 60)+TimeNowMinutes)-hTm )* -1)
@@ -419,7 +417,7 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
     }
     if(TimeNowHouresByMinues <= Asr && TimeNowHouresByMinues > Zohr){
         name ='العصر'
-
+        pray[2].style.backgroundColor = '#16c27a'
 
         let hTm = (moaqeet.asr[0] * 60)+ moaqeet.asr[1] 
         y=hTm
@@ -439,6 +437,7 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
 }
     if(TimeNowHouresByMinues <= Maqhreeb && TimeNowHouresByMinues > Asr){
         name ='المغرب'
+        pray[3].style.backgroundColor = '#16c27a'
         let hTm = (moaqeet.maqgreeb[0] * 60)+ moaqeet.maqgreeb[1] 
         y=hTm
         let NetHoures = ((((TimeNowHoures * 60)+TimeNowMinutes)-hTm )* -1)
@@ -456,6 +455,7 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
     }
     if( TimeNowHouresByMinues <= Ishaa && TimeNowHouresByMinues > Maqhreeb){
         name ='العشاء'
+        pray[4].style.backgroundColor = '#16c27a'
         let hTm = (moaqeet.isha[0] * 60)+ moaqeet.isha[1] 
         y=hTm
         let NetHoures = ((((TimeNowHoures * 60)+TimeNowMinutes)-hTm )* -1)
@@ -486,26 +486,15 @@ let Ishaa =  (moaqeet.isha[0] * 60 ) +  moaqeet.isha[1]
             
             if(x == y){
                 azan.style.display = 'block';
-                
-                // for(let i=0 ; i < arr.length ; i++){
-                //     setTimeout(() => {
-                        
-                //         azan_title.innerText = arr[i]
-                //     }, 3*1000);
-                //     }
-                
-                    
+                audio2.play()
+
                 setTimeout(() => {
-                    audio2.style.display = 'block';
-                    audio2.setAttribute('controls','')
-                    audio2.setAttribute('autoplay','')
-                    audio2.style.visibility = 'hidden'
                     azan.style.display = 'none';
-                },  60 * 1000);
+                    audio2.clear()
+                }, 3.36* 60 * 1000);
                 
             }
-            console.log(x)
-            console.log(y)
+            
             
         },1 * 1000)
         
