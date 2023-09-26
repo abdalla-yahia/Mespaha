@@ -409,7 +409,11 @@ bottom: 0;
 left: 0;
 width: 100%;
 opacity: .5;
+color: #4af905;
+font-size: 20px;
+
 }
+
 .times .mwaqeet .pray .pray-name{
 color: red;
 text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),

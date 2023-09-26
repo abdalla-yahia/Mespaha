@@ -424,7 +424,7 @@ setInterval(() => {
         ((Fajr + Ishaa + netIshaa - tt) / (Fajr + Ishaa + netIshaa - Ishaa)) *
         100
       }%`;
-      
+
       net_time_pray[0].innerText = Houres;
       net_time_pray[1].innerText = Minutes;
       net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -556,6 +556,11 @@ setInterval(() => {
       azan.style.display = "none";
     }, 3.36 * 60 * 1000);
   }
+  bg.forEach((e)=>{
+    let heig = e.style.height
+    let hh = heig.match(/[\d,.]/ig)
+    e.innerText = `${Math.floor(hh.join(''))}%`
+  })
 }, 1 * 1000);
 
 setInterval(() => {
