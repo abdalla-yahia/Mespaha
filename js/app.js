@@ -393,6 +393,11 @@ setInterval(() => {
   let Maqhreeb = moaqeet.maqgreeb[0] * 60 + moaqeet.maqgreeb[1];
   let Ishaa = moaqeet.isha[0] * 60 + moaqeet.isha[1];
 
+  bg.forEach((e) => {
+    e.style.display = "none";
+    e.title =`${e.style.height} متبقي من إجمالي الوقت `
+  }); 
+
   net_time_pray[2].innerText = 59 - TimeNowSeconds;
 
   if (net_time_pray[2].innerText <= 0) {
@@ -403,9 +408,7 @@ setInterval(() => {
     name = "الفجر";
     // pray[0].style.backgroundColor = '#16c27a'
 
-    bg.forEach((e) => {
-      e.style.display = "none";
-    });
+    audio2.src = arrAzan[0]
 
     bg[0].style.display = "block";
 
@@ -448,9 +451,7 @@ setInterval(() => {
     name = "الظهر";
     // pray[1].style.backgroundColor = '#16c27a'
 
-    bg.forEach((e) => {
-      e.style.display = "none";
-    });
+    audio2.src = arrAzan[1]
     bg[1].style.display = "block";
     bg[1].style.height = `${
       ((Zohr - (TimeNowHoures * 60 + TimeNowMinutes)) / (Zohr - Fajr)) * 100
@@ -471,6 +472,7 @@ setInterval(() => {
   if (TimeNowHouresByMinues <= Asr && TimeNowHouresByMinues > Zohr) {
     name = "العصر";
     // pray[2].style.backgroundColor = '#16c27a'
+    audio2.src = arrAzan[2]
     let hTm = moaqeet.asr[0] * 60 + moaqeet.asr[1];
     y = hTm;
     let NetHoures = (TimeNowHoures * 60 + TimeNowMinutes - hTm) * -1;
@@ -479,9 +481,7 @@ setInterval(() => {
     let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
     let Minutes = Math.trunc(NetMinutes * 60);
 
-    bg.forEach((e) => {
-      e.style.display = "none";
-    });
+    
     bg[2].style.display = "block";
     bg[2].style.height = `${
       ((Asr - (TimeNowHoures * 60 + TimeNowMinutes)) / (Asr - Zohr)) * 100
@@ -494,9 +494,7 @@ setInterval(() => {
   if (TimeNowHouresByMinues <= Maqhreeb && TimeNowHouresByMinues > Asr) {
     name = "المغرب";
     // pray[3].style.backgroundColor = '#16c27a'
-    bg.forEach((e) => {
-      e.style.display = "none";
-    });
+    audio2.src = arrAzan[4]
     bg[3].style.display = "block";
     bg[3].style.height = `${
       ((Maqhreeb - (TimeNowHoures * 60 + TimeNowMinutes)) / (Maqhreeb - Asr)) *
@@ -517,9 +515,7 @@ setInterval(() => {
   if (TimeNowHouresByMinues <= Ishaa && TimeNowHouresByMinues > Maqhreeb) {
     name = "العشاء";
     // pray[4].style.backgroundColor = '#16c27a'
-    bg.forEach((e) => {
-      e.style.display = "none";
-    });
+    audio2.src = arrAzan[5]
     bg[4].style.display = "block";
     bg[4].style.height = `${
       ((Ishaa - (TimeNowHoures * 60 + TimeNowMinutes)) / (Ishaa - Maqhreeb)) *
