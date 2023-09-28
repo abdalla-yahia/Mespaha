@@ -29,6 +29,7 @@ let azan = document.querySelector(".azan");
 let audio = document.querySelector(".audio");
 let audio2 = document.querySelector(".audio2");
 
+
 let arrImage = [
   "./Images/1.jpg",
   "./Images/2.jpg",
@@ -395,7 +396,7 @@ setInterval(() => {
 
   bg.forEach((e) => {
     e.style.display = "none";
-    e.title =`${e.style.height} متبقي من إجمالي الوقت `
+    
   }); 
 
   net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -407,8 +408,6 @@ setInterval(() => {
   if (TimeNowHouresByMinues <= Fajr || TimeNowHouresByMinues > Ishaa) {
     name = "الفجر";
     // pray[0].style.backgroundColor = '#16c27a'
-
-    audio2.src = arrAzan[0]
 
     bg[0].style.display = "block";
 
@@ -427,7 +426,9 @@ setInterval(() => {
         ((Fajr + Ishaa + netIshaa - tt) / (Fajr + Ishaa + netIshaa - Ishaa)) *
         100
       }%`;
-
+      let heig = bg[0].style.height
+    let hh = heig.match(/[\d,.]/ig)
+    bg[0].title =`${Math.floor(hh.join(''))}% متبقي من إجمالي الوقت `
       net_time_pray[0].innerText = Houres;
       net_time_pray[1].innerText = Minutes;
       net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -441,7 +442,9 @@ setInterval(() => {
 
       let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
       let Minutes = Math.trunc(NetMinutes * 60);
-
+      let heig = bg[0].style.height
+    let hh = heig.match(/[\d,.]/ig)
+    bg[0].title =`${Math.floor(hh.join(''))}% متبقي من إجمالي الوقت `
       net_time_pray[0].innerText = Houres;
       net_time_pray[1].innerText = Minutes;
       net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -450,8 +453,6 @@ setInterval(() => {
   if (TimeNowHouresByMinues <= Zohr && TimeNowHouresByMinues > Fajr) {
     name = "الظهر";
     // pray[1].style.backgroundColor = '#16c27a'
-
-    audio2.src = arrAzan[1]
     bg[1].style.display = "block";
     bg[1].style.height = `${
       ((Zohr - (TimeNowHoures * 60 + TimeNowMinutes)) / (Zohr - Fajr)) * 100
@@ -464,7 +465,9 @@ setInterval(() => {
 
     let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
     let Minutes = Math.trunc(NetMinutes * 60);
-
+    let heig = bg[1].style.height
+    let hh = heig.match(/[\d,.]/ig)
+    bg[1].title =`${Math.floor(hh.join(''))}% متبقي من إجمالي الوقت `
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -472,7 +475,7 @@ setInterval(() => {
   if (TimeNowHouresByMinues <= Asr && TimeNowHouresByMinues > Zohr) {
     name = "العصر";
     // pray[2].style.backgroundColor = '#16c27a'
-    audio2.src = arrAzan[2]
+
     let hTm = moaqeet.asr[0] * 60 + moaqeet.asr[1];
     y = hTm;
     let NetHoures = (TimeNowHoures * 60 + TimeNowMinutes - hTm) * -1;
@@ -486,7 +489,9 @@ setInterval(() => {
     bg[2].style.height = `${
       ((Asr - (TimeNowHoures * 60 + TimeNowMinutes)) / (Asr - Zohr)) * 100
     }%`;
-
+    let heig = bg[2].style.height
+    let hh = heig.match(/[\d,.]/ig)
+    bg[2].title =`${Math.floor(hh.join(''))}% متبقي من إجمالي الوقت `
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -494,7 +499,7 @@ setInterval(() => {
   if (TimeNowHouresByMinues <= Maqhreeb && TimeNowHouresByMinues > Asr) {
     name = "المغرب";
     // pray[3].style.backgroundColor = '#16c27a'
-    audio2.src = arrAzan[4]
+    
     bg[3].style.display = "block";
     bg[3].style.height = `${
       ((Maqhreeb - (TimeNowHoures * 60 + TimeNowMinutes)) / (Maqhreeb - Asr)) *
@@ -507,7 +512,9 @@ setInterval(() => {
 
     let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
     let Minutes = Math.trunc(NetMinutes * 60);
-
+    let heig = bg[3].style.height
+    let hh = heig.match(/[\d,.]/ig)
+    bg[3].title =`${Math.floor(hh.join(''))}% متبقي من إجمالي الوقت `
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -515,7 +522,7 @@ setInterval(() => {
   if (TimeNowHouresByMinues <= Ishaa && TimeNowHouresByMinues > Maqhreeb) {
     name = "العشاء";
     // pray[4].style.backgroundColor = '#16c27a'
-    audio2.src = arrAzan[5]
+   
     bg[4].style.display = "block";
     bg[4].style.height = `${
       ((Ishaa - (TimeNowHoures * 60 + TimeNowMinutes)) / (Ishaa - Maqhreeb)) *
@@ -528,7 +535,9 @@ setInterval(() => {
 
     let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
     let Minutes = Math.trunc(NetMinutes * 60);
-
+    let heig = bg[4].style.height
+    let hh = heig.match(/[\d,.]/ig)
+    bg[4].title =`${Math.floor(hh.join(''))}% متبقي من إجمالي الوقت `
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -552,16 +561,26 @@ setInterval(() => {
       azan.style.display = "none";
     }, 3.36 * 60 * 1000);
   }
-  bg.forEach((e)=>{
-    let heig = e.style.height
-    let hh = heig.match(/[\d,.]/ig)
-    e.innerText = `${Math.floor(hh.join(''))}%`
-  })
+
 }, 1 * 1000);
 
 setInterval(() => {
   azan.style.backgroundImage = `url(${
     arrImage[Math.floor(Math.random() * arrImage.length)]
   })`;
-  audio2.src = arrAzan[Math.floor(Math.random() * arrAzan.length - 1)];
+  if(net_pray_name.innerText == 'الفجر') {
+    audio2.src = arrAzan[2]
+  }
+  if(net_pray_name.innerText == 'الظهر') {
+    audio2.src = arrAzan[1]
+  }
+  if(net_pray_name.innerText == 'العصر') {
+    audio2.src = arrAzan[3]
+  }
+  if(net_pray_name.innerText == 'المغرب') {
+    audio2.src = arrAzan[4]
+  }
+  if(net_pray_name.innerText == 'العشاء') {
+    audio2.src = arrAzan[5]
+  }
 }, 5 * 60 * 1000);
