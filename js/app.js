@@ -1,4 +1,5 @@
 import data from "../data/data.js";
+import api from '../data/MoaqeetApi.js'
 let counter = document.getElementById("counter");
 let container = document.querySelector(".container");
 let tasbeh = document.querySelectorAll(".tasbeh");
@@ -29,6 +30,40 @@ let azan = document.querySelector(".azan");
 let audio = document.querySelector(".audio");
 let audio2 = document.querySelector(".audio2");
 
+let dd = new Date().getDay()
+  //Get Fajr Time
+  let FAJ1 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Fajr).slice(0,2))
+  let FAJ2 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Fajr).slice(3,5))
+  //Get Dohr Time
+  let D1 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Dhuhr).slice(0,2))
+  let D2 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Dhuhr).slice(3,5))
+  //Get Asr Time
+  let AS1 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Asr).slice(0,2))
+  let AS2 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Asr).slice(3,5))
+  //Get Maghrib Time
+  let M1 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Maghrib).slice(0,2))
+  let M2 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Maghrib).slice(3,5))
+  //Get Isha Time
+  let ISH1 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Isha).slice(0,2))
+  let ISH2 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Isha).slice(3,5))
+    
+  let moaqeet = {
+    fajr: [Number(FAJ1), Number(FAJ2)],
+    zohr: [Number(D1), Number(D2)],
+    asr: [Number(AS1), Number(AS2)],
+    maqgreeb: [Number(M1), Number(M2)],
+    isha: [Number(ISH1),Number(ISH2)],
+  };
 
 let arrImage = [
   "./Images/1.jpg",
@@ -48,13 +83,13 @@ let arrAzan = [
   "./Audio/azan16.mp3",
   "./Audio/azan20.mp3",
 ];
-let moaqeet = {
-  fajr: [5, 20],
-  zohr: [12, 47],
-  asr: [16, 13],
-  maqgreeb: [18, 48],
-  isha: [20, 7],
-};
+// let moaqeet = {
+//   fajr: [5, 20],
+//   zohr: [12, 47],
+//   asr: [16, 13],
+//   maqgreeb: [18, 48],
+//   isha: [20, 7],
+// };
 container.style.backgroundImage = `url(${
   arrImage[Math.floor(Math.random() * arrImage.length)]
 })`;
@@ -222,135 +257,22 @@ btn[3].onclick = () => {
   }, 5000);
 };
 
-function gmod(n, m) {
-  return ((n % m) + m) % m;
-}
-
-function kuwaiticalendar(adjust) {
-  var today = new Date();
-  if (adjust) {
-    adjustmili = 1000 * 60 * 60 * 24 * adjust;
-    todaymili = today.getTime() + adjustmili;
-    today = new Date(todaymili);
-  }
-  let day = today.getDate();
-  let month = today.getMonth();
-  let year = today.getFullYear();
-  let m = month + 1;
-  let y = year;
-  if (m < 3) {
-    y -= 1;
-    m += 12;
-  }
-
-  let a = Math.floor(y / 100);
-  let b = 2 - a + Math.floor(a / 4);
-  if (y < 1583) b = 0;
-  if (y == 1582) {
-    if (m > 10) b = -10;
-    if (m == 10) {
-      b = 0;
-      if (day > 4) b = -10;
-    }
-  }
-
-  let jd =
-    Math.floor(365.25 * (y + 4716)) +
-    Math.floor(30.6001 * (m + 1)) +
-    day +
-    b -
-    1524;
-
-  b = 0;
-  if (jd > 2299160) {
-    a = Math.floor((jd - 1867216.25) / 36524.25);
-    b = 1 + a - Math.floor(a / 4);
-  }
-  let bb = jd + b + 1524;
-  let cc = Math.floor((bb - 122.1) / 365.25);
-  let dd = Math.floor(365.25 * cc);
-  let ee = Math.floor((bb - dd) / 30.6001);
-  day = bb - dd - Math.floor(30.6001 * ee);
-  month = ee - 1;
-  if (ee > 13) {
-    cc += 1;
-    month = ee - 13;
-  }
-  year = cc - 4716;
-
-  let wd = gmod(jd + 1, 7) + 1;
-
-  let iyear = 10631 / 30;
-  let epochastro = 1948084;
-  let epochcivil = 1948085;
-
-  let shift1 = 8.01 / 60;
-
-  let z = jd - epochastro;
-  let cyc = Math.floor(z / 10631);
-  z = z - 10631 * cyc;
-  let j = Math.floor((z - shift1) / iyear);
-  let iy = 30 * cyc + j;
-  z = z - Math.floor(j * iyear + shift1);
-  let im = Math.floor((z + 28.5001) / 29.5);
-  if (im == 13) im = 12;
-  let id = z - Math.floor(29.5001 * im - 28);
-
-  var myRes = new Array(8);
-
-  myRes[0] = day; //calculated day (CE)
-  myRes[1] = month - 1; //calculated month (CE)
-  myRes[2] = year; //calculated year (CE)
-  myRes[3] = jd - 1; //julian day number
-  myRes[4] = wd - 1; //weekday number
-  myRes[5] = id; //islamic date
-  myRes[6] = im - 1; //islamic month
-  myRes[7] = iy; //islamic year
-
-  return myRes;
-}
-function writeIslamicDate(adjustment) {
-  var wdNames = new Array(
-    "الأحد",
-    "الإثنين",
-    "الثلاثاء",
-    "الأربعاء",
-    "الخميس",
-    "الجمعه",
-    "السبت"
-  );
-  var iMonthNames = new Array(
-    "محرم",
-    "صفر",
-    "ربيع أول",
-    "ربيع أخر",
-    "جمادى اولى",
-    "جمادى أخر",
-    "رجب",
-    "شعبان",
-    "رمضان",
-    "شوال",
-    "ذو القعدة",
-    "ذو الحجة"
-  );
-  var iDate = kuwaiticalendar(adjustment);
-  var outputIslamicDate =
-    wdNames[iDate[4]] +
-    ", " +
-    iDate[5] +
-    " " +
-    iMonthNames[iDate[6]] +
-    " " +
-    iDate[7] +
-    " هـ";
-  return outputIslamicDate;
-}
-let getDay = writeIslamicDate().split(",")[0];
-let getMonths = writeIslamicDate().split(",")[1];
+let getDay = await fetch( api
+  ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.weekday.ar)
+let getDayEn = await fetch( api
+  ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.weekday.en)
+let getDate = await fetch( api
+  ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.day)
+let getMonths = await fetch( api
+  ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.month.ar)
+let getYers = await fetch( api
+  ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.year)
 times_span[0].innerHTML = `<div><span style=" text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2),
     10px 10px 10px rgba(0, 0, 0, 0.2),
     10px 10px 10px rgba(0, 0, 0, 0.2);border-radius:15px;
-    ;font-family:arial;color:red;display:block;background:#ddd;height:250px;text-align:center;line-height:250px;font-size:80px">${getDay}</span> ${getMonths} </div>`;
+    ;font-family:arial;color:red;display:flex;justify-content:center;align-item:center;gap:2px;background:#ddd;height:250px;text-align:center;line-height:250px;font-size:80px">${getDay} <span style="font-size:15px;color:green">${getDayEn}</span></span><span style=" text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
+    2px 2px 5px rgba(0, 0, 0, 0.2),
+    2px 2px 5px rgba(0, 0, 0, 0.2);color:red;">${getDate}</span> ${getMonths} ${getYers} هـ</div>`;
 
 setInterval(() => {
   let date = new Date();
