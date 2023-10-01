@@ -1,5 +1,5 @@
 import data from "../data/data.js";
-// import api from '../data/MoaqeetApi.js'
+import api from '../data/MoaqeetApi.js'
 let counter = document.getElementById("counter");
 let container = document.querySelector(".container");
 let tasbeh = document.querySelectorAll(".tasbeh");
@@ -31,11 +31,10 @@ let audio = document.querySelector(".audio");
 let audio2 = document.querySelector(".audio2");
 
 let date = new Date()
-let Month = date.getMonth() + 1
+// let Month = date.getMonth() + 1
 let dd = date.getDay()
-let city= 'cairo'
+// let city= 'cairo'
 
-let api =`https://api.aladhan.com/v1/calendarByAddress/${date.getFullYear()}/${Month}?address=${city},Egypt&method=1`
 
   //Get Fajr Time
   let FAJ1 = await fetch( api
@@ -62,22 +61,26 @@ let api =`https://api.aladhan.com/v1/calendarByAddress/${date.getFullYear()}/${M
     ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Isha).slice(0,2))
   let ISH2 = await fetch( api
     ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Isha).slice(3,5))
-    
-  let moaqeet = {
-    fajr: [Number(FAJ1), Number(FAJ2)],
-    zohr: [Number(D1), Number(D2)],
-    asr: [Number(AS1), Number(AS2)],
-    maqgreeb: [Number(M1), Number(M2)],
-    isha: [Number(ISH1),Number(ISH2)],
-  };
   
-  // let moaqeet = {
-  //   fajr: [5, 20],
-  //   zohr: [12, 47],
-  //   asr: [16, 13],
-  //   maqgreeb: [18, 48],
-  //   isha: [20, 7],
-  // };
+    let moaqeet = {}
+    if(window.navigator.onLine){
+
+      moaqeet = {
+        fajr: [Number(FAJ1), Number(FAJ2)],
+        zohr: [Number(D1), Number(D2)],
+        asr: [Number(AS1), Number(AS2)],
+        maqgreeb: [Number(M1), Number(M2)],
+        isha: [Number(ISH1),Number(ISH2)],
+      };
+    }else{
+      moaqeet = {
+          fajr: [5, 20],
+          zohr: [12, 47],
+          asr: [16, 13],
+          maqgreeb: [18, 48],
+          isha: [20, 7],
+        };
+      }
 
 let arrImage = [
   "./Images/1.jpg",
@@ -142,7 +145,6 @@ setInterval(() => {
   notifaction.style.display = "block";
   setTimeout(() => {
     notifaction.style.display = "none";
-    audio.clear();
   }, 7000);
 }, 10 * 60 * 1000);
 
@@ -274,12 +276,12 @@ let getMonths = await fetch( api
   ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.month.ar)
 let getYers = await fetch( api
   ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.year)
-times_span[0].innerHTML = `<div><span style=" text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2),
+times_span[0].innerHTML = `<div><span class="getDay" style=" text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2),
     10px 10px 10px rgba(0, 0, 0, 0.2),
-    10px 10px 10px rgba(0, 0, 0, 0.2);border-radius:15px;
-    ;font-family:arial;color:red;display:flex;justify-content:center;align-item:center;gap:2px;background:#ddd;height:250px;text-align:center;line-height:250px;font-size:80px">${getDay} <span style="font-size:15px;color:green">${getDayEn}</span></span><span style=" text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
+    10px 10px 10px rgba(0, 0, 0, 0.2);border-radius:15px
+;font-family:arial;color:red;display:flex;justify-content:center;align-items:center;flex-direction: column;gap:2px;background:#ddd;height:250px;text-align:center;font-size:80px;position: relative">${getDay} <span style="font-size:25px;color:green;letter-spacing:10px">${getDayEn}</span></span><span style=" text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
     2px 2px 5px rgba(0, 0, 0, 0.2),
-    2px 2px 5px rgba(0, 0, 0, 0.2);color:red;">${getDate}</span> ${getMonths} ${getYers} هـ</div>`;
+    2px 2px 5px rgba(0, 0, 0, 0.2);color:red;">${getDate}</span> ${getMonths} <span style="color:green">${getYers}</span>  <span style="color:red">هـ</span></div>`;
 
 setInterval(() => {
   let date = new Date();
