@@ -1,5 +1,5 @@
 import data from "../data/data.js";
-import api from '../data/MoaqeetApi.js'
+// import api from '../data/MoaqeetApi.js'
 let counter = document.getElementById("counter");
 let container = document.querySelector(".container");
 let tasbeh = document.querySelectorAll(".tasbeh");
@@ -11,7 +11,7 @@ let clock = document.querySelector(".clock");
 let notifaction = document.querySelector(".notifaction");
 let reset_span = document.querySelector(".reset-span");
 let yes_span = document.querySelector(".yes-span");
-let no_span = document.querySelector(".no-span");
+// let select = document.querySelector(".select");
 let minutes = document.querySelector(".minutes");
 let seconds = document.querySelector(".seconds");
 let times_span = document.querySelectorAll(".times-span");
@@ -19,18 +19,24 @@ let time_pm = document.querySelector(".time-pm");
 let hadith = document.querySelector(".hadith");
 let rawy = document.querySelector(".rawy");
 let num = document.querySelector(".num");
-let pray = document.querySelectorAll(".pray");
+// let pray = document.querySelectorAll(".pray");
 let pra_time_houres = document.querySelectorAll(".pra-time-houres");
 let pra_time_minutes = document.querySelectorAll(".pra-time-minutes");
 let net_time_pray = document.querySelectorAll(".net-time-pray");
-let pray_name = document.querySelectorAll(".pray-name");
+// let pray_name = document.querySelectorAll(".pray-name");
 let bg = document.querySelectorAll(".bg");
 let net_pray_name = document.querySelector(".net-pray-name");
 let azan = document.querySelector(".azan");
 let audio = document.querySelector(".audio");
 let audio2 = document.querySelector(".audio2");
 
-let dd = new Date().getDay()
+let date = new Date()
+let Month = date.getMonth() + 1
+let dd = date.getDay()
+let city= 'cairo'
+
+let api =`https://api.aladhan.com/v1/calendarByAddress/${date.getFullYear()}/${Month}?address=${city},Egypt&method=1`
+
   //Get Fajr Time
   let FAJ1 = await fetch( api
     ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Fajr).slice(0,2))
@@ -64,6 +70,14 @@ let dd = new Date().getDay()
     maqgreeb: [Number(M1), Number(M2)],
     isha: [Number(ISH1),Number(ISH2)],
   };
+  
+  // let moaqeet = {
+  //   fajr: [5, 20],
+  //   zohr: [12, 47],
+  //   asr: [16, 13],
+  //   maqgreeb: [18, 48],
+  //   isha: [20, 7],
+  // };
 
 let arrImage = [
   "./Images/1.jpg",
@@ -83,13 +97,6 @@ let arrAzan = [
   "./Audio/azan16.mp3",
   "./Audio/azan20.mp3",
 ];
-// let moaqeet = {
-//   fajr: [5, 20],
-//   zohr: [12, 47],
-//   asr: [16, 13],
-//   maqgreeb: [18, 48],
-//   isha: [20, 7],
-// };
 container.style.backgroundImage = `url(${
   arrImage[Math.floor(Math.random() * arrImage.length)]
 })`;
@@ -505,4 +512,5 @@ setInterval(() => {
   if(net_pray_name.innerText == 'العشاء') {
     audio2.src = arrAzan[5]
   }
-}, 5 * 60 * 1000);
+}, 10 * 60 * 1000);
+
