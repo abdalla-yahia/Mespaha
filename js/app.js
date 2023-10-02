@@ -35,12 +35,20 @@ let date = new Date()
 let dd = date.getDay()
 // let city= 'cairo'
 
+console.log(date.getTime())
 
+let moaqeet = {}
+if(window.navigator.onLine){
   //Get Fajr Time
   let FAJ1 = await fetch( api
     ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Fajr).slice(0,2))
   let FAJ2 = await fetch( api
     ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Fajr).slice(3,5))
+  //Get SunRice Time
+  let SUN1 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Sunrise).slice(0,2))
+  let SUN2 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Sunrise).slice(3,5))
   //Get Dohr Time
   let D1 = await fetch( api
     ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Dhuhr).slice(0,2))
@@ -62,19 +70,20 @@ let dd = date.getDay()
   let ISH2 = await fetch( api
     ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Isha).slice(3,5))
   
-    let moaqeet = {}
-    if(window.navigator.onLine){
 
       moaqeet = {
         fajr: [Number(FAJ1), Number(FAJ2)],
+        sun:[Number(SUN1),Number(SUN2)],
         zohr: [Number(D1), Number(D2)],
         asr: [Number(AS1), Number(AS2)],
         maqgreeb: [Number(M1), Number(M2)],
         isha: [Number(ISH1),Number(ISH2)],
       };
+      
     }else{
       moaqeet = {
           fajr: [5, 20],
+          sun: [6,448],
           zohr: [12, 47],
           asr: [16, 13],
           maqgreeb: [18, 48],
@@ -105,16 +114,18 @@ container.style.backgroundImage = `url(${
 })`;
 
 pra_time_houres[0].innerText = moaqeet.fajr[0];
-pra_time_houres[1].innerText = moaqeet.zohr[0];
-pra_time_houres[2].innerText = moaqeet.asr[0];
-pra_time_houres[3].innerText = moaqeet.maqgreeb[0];
-pra_time_houres[4].innerText = moaqeet.isha[0];
+pra_time_houres[1].innerText = moaqeet.sun[0];
+pra_time_houres[2].innerText = moaqeet.zohr[0];
+pra_time_houres[3].innerText = moaqeet.asr[0];
+pra_time_houres[4].innerText = moaqeet.maqgreeb[0];
+pra_time_houres[5].innerText = moaqeet.isha[0];
 
 pra_time_minutes[0].innerText = moaqeet.fajr[1];
-pra_time_minutes[1].innerText = moaqeet.zohr[1];
-pra_time_minutes[2].innerText = moaqeet.asr[1];
-pra_time_minutes[3].innerText = moaqeet.maqgreeb[1];
-pra_time_minutes[4].innerText = moaqeet.isha[1];
+pra_time_minutes[1].innerText = moaqeet.sun[1];
+pra_time_minutes[2].innerText = moaqeet.zohr[1];
+pra_time_minutes[3].innerText = moaqeet.asr[1];
+pra_time_minutes[4].innerText = moaqeet.maqgreeb[1];
+pra_time_minutes[5].innerText = moaqeet.isha[1];
 
 pra_time_houres.forEach((e) => {
   +e.innerText > 12 ? (e.innerText -= 12) : +e.innerText;
@@ -276,7 +287,7 @@ let getMonths = await fetch( api
   ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.month.ar)
 let getYers = await fetch( api
   ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.year)
-times_span[0].innerHTML = `<div><span class="getDay" style=" text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2),
+times_span[0].innerHTML = `<div style="height:350px;"><span class="getDay" style=" text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2),
     10px 10px 10px rgba(0, 0, 0, 0.2),
     10px 10px 10px rgba(0, 0, 0, 0.2);border-radius:15px
 ;font-family:arial;color:red;display:flex;justify-content:center;align-items:center;flex-direction: column;gap:2px;background:#ddd;height:250px;text-align:center;font-size:80px;position: relative">${getDay} <span style="font-size:25px;color:green;letter-spacing:10px">${getDayEn}</span></span><span style=" text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
@@ -320,6 +331,7 @@ setInterval(() => {
   let y = 0;
 
   let Fajr = moaqeet.fajr[0] * 60 + moaqeet.fajr[1];
+  let SunRice = moaqeet.sun[0] * 60 + moaqeet.sun[1];
   let Zohr = moaqeet.zohr[0] * 60 + moaqeet.zohr[1];
   let Asr = moaqeet.asr[0] * 60 + moaqeet.asr[1];
   let Maqhreeb = moaqeet.maqgreeb[0] * 60 + moaqeet.maqgreeb[1];
@@ -359,7 +371,7 @@ setInterval(() => {
       }%`;
       let heig = bg[0].style.height
     let hh = heig.match(/[\d,.]/ig)
-    bg[0].title =`${Math.floor(hh.join(''))}% متبقي من إجمالي الوقت `
+    bg[0].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت الصلاة `
       net_time_pray[0].innerText = Houres;
       net_time_pray[1].innerText = Minutes;
       net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -375,20 +387,20 @@ setInterval(() => {
       let Minutes = Math.trunc(NetMinutes * 60);
       let heig = bg[0].style.height
     let hh = heig.match(/[\d,.]/ig)
-    bg[0].title =`${Math.floor(hh.join(''))}% متبقي من إجمالي الوقت `
+    bg[0].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت الصلاة `
       net_time_pray[0].innerText = Houres;
       net_time_pray[1].innerText = Minutes;
       net_time_pray[2].innerText = 59 - TimeNowSeconds;
     }
   }
-  if (TimeNowHouresByMinues <= Zohr && TimeNowHouresByMinues > Fajr) {
-    name = "الظهر";
+  if (TimeNowHouresByMinues <= SunRice && TimeNowHouresByMinues > Fajr) {
+    name = "الشروق";
     // pray[1].style.backgroundColor = '#16c27a'
     bg[1].style.display = "block";
     bg[1].style.height = `${
-      ((Zohr - (TimeNowHoures * 60 + TimeNowMinutes)) / (Zohr - Fajr)) * 100
+      ((SunRice - (TimeNowHoures * 60 + TimeNowMinutes)) / (SunRice - Fajr)) * 100
     }%`;
-    let hTm = moaqeet.zohr[0] * 60 + moaqeet.zohr[1];
+    let hTm = moaqeet.sun[0] * 60 + moaqeet.sun[1];
     y = hTm;
     let NetHoures = (TimeNowHoures * 60 + TimeNowMinutes - hTm) * -1;
 
@@ -398,14 +410,36 @@ setInterval(() => {
     let Minutes = Math.trunc(NetMinutes * 60);
     let heig = bg[1].style.height
     let hh = heig.match(/[\d,.]/ig)
-    bg[1].title =`${Math.floor(hh.join(''))}% متبقي من إجمالي الوقت `
+    bg[1].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت الصلاة `
+    net_time_pray[0].innerText = Houres;
+    net_time_pray[1].innerText = Minutes;
+    net_time_pray[2].innerText = 59 - TimeNowSeconds;
+  }
+  if (TimeNowHouresByMinues <= Zohr && TimeNowHouresByMinues > SunRice) {
+    name = "الظهر";
+    // pray[2].style.backgroundColor = '#16c27a'
+    bg[2].style.display = "block";
+    bg[2].style.height = `${
+      ((Zohr - (TimeNowHoures * 60 + TimeNowMinutes)) / (Zohr - SunRice)) * 100
+    }%`;
+    let hTm = moaqeet.zohr[0] * 60 + moaqeet.zohr[1];
+    y = hTm;
+    let NetHoures = (TimeNowHoures * 60 + TimeNowMinutes - hTm) * -1;
+
+    let Houres = Math.trunc(NetHoures / 60);
+
+    let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
+    let Minutes = Math.trunc(NetMinutes * 60);
+    let heig = bg[2].style.height
+    let hh = heig.match(/[\d,.]/ig)
+    bg[2].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت الصلاة `
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
   }
   if (TimeNowHouresByMinues <= Asr && TimeNowHouresByMinues > Zohr) {
     name = "العصر";
-    // pray[2].style.backgroundColor = '#16c27a'
+    // pray[3].style.backgroundColor = '#16c27a'
 
     let hTm = moaqeet.asr[0] * 60 + moaqeet.asr[1];
     y = hTm;
@@ -416,23 +450,23 @@ setInterval(() => {
     let Minutes = Math.trunc(NetMinutes * 60);
 
     
-    bg[2].style.display = "block";
-    bg[2].style.height = `${
+    bg[3].style.display = "block";
+    bg[3].style.height = `${
       ((Asr - (TimeNowHoures * 60 + TimeNowMinutes)) / (Asr - Zohr)) * 100
     }%`;
-    let heig = bg[2].style.height
+    let heig = bg[3].style.height
     let hh = heig.match(/[\d,.]/ig)
-    bg[2].title =`${Math.floor(hh.join(''))}% متبقي من إجمالي الوقت `
+    bg[3].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت الصلاة `
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
   }
   if (TimeNowHouresByMinues <= Maqhreeb && TimeNowHouresByMinues > Asr) {
     name = "المغرب";
-    // pray[3].style.backgroundColor = '#16c27a'
+    // pray[4].style.backgroundColor = '#16c27a'
     
-    bg[3].style.display = "block";
-    bg[3].style.height = `${
+    bg[4].style.display = "block";
+    bg[4].style.height = `${
       ((Maqhreeb - (TimeNowHoures * 60 + TimeNowMinutes)) / (Maqhreeb - Asr)) *
       100
     }%`;
@@ -443,19 +477,19 @@ setInterval(() => {
 
     let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
     let Minutes = Math.trunc(NetMinutes * 60);
-    let heig = bg[3].style.height
+    let heig = bg[4].style.height
     let hh = heig.match(/[\d,.]/ig)
-    bg[3].title =`${Math.floor(hh.join(''))}% متبقي من إجمالي الوقت `
+    bg[4].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت الصلاة `
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
   }
   if (TimeNowHouresByMinues <= Ishaa && TimeNowHouresByMinues > Maqhreeb) {
     name = "العشاء";
-    // pray[4].style.backgroundColor = '#16c27a'
+    // pray[5].style.backgroundColor = '#16c27a'
    
-    bg[4].style.display = "block";
-    bg[4].style.height = `${
+    bg[5].style.display = "block";
+    bg[5].style.height = `${
       ((Ishaa - (TimeNowHoures * 60 + TimeNowMinutes)) / (Ishaa - Maqhreeb)) *
       100
     }%`;
@@ -466,9 +500,9 @@ setInterval(() => {
 
     let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
     let Minutes = Math.trunc(NetMinutes * 60);
-    let heig = bg[4].style.height
+    let heig = bg[5].style.height
     let hh = heig.match(/[\d,.]/ig)
-    bg[4].title =`${Math.floor(hh.join(''))}% متبقي من إجمالي الوقت `
+    bg[5].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت الصلاة   `
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;

@@ -10,9 +10,29 @@ let close = document.querySelector('.close')
 let one = document.querySelector('.one')
 let two = document.querySelector('.two')
 let page_number = document.querySelector('.page-number');
-
+let h3 = document.querySelector('.span-basmalah')
 let e = 1
+let sur = async function getsurah(e){
+    await fetch(`https://raw.githubusercontent.com/penggguna/QuranJSON/master/surah/${e}.json`).then(res=>res.json())
+    .then(res=> {
+        for(let i =0 ;i<20 ; i++){
+            if(res.verses[i].text.includes("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ")){
 
+                h3.innerHTML = `<span style="color:red">${(res.verses[i].text).slice((res.verses[i].text).indexOf("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ "),(res.verses[i].text).indexOf("ٱلرَّحِيمِ")+10)}</span>`
+                box_1.innerHTML += `<br/> <br/>`
+                box_1.innerText += `${(res.verses[i].text).slice((res.verses[i].text).indexOf("ٱلرَّحِيمِ")+10,)}`
+                box_1.innerHTML += ` <span style="color:red">( ${res.verses[i].number} ) </span>`
+                
+            }else {
+                
+                box_1.innerText +=  ` ${(res.verses[i].text)} `
+                box_1.innerHTML += ` <span style="color:red">( ${res.verses[i].number} ) </span>`
+            }
+        }
+    console.log(h3)
+    })
+}
+// sur(2)
 if(window.localStorage.getItem('page')){
     e = Number(window.localStorage.getItem('page'))
     if(e%2 == 0){

@@ -422,8 +422,8 @@ font-size: 20px;
   left: 0;
   background-color: #076eff8e;
   opacity: .5;
-  border-radius:15px;
-  /* transform: rotateX(45deg); */
+  border-bottom-left-radius:15px;
+  border-bottom-right-radius:15px;
 }
 .times .mwaqeet .pray .pray-name{
 color: red;

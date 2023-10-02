@@ -28,11 +28,22 @@ background-color: rgba(0, 0, 0, 0.77);
 .container .box .box-1,
 .container .box .box-2 {
     width: calc(42% - 15px);
-    background-color: black;
+    /* background-color: black; */
     overflow: hidden;
+    /* height: 650px; */
+    background-color: rgb(232, 210, 65);
     
 }
 .container .box .box-1 {
+    /* color: white; */
+    font-size: 25px;
+    text-align:justify;
+    overflow: auto;
+    /* padding: 20px; */
+}
+.container .box .box-1 .span-basmalah {
+    color: gray;
+    text-align: center;
     background-color: red;
 }
 .box img {
@@ -41,7 +52,7 @@ background-color: rgba(0, 0, 0, 0.77);
     height: 70%;
     user-zoom: zoom;
     cursor: pointer;
-    filter: hue-rotate(110deg);
+    /* filter: hue-rotate(110deg); */
 }
 .buttons {
     display: flex;
