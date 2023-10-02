@@ -29,7 +29,8 @@ let net_pray_name = document.querySelector(".net-pray-name");
 let azan = document.querySelector(".azan");
 let audio = document.querySelector(".audio");
 let audio2 = document.querySelector(".audio2");
-
+let wornning =document.querySelector('.wornning-div')
+let wornning_close =document.querySelector('.wornning-div span')
 let date = new Date()
 // let Month = date.getMonth() + 1
 let dd = date.getDay()
@@ -82,12 +83,12 @@ if(window.navigator.onLine){
       
     }else{
       moaqeet = {
-          fajr: [5, 20],
-          sun: [6,448],
-          zohr: [12, 47],
-          asr: [16, 13],
-          maqgreeb: [18, 48],
-          isha: [20, 7],
+          fajr: [5, 22],
+          sun: [6,49],
+          zohr: [12, 45],
+          asr: [16, 8],
+          maqgreeb: [18, 41],
+          isha: [19, 57],
         };
       }
 
@@ -156,7 +157,7 @@ setInterval(() => {
   notifaction.style.display = "block";
   setTimeout(() => {
     notifaction.style.display = "none";
-  }, 7000);
+  }, 7 * 1000);
 }, 10 * 60 * 1000);
 
 window.localStorage.getItem("الذكر")
@@ -183,7 +184,6 @@ tasbeh.forEach((e, ind) => {
       arrImage[Math.floor(Math.random() * arrImage.length)]
     })`;
 
-    console.log(e);
     cover.innerText = e.innerText;
     window.localStorage.getItem(e.innerText)
       ? (span.innerHTML = window.localStorage.getItem(e.innerText))
@@ -238,32 +238,32 @@ btn[0].onclick = () => {
   counter.innerHTML = 0;
 };
 
-setInterval(() => {
-  if (minutes.innerText > 0) {
-    seconds.innerText -= 1;
+// setInterval(() => {
+//   if (minutes.innerText > 0) {
+//     seconds.innerText -= 1;
 
-    if (seconds.innerText <= 0) {
-      minutes.innerText -= 1;
-      seconds.innerText = 60;
-    }
-    if (seconds.innerText <= 9) {
-      seconds.innerText = "0" + +seconds.innerText;
-    }
-    if (minutes.innerText <= 9) {
-      minutes.innerText = "0" + +minutes.innerText;
-    }
-  } else if (minutes.innerText == 0 && seconds.innerText == 0) {
-    minutes.innerText = 9;
-    seconds.innerText = 60;
-  } else {
-    seconds.innerText -= 1;
-    minutes.innerText = "0" + +minutes.innerText;
-    if (seconds.innerText <= 9) {
-      seconds.innerText = "0" + +seconds.innerText;
-    }
-  }
-  document.title = clock.innerText;
-}, 1000);
+//     if (seconds.innerText <= 0) {
+//       minutes.innerText -= 1;
+//       seconds.innerText = 60;
+//     }
+//     if (seconds.innerText <= 9) {
+//       seconds.innerText = "0" + +seconds.innerText;
+//     }
+//     if (minutes.innerText <= 9) {
+//       minutes.innerText = "0" + +minutes.innerText;
+//     }
+//   } else if (minutes.innerText == 0 && seconds.innerText == 0) {
+//     minutes.innerText = 9;
+//     seconds.innerText = 60;
+//   } else {
+//     seconds.innerText -= 1;
+//     minutes.innerText = "0" + +minutes.innerText;
+//     if (seconds.innerText <= 9) {
+//       seconds.innerText = "0" + +seconds.innerText;
+//     }
+//   }
+//   document.title = clock.innerText;
+// }, 1000);
 
 btn[3].onclick = () => {
   reset_span.classList.toggle("disappear");
@@ -352,7 +352,7 @@ setInterval(() => {
     name = "الفجر";
     // pray[0].style.backgroundColor = '#16c27a'
 
-    bg[0].style.display = "block";
+    bg[5].style.display = "block";
 
     let hTm = moaqeet.fajr[0] * 60 + moaqeet.fajr[1];
     let tt = TimeNowHoures * 60 + TimeNowMinutes;
@@ -365,13 +365,13 @@ setInterval(() => {
       let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
       let Minutes = Math.trunc(NetMinutes * 60);
       let netIshaa = 24 * 60 - Ishaa;
-      bg[0].style.height = `${
+      bg[5].style.height = `${
         ((Fajr + Ishaa + netIshaa - tt) / (Fajr + Ishaa + netIshaa - Ishaa)) *
         100
       }%`;
-      let heig = bg[0].style.height
+      let heig = bg[5].style.height
     let hh = heig.match(/[\d,.]/ig)
-    bg[0].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت الصلاة `
+    bg[5].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت صلاة العشاء`
       net_time_pray[0].innerText = Houres;
       net_time_pray[1].innerText = Minutes;
       net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -379,15 +379,16 @@ setInterval(() => {
       let NetHoures = (TimeNowHoures * 60 + TimeNowMinutes - hTm) * -1;
       let Houres = Math.trunc(NetHoures / 60);
       let netIshaa = 24 * 60 - Ishaa;
-      bg[0].style.height = `${
+      bg[5].style.height = `${
         ((Fajr - tt) / (Fajr + Ishaa + netIshaa - Ishaa)) * 100
       }%`;
-
+      
       let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
       let Minutes = Math.trunc(NetMinutes * 60);
-      let heig = bg[0].style.height
-    let hh = heig.match(/[\d,.]/ig)
-    bg[0].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت الصلاة `
+      let heig = bg[5].style.height
+      let hh = heig.match(/[\d,.]/ig)
+      
+    bg[5].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت صلاة العشاء `
       net_time_pray[0].innerText = Houres;
       net_time_pray[1].innerText = Minutes;
       net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -396,8 +397,8 @@ setInterval(() => {
   if (TimeNowHouresByMinues <= SunRice && TimeNowHouresByMinues > Fajr) {
     name = "الشروق";
     // pray[1].style.backgroundColor = '#16c27a'
-    bg[1].style.display = "block";
-    bg[1].style.height = `${
+    bg[0].style.display = "block";
+    bg[0].style.height = `${
       ((SunRice - (TimeNowHoures * 60 + TimeNowMinutes)) / (SunRice - Fajr)) * 100
     }%`;
     let hTm = moaqeet.sun[0] * 60 + moaqeet.sun[1];
@@ -408,9 +409,9 @@ setInterval(() => {
 
     let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
     let Minutes = Math.trunc(NetMinutes * 60);
-    let heig = bg[1].style.height
+    let heig = bg[0].style.height
     let hh = heig.match(/[\d,.]/ig)
-    bg[1].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت الصلاة `
+    bg[0].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت صلاة الفجر`
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -418,9 +419,9 @@ setInterval(() => {
   if (TimeNowHouresByMinues <= Zohr && TimeNowHouresByMinues > SunRice) {
     name = "الظهر";
     // pray[2].style.backgroundColor = '#16c27a'
-    bg[2].style.display = "block";
-    bg[2].style.height = `${
-      ((Zohr - (TimeNowHoures * 60 + TimeNowMinutes)) / (Zohr - SunRice)) * 100
+    bg[1].style.display = "block";
+    bg[1].style.height = `${
+      ((Zohr - (TimeNowHoures * 60 + TimeNowMinutes)) / ((Zohr-20) - (SunRice+20))) * 100
     }%`;
     let hTm = moaqeet.zohr[0] * 60 + moaqeet.zohr[1];
     y = hTm;
@@ -430,9 +431,9 @@ setInterval(() => {
 
     let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
     let Minutes = Math.trunc(NetMinutes * 60);
-    let heig = bg[2].style.height
+    let heig = bg[1].style.height
     let hh = heig.match(/[\d,.]/ig)
-    bg[2].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت الصلاة `
+    bg[1].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت صلاة الضحى `
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -450,13 +451,13 @@ setInterval(() => {
     let Minutes = Math.trunc(NetMinutes * 60);
 
     
-    bg[3].style.display = "block";
-    bg[3].style.height = `${
+    bg[2].style.display = "block";
+    bg[2].style.height = `${
       ((Asr - (TimeNowHoures * 60 + TimeNowMinutes)) / (Asr - Zohr)) * 100
     }%`;
-    let heig = bg[3].style.height
+    let heig = bg[2].style.height
     let hh = heig.match(/[\d,.]/ig)
-    bg[3].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت الصلاة `
+    bg[2].title =`${Math.floor(hh.join(''))}%  متبقي حتى خروج وقت صلاة الظهر`
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -465,9 +466,9 @@ setInterval(() => {
     name = "المغرب";
     // pray[4].style.backgroundColor = '#16c27a'
     
-    bg[4].style.display = "block";
-    bg[4].style.height = `${
-      ((Maqhreeb - (TimeNowHoures * 60 + TimeNowMinutes)) / (Maqhreeb - Asr)) *
+    bg[3].style.display = "block";
+    bg[3].style.height = `${
+      (((Maqhreeb-20) - (TimeNowHoures * 60 + TimeNowMinutes)) / ((Maqhreeb-20) - Asr)) *
       100
     }%`;
     let hTm = moaqeet.maqgreeb[0] * 60 + moaqeet.maqgreeb[1];
@@ -477,9 +478,9 @@ setInterval(() => {
 
     let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
     let Minutes = Math.trunc(NetMinutes * 60);
-    let heig = bg[4].style.height
+    let heig = bg[3].style.height
     let hh = heig.match(/[\d,.]/ig)
-    bg[4].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت الصلاة `
+    bg[3].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت صلاة العصر`
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -488,8 +489,8 @@ setInterval(() => {
     name = "العشاء";
     // pray[5].style.backgroundColor = '#16c27a'
    
-    bg[5].style.display = "block";
-    bg[5].style.height = `${
+    bg[4].style.display = "block";
+    bg[4].style.height = `${
       ((Ishaa - (TimeNowHoures * 60 + TimeNowMinutes)) / (Ishaa - Maqhreeb)) *
       100
     }%`;
@@ -500,9 +501,9 @@ setInterval(() => {
 
     let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
     let Minutes = Math.trunc(NetMinutes * 60);
-    let heig = bg[5].style.height
+    let heig = bg[4].style.height
     let hh = heig.match(/[\d,.]/ig)
-    bg[5].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت الصلاة   `
+    bg[4].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت صلاة المغرب  `
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -548,5 +549,13 @@ setInterval(() => {
   if(net_pray_name.innerText == 'العشاء') {
     audio2.src = arrAzan[5]
   }
-}, 10 * 60 * 1000);
 
+}, 15 * 60 * 1000);
+wornning_close.onclick = ()=>{
+  wornning.style.display ='none'
+}
+setTimeout(()=>{
+  if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) <= 15){
+    wornning.style.display ='block'
+  }
+},5*1000)
