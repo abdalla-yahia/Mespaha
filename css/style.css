@@ -156,13 +156,11 @@ body {
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2),
     10px 10px 10px rgba(0, 0, 0, 0.2),
     10px 10px 10px rgba(0, 0, 0, 0.2);
-  /* border-radius: 10px; */
   padding: 10px;
   text-align: center;
   width: 100%;
   min-height: 100px;
-  margin: 0;
-
+  direction: rtl;
 }
 .hadith,.rawy,.num {
   color:#000000;
@@ -182,10 +180,57 @@ body {
   }
 }
 .moshaf {
-  max-width: 60px;
+  width: 450px;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .moshaf img {
-  max-width: 100%;
+  max-width: 60px;
+}
+.weather {
+  width: 50%;
+  min-height: fit-content;
+  /* background-image:linear-gradient(transparent  , #fff,transparent) ; */
+  border-radius: 15px;
+  background-color: rgba(255,255,255,.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1px;
+}
+.w-span {
+  width: 70%;
+  height: 40%;
+  /* background-color: rgba(250,250,250,.5); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+.w-span-ar {
+  color: #6805d1;
+  font-weight: 700;
+  font-size: 25px;
+}
+.w-span.one{
+  font-size: 45px;
+  color: red;
+  font-weight: 700;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
+    5px 5px 10px rgba(0, 0, 0, 0.1),
+    5px 5px 10px rgba(0, 0, 0, 0.1);
+  }
+  .w-span.two{
+    color: #fb07ff;
+    font-weight: 700;
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
+      5px 5px 10px rgba(0, 0, 0, 0.1),
+      5px 5px 10px rgba(0, 0, 0, 0.1);
+
 }
 section,
 aside {
@@ -316,19 +361,6 @@ button.btn:last-of-type div.reset-span::before {
   
 }
 
-.cover {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  color: rgba(0, 0, 0, 0.573);
-  font-size: 5.5rem;
-  font-weight: 800;
-  opacity: .3;
-  z-index: -1;
-  text-align: center;
-  line-height: 85lh;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
-}
 
 span.sp {
   font-size: 35px;
@@ -489,6 +521,8 @@ text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
 .times-span:nth-child(4){
   color: #ff07c1;
 }
+
+
 @media (min-width:1051px) {
   .container {
     position: relative;
