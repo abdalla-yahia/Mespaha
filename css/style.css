@@ -404,6 +404,10 @@ span.sp {
   flex-direction: column;
   position: relative;
 }
+.mowaqeet-parent{
+  display: flex;
+  flex-direction: row-reverse;
+}
 .wornning-div {
   background-color: red;
   text-align: center;
@@ -556,6 +560,21 @@ aside {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+}
+.times .mwaqeet{
+height: 350px;
+}
+.mowaqeet-paren{
+  flex-wrap: wrap;
+}
+.parent-hadeth {
+  height: 350px;
+}
+.child-hadeth {
+  height: 250px;
+}
+aside{
   flex-wrap: wrap;
 }
 }
