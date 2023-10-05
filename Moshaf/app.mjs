@@ -1,5 +1,5 @@
 import {fehres} from './fehres.mjs'
-const btn  = document.querySelectorAll('.btn');
+
 let img_1 = document.querySelector('.box-1 img')
 let img_2 = document.querySelector('.box-2 img')
 let box_1 = document.querySelector('.box-1')
@@ -8,31 +8,13 @@ let fehres_1 = document.querySelector('.fehres')
 let btn_fhrs = document.querySelector('.fh-btn')
 let close = document.querySelector('.close')
 let one = document.querySelector('.one')
-let two = document.querySelector('.two')
+// let two = document.querySelector('.two')
 let page_number = document.querySelector('.page-number');
-let h3 = document.querySelector('.span-basmalah')
+// let h3 = document.querySelector('.span-basmalah')
+let audio4 = document.querySelector('.audio4')
 let e = 1
-let sur = async function getsurah(e){
-    await fetch(`https://raw.githubusercontent.com/penggguna/QuranJSON/master/surah/${e}.json`).then(res=>res.json())
-    .then(res=> {
-        for(let i =0 ;i<20 ; i++){
-            if(res.verses[i].text.includes("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ")){
+audio4.style.visibility = 'hidden'
 
-                h3.innerHTML = `<span style="color:red">${(res.verses[i].text).slice((res.verses[i].text).indexOf("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ "),(res.verses[i].text).indexOf("ٱلرَّحِيمِ")+10)}</span>`
-                box_1.innerHTML += `<br/> <br/>`
-                box_1.innerText += `${(res.verses[i].text).slice((res.verses[i].text).indexOf("ٱلرَّحِيمِ")+10,)}`
-                box_1.innerHTML += ` <span style="color:red">( ${res.verses[i].number} ) </span>`
-                
-            }else {
-                
-                box_1.innerText +=  ` ${(res.verses[i].text)} `
-                box_1.innerHTML += ` <span style="color:red">( ${res.verses[i].number} ) </span>`
-            }
-        }
-    console.log(h3)
-    })
-}
-// sur(2)
 if(window.localStorage.getItem('page')){
     e = Number(window.localStorage.getItem('page'))
     if(e%2 == 0){
@@ -46,41 +28,10 @@ if(window.localStorage.getItem('page')){
     
 } 
 
-btn[0].onclick = ()=>{
-    img_1.setAttribute('src',`./quran-images/${e }.jpg`)
-    img_2.setAttribute('src',`./quran-images/${e + 1}.jpg`)
-    e+=2
-    if(e >= 604){
-        e =603
-        img_1.setAttribute('src',`./quran-images/603.jpg`)
-        img_2.setAttribute('src',`./quran-images/604.jpg`)
-        btn[0].style.display = 'none'
-    }else {
-        btn[0].style.display = 'block'
-        btn[1].style.display = 'block'
-    
-    }
-    window.localStorage.setItem('page',e)
-}
-btn[1].onclick = ()=>{
-    img_1.setAttribute('src',`./quran-images/${e -2}.jpg`)
-    img_2.setAttribute('src',`./quran-images/${e -1}.jpg`)
-    e-=2
-    if(e <=0){
-        e=1
-        img_1.setAttribute('src',`./quran-images/1.jpg`)
-        img_2.setAttribute('src',`./quran-images/2.jpg`)
-        btn[1].style.display = 'none'
-    }else {
-        btn[0].style.display = 'block'
-        btn[1].style.display = 'block'
-    
-    }
-    window.localStorage.setItem('page',e)
-}
 box_2.onclick = ()=>{
-    if(btn[0].style.display == 'block'&&btn[1].style.display == 'block'){
+   
     e+=2
+    audio4.play()
     img_1.setAttribute('src',`./quran-images/${e }.jpg`)
     img_2.setAttribute('src',`./quran-images/${e + 1}.jpg`)
     
@@ -95,17 +46,15 @@ box_2.onclick = ()=>{
 
 }
 window.localStorage.setItem('page',e)
-    }else {
-        return false
-    }
+    
 }
 box_1.onclick = ()=>{
-    if(btn[0].style.display == 'block'&&btn[1].style.display == 'block'){
 
     
     img_1.setAttribute('src',`./quran-images/${e -2}.jpg`)
     img_2.setAttribute('src',`./quran-images/${e -1}.jpg`)
     e-=2
+    audio4.play()
     if(e <=0){
         e=1
         img_1.setAttribute('src',`./quran-images/1.jpg`)
@@ -117,9 +66,7 @@ box_1.onclick = ()=>{
     
     }
     window.localStorage.setItem('page',e)
-}else {
-    return false
-}
+
 }
 btn_fhrs.onclick =()=>{
     fehres_1.style.visibility == 'hidden'? fehres_1.style.visibility = 'visible':fehres_1.style.visibility = 'hidden'
@@ -150,12 +97,8 @@ for(let i=0;i < fehres.length ; i++){
         let th = document.createElement('th');
         th.append(fehres[i][j])
         header.appendChild(th)
-        
     }
-}
-
-else 
-    
+}else {
 
 for(let k = 0; k < fehres[i].length ;k++){
 
@@ -164,12 +107,14 @@ btn_bage.className='bage-btn'
 btn_bage.innerText = fehres[i][1]
 btn_bage.addEventListener('click',()=>{
 e=Number(fehres[i][4])
+fehres_1.style.visibility == 'hidden'? fehres_1.style.visibility = 'visible':fehres_1.style.visibility = 'hidden'
 document.documentElement.scrollTo({
     top:0,
     left:0,
     behavior:'smooth'
 })
-if(btn[0].style.display == 'block'&&btn[1].style.display == 'block'){
+
+
 if(e%2 === 0){
     e-=1
     img_1.setAttribute('src',`./quran-images/${e}.jpg`)
@@ -181,11 +126,6 @@ if(e%2 === 0){
     window.localStorage.setItem('page',e)
 }
     fehres_1.style.visibility = 'hidden'
-}else{
-    img_1.setAttribute('src',`./quran-images/${e}.jpg`)
-    fehres_1.style.visibility = 'hidden'
-    window.localStorage.setItem('page',e)
-}
 })
 
     if(k== 1){
@@ -202,7 +142,7 @@ if(e%2 === 0){
     }
 }
 }
-
+}
 one.appendChild(table)
 
 page_number.onchange=(el)=>{
@@ -226,33 +166,3 @@ page_number.onchange=(el)=>{
     }
     el.target.value = ''
 }
-
-btn[2].onclick = ()=>{
-    e++
-    img_1.setAttribute('src',`./quran-images/${e}.jpg`)
-    if(e >= 604){
-        e=604
-        img_1.setAttribute('src',`./quran-images/604.jpg`)
-        btn[3].style.display = 'none'
-    }else {
-        btn[2].style.display = 'block'
-        btn[3].style.display = 'block'
-    
-    }
-    window.localStorage.setItem('page',e)
-}
-btn[3].onclick = ()=>{
-    e--
-    img_1.setAttribute('src',`./quran-images/${e}.jpg`)
-    if(e <=0){
-        e=1
-        img_1.setAttribute('src',`./quran-images/1.jpg`)
-        btn[3].style.display = 'none'
-    }else {
-        btn[2].style.display = 'block'
-        btn[3].style.display = 'block'
-    
-    }
-    window.localStorage.setItem('page',e)
-}
-

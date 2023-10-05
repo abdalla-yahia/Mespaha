@@ -22,7 +22,7 @@ let time_pm = document.querySelector(".time-pm");
 let hadith = document.querySelector(".hadith");
 let rawy = document.querySelector(".rawy");
 let num = document.querySelector(".num");
-// let pray = document.querySelectorAll(".pray");
+let pray = document.querySelectorAll(".pray");
 let pra_time_houres = document.querySelectorAll(".pra-time-houres");
 let pra_time_minutes = document.querySelectorAll(".pra-time-minutes");
 let net_time_pray = document.querySelectorAll(".net-time-pray");
@@ -32,7 +32,9 @@ let net_pray_name = document.querySelector(".net-pray-name");
 let azan = document.querySelector(".azan");
 let audio = document.querySelector(".audio");
 let audio2 = document.querySelector(".audio2");
+let audio3 = document.querySelector(".audio3");
 let wornning =document.querySelector('.wornning-div')
+let wornning_div_time =document.querySelector('.wornning-div-time')
 let wornning_close =document.querySelector('.wornning-div span')
 
 let date = new Date()
@@ -112,7 +114,7 @@ setInterval(() => {
 }, 10 * 1000);
 
 //Set Time  Of Notifacation Audio Of Saly Ala Mohamed
-let Saly = setInterval(() => {
+ setInterval(() => {
   audio.play();
   notifaction.style.display = "block";
   notifaction.style.display = "block";
@@ -127,6 +129,7 @@ window.localStorage.getItem("الذكر")
 counter.onclick = (e) => {
   counter.innerHTML++;
   setTimeout(() => {
+    audio3.play()
     counter.style.transform = "scale(1)";
   });
   counter.style.transform = "scale(.9)";
@@ -384,7 +387,7 @@ setInterval(() => {
     // pray[2].style.backgroundColor = '#16c27a'
     bg[1].style.display = "block";
     bg[1].style.height = `${
-      ((Zohr - (TimeNowHoures * 60 + TimeNowMinutes)) / ((Zohr-20) - (SunRice+20))) * 100
+      (((Zohr-20) - (TimeNowHoures * 60 + TimeNowMinutes)) / ((Zohr-20) - (SunRice+20))) * 100
     }%`;
     let hTm = moaqeet.zohr[0] * 60 + moaqeet.zohr[1];
     y = hTm;
@@ -395,8 +398,10 @@ setInterval(() => {
     let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
     let Minutes = Math.trunc(NetMinutes * 60);
     let heig = bg[1].style.height
+    if(heig !== ''){
     let hh = heig.match(/[\d,.]/ig)
     bg[1].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت صلاة الضحى `
+    }
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -431,9 +436,10 @@ setInterval(() => {
     
     bg[3].style.display = "block";
     bg[3].style.height = `${
-      (((Maqhreeb-20) - (TimeNowHoures * 60 + TimeNowMinutes)) / ((Maqhreeb-20) - Asr)) *
+      (((Maqhreeb-25) - (TimeNowHoures * 60 + TimeNowMinutes)) / ((Maqhreeb-25) - Asr)) *
       100
     }%`;
+    
     let hTm = moaqeet.maqgreeb[0] * 60 + moaqeet.maqgreeb[1];
     y = hTm;
     let NetHoures = (TimeNowHoures * 60 + TimeNowMinutes - hTm) * -1;
@@ -442,8 +448,12 @@ setInterval(() => {
     let NetMinutes = NetHoures / 60 - Math.trunc(NetHoures / 60);
     let Minutes = Math.trunc(NetMinutes * 60);
     let heig = bg[3].style.height
-    let hh = heig.match(/[\d,.]/ig)
-    bg[3].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت صلاة العصر`
+    if(heig !== ''){
+
+      let hh = heig.match(/[\d,.]/ig)
+      bg[3].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت صلاة العصر`
+    }
+    
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -491,7 +501,15 @@ setInterval(() => {
       azan.style.display = "none";
     }, 3.36 * 60 * 1000);
   }
-
+  if(name === 'الظهر' && bg[1].style.height == ""){
+    pray[1].style.backgroundColor = '#F44336';
+    pray[1].title=' إنتبه أنت الأن في وقت تكره فيه الصلاة إلا صلاة قضاء'
+  }
+  if(name === 'المغرب' && bg[3].style.height == ''){
+    pray[3].style.backgroundColor = '#F44336'
+    pray[3].title=' إنتبه أنت الأن في وقت تكره فيه الصلاة إلا صلاة قضاء'
+  }
+  wornning_div_time.innerText=((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) 
 }, 1 * 1000);
 
 setInterval(() => {
@@ -519,9 +537,17 @@ wornning_close.onclick = ()=>{
   wornning.style.display ='none'
 }
 setTimeout(()=>{
+  
   if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) <= 15){
     wornning.style.display ='block'
   }
+  setInterval(()=>{
+    if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) >= 15){
+      wornning.style.display ='none'
+      
+    }
+
+  },1000)
 },5*1000)
 
     

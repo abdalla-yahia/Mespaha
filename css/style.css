@@ -421,7 +421,7 @@ span.sp {
   padding: 5px 20px;
   display: none;
 }
-.wornning-div span{
+.wornning-div span:nth-child(4){
   position: absolute;
   font-size: 10px;
   background-color: #076eff;
@@ -435,11 +435,11 @@ span.sp {
 }
 @keyframes wor {
   0%{
-    background-color: rgb(247, 254, 145);
-    color: black;
+    background-color: rgb(104, 50, 90);
+    color: rgb(93, 82, 82);
   }
   100%{
-    background-color: red;
+    background-color: rgb(70, 32, 32);
 
   }
 }
