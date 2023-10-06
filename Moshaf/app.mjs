@@ -8,14 +8,20 @@ let fehres_1 = document.querySelector('.fehres')
 let btn_fhrs = document.querySelector('.fh-btn')
 let close = document.querySelector('.close')
 let one = document.querySelector('.one')
-// let two = document.querySelector('.two')
 let page_number = document.querySelector('.page-number');
 let goza_number = document.querySelector('.goza-number');
-// let h3 = document.querySelector('.span-basmalah')
+let sign_save = document.querySelector('.sign-save')
+let sign_get = document.querySelector('.sign-get')
+let sign_save_span = document.querySelector('.sign-save-span')
 let audio4 = document.querySelector('.audio4')
 let e = 1
 audio4.style.visibility = 'hidden'
-
+if(window.localStorage.getItem('sign')){
+    if(window.localStorage.getItem('page') == window.localStorage.getItem('sign')){
+        sign_save_span.style.display = 'block'
+    }else
+    sign_save_span.style.display = 'none'
+}
 if(window.localStorage.getItem('page')){
     e = Number(window.localStorage.getItem('page'))
     if(e%2 == 0){
@@ -28,9 +34,11 @@ if(window.localStorage.getItem('page')){
     }
     
 } 
-
+sign_save.onclick=()=>{
+    window.localStorage.setItem('sign',window.localStorage.getItem('page'))
+    sign_save_span.style.display = 'block'
+}
 box_2.onclick = ()=>{
-   
     e+=2
     audio4.play()
     img_1.setAttribute('src',`./quran-images/${e }.jpg`)
@@ -40,18 +48,18 @@ box_2.onclick = ()=>{
         e =603
         img_1.setAttribute('src',`./quran-images/603.jpg`)
         img_2.setAttribute('src',`./quran-images/604.jpg`)
-    btn[0].style.display = 'none'
-}else {
-    btn[0].style.display = 'block'
-    btn[1].style.display = 'block'
-
 }
+
 window.localStorage.setItem('page',e)
-    
+if(window.localStorage.getItem('sign')){
+    if(window.localStorage.getItem('page') == window.localStorage.getItem('sign')){
+        sign_save_span.style.display = 'block'
+    }else
+    sign_save_span.style.display = 'none'
+}
 }
 box_1.onclick = ()=>{
 
-    
     img_1.setAttribute('src',`./quran-images/${e -2}.jpg`)
     img_2.setAttribute('src',`./quran-images/${e -1}.jpg`)
     e-=2
@@ -60,14 +68,14 @@ box_1.onclick = ()=>{
         e=1
         img_1.setAttribute('src',`./quran-images/1.jpg`)
         img_2.setAttribute('src',`./quran-images/2.jpg`)
-        btn[1].style.display = 'none'
-    }else {
-        btn[0].style.display = 'block'
-        btn[1].style.display = 'block'
-    
     }
     window.localStorage.setItem('page',e)
-
+    if(window.localStorage.getItem('sign')){
+        if(window.localStorage.getItem('page') == window.localStorage.getItem('sign')){
+            sign_save_span.style.display = 'block'
+        }else
+        sign_save_span.style.display = 'none'
+    }
 }
 btn_fhrs.onclick =()=>{
     fehres_1.style.visibility == 'hidden'? fehres_1.style.visibility = 'visible':fehres_1.style.visibility = 'hidden'
@@ -127,6 +135,12 @@ if(e%2 === 0){
     window.localStorage.setItem('page',e)
 }
     fehres_1.style.visibility = 'hidden'
+    if(window.localStorage.getItem('sign')){
+        if(window.localStorage.getItem('page') == window.localStorage.getItem('sign')){
+            sign_save_span.style.display = 'block'
+        }else
+        sign_save_span.style.display = 'none'
+    }
 })
 
     if(k== 1){
@@ -166,6 +180,12 @@ page_number.onchange=(el)=>{
         window.localStorage.setItem('page',e)
     }
     el.target.value = ''
+    if(window.localStorage.getItem('sign')){
+        if(window.localStorage.getItem('page') == window.localStorage.getItem('sign')){
+            sign_save_span.style.display = 'block'
+        }else
+        sign_save_span.style.display = 'none'
+    }
 }
 goza_number.onchange=(el)=>{
     if(Number(el.target.value) <= 1){
@@ -221,4 +241,30 @@ goza_number.onchange=(el)=>{
         window.localStorage.setItem('page',e)
     }
     el.target.value = ''
+    if(window.localStorage.getItem('sign')){
+        if(window.localStorage.getItem('page') == window.localStorage.getItem('sign')){
+            sign_save_span.style.display = 'block'
+        }else
+        sign_save_span.style.display = 'none'
+    }
+}
+
+sign_get.onclick =(el)=>{
+    e=Number(window.localStorage.getItem('sign'))
+    if(e%2 === 0){
+        e-=1
+        img_1.setAttribute('src',`./quran-images/${e}.jpg`)
+        img_2.setAttribute('src',`./quran-images/${e+1}.jpg`)
+        window.localStorage.setItem('page',e)
+    }else {
+        img_1.setAttribute('src',`./quran-images/${e}.jpg`)
+        img_2.setAttribute('src',`./quran-images/${e+1}.jpg`)
+        window.localStorage.setItem('page',e)
+    }
+    if(window.localStorage.getItem('sign')){
+        if(window.localStorage.getItem('page') == window.localStorage.getItem('sign')){
+            sign_save_span.style.display = 'block'
+        }else
+        sign_save_span.style.display = 'none'
+    }
 }

@@ -504,10 +504,16 @@ setInterval(() => {
   if(name === 'الظهر' && bg[1].style.height == ""){
     pray[1].style.backgroundColor = '#F44336';
     pray[1].title=' إنتبه أنت الأن في وقت تكره فيه الصلاة إلا صلاة قضاء'
+  }else{
+    pray[1].style.backgroundColor='transparent'
+    pray[1].title=''
   }
   if(name === 'المغرب' && bg[3].style.height == ''){
     pray[3].style.backgroundColor = '#F44336'
     pray[3].title=' إنتبه أنت الأن في وقت تكره فيه الصلاة إلا صلاة قضاء'
+  }else{
+    pray[3].style.backgroundColor='transparent'
+    pray[3].title=''
   }
   wornning_div_time.innerText=((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) 
 }, 1 * 1000);
