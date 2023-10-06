@@ -81,27 +81,34 @@ cursor: pointer;
     color: red;
 }
 
-.fh-btn {
-    padding: 10px;
-    border: 2px dotted red;
+.fh-btn,.sahm {
+    padding: 15px;
     color: rgb(37, 210, 230);
     font-size: larger;
     font-weight: 700;
     cursor: pointer;
     border-radius: 10px;
-    position: fixed;
     background-color: transparent;
     left: 20px;
     top: 20px;
     z-index: 1;
     text-align: center;
     width: 170px;
+    border: 2px dotted rgb(0, 255, 174);
 }
 .sahm {
+    border: 2px dotted red;
     left: 20px;
     top: 50px;
     color: rgb(134, 37, 230);
     margin-top: 20px;
+    position: fixed;
+}
+.search-by-thing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 label {
     color: #fff;

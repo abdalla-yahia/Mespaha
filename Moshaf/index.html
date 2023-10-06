@@ -13,14 +13,18 @@
     <audio class="audio4" src="../Audio/Page-Flip.wav"  controls></audio>
     <div class="container">
         <div>
-            <button class="fh-btn ">الفهرس</button>
             <a href="../index.html">
-            <button class="fh-btn sahm">&lt; الصفحة الرئيسية
+                <button class="sahm">&lt; الصفحة الرئيسية
                 </button>
             </a>
-            <!-- <audio src="https://download.quranicaudio.com/quran/abdurrahmaan_as-sudays/001.mp3" controls autoplay> -->
-            <label for="ind"> ابحث برقم الصفحة</label>
-            <input id="ind" class="page-number" type="number" min="1" max="604" placeholder="أدخل رقم الصفحة">
+            <div class="search-by-thing">
+                
+                <button class="fh-btn ">الفهرس</button>
+                <label for="ind"> ابحث برقم الصفحة</label>
+                <input id="ind" class="page-number" type="number" min="1" max="604" placeholder="أدخل رقم الصفحة">
+                <label for="goza"> ابحث برقم الجزء</label>
+                <input id="goza" class="goza-number" type="number" min="1" max="30" placeholder="أدخل رقم الجزء">
+            </div>
         </div>
         <div class="fehres" style="visibility: hidden;">
             <button class="close">X</button>

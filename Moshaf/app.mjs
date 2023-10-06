@@ -10,6 +10,7 @@ let close = document.querySelector('.close')
 let one = document.querySelector('.one')
 // let two = document.querySelector('.two')
 let page_number = document.querySelector('.page-number');
+let goza_number = document.querySelector('.goza-number');
 // let h3 = document.querySelector('.span-basmalah')
 let audio4 = document.querySelector('.audio4')
 let e = 1
@@ -153,6 +154,61 @@ page_number.onchange=(el)=>{
     }else{
 
         e = Number(el.target.value)
+    }
+    if(e%2 === 0){
+        e-=1
+        img_1.setAttribute('src',`./quran-images/${e}.jpg`)
+        img_2.setAttribute('src',`./quran-images/${e+1}.jpg`)
+        window.localStorage.setItem('page',e)
+    }else {
+        img_1.setAttribute('src',`./quran-images/${e}.jpg`)
+        img_2.setAttribute('src',`./quran-images/${e+1}.jpg`)
+        window.localStorage.setItem('page',e)
+    }
+    el.target.value = ''
+}
+goza_number.onchange=(el)=>{
+    if(Number(el.target.value) <= 1){
+        e = 1
+    }else if (Number(el.target.value) >= 30){
+        e = 582
+    }else{
+        let goz = {
+            2:22,
+            3:42,
+            4:62,
+            5:82,
+            6:102,
+            7:121,
+            8:142,
+            9:162,
+            10:182,
+            11:201,
+            12:222,
+            13:242,
+            14:262,
+            15:282,
+            16:302,
+            17:322,
+            18:342,
+            19:362,
+            20:382,
+            21:402,
+            22:422,
+            23:442,
+            24:462,
+            25:482,
+            26:502,
+            27:522,
+            28:542,
+            29:562
+        }
+        for(let i in goz){
+            if(el.target.value == i){
+                e =goz[i]
+            }
+        }
+        // e = Number(el.target.value)
     }
     if(e%2 === 0){
         e-=1
