@@ -38,10 +38,100 @@ let wornning_div_time =document.querySelector('.wornning-div-time')
 let wornning_close =document.querySelector('.wornning-div span')
 
 let date = new Date()
-let dd = date.getDay()
+let dd = date.getDate()
 
 let S = window.localStorage
 let moaqeet = {}
+let getDay = ''
+    let getDayEn = ''
+    let getDate = ''
+    let getMonths = ''
+    let getYers = ''
+    
+
+  //Get Fajr Time
+  let FAJ1 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Fajr).slice(0,2))
+  let FAJ2 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Fajr).slice(3,5))
+    //Get SunRice Time
+  let SUN1 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Sunrise).slice(0,2))
+  let SUN2 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Sunrise).slice(3,5))
+  //Get Dohr Time
+  let D1 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Dhuhr).slice(0,2))
+  let D2 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Dhuhr).slice(3,5))
+  //Get Asr Time
+  let AS1 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Asr).slice(0,2))
+    let AS2 = await fetch( api
+      ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Asr).slice(3,5))
+      //Get Maghrib Time
+      let M1 = await fetch( api
+        ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Maghrib).slice(0,2))
+        let M2 = await fetch( api
+          ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Maghrib).slice(3,5))
+  //Get Isha Time
+  let ISH1 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Isha).slice(0,2))
+  let ISH2 = await fetch( api
+    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Isha).slice(3,5))
+    getDay = await fetch( api
+      ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.weekday.ar)
+     getDayEn = await fetch( api
+      ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.weekday.en)
+      getDate = await fetch( api
+      ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.day)
+      getMonths = await fetch( api
+      ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.month.ar)
+     getYers = await fetch( api
+      ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.year)
+    
+
+
+    moaqeet = {
+        fajr: [Number(FAJ1), Number(FAJ2)],
+        sun:[Number(SUN1),Number(SUN2)],
+        zohr: [Number(D1), Number(D2)],
+        asr: [Number(AS1), Number(AS2)],
+        maqgreeb: [Number(M1), Number(M2)],
+        isha: [Number(ISH1),Number(ISH2)],
+      };
+      if(window.navigator.onLine){
+
+        let Temp =  await fetch(weather
+          ).then((res)=>res.json())
+          .then(res=>res.temperature  )
+          w_span[0].innerHTML = Temp
+            //Set Weather Temp In Localstorge To Get It If No Network Connection
+            S.setItem('Temp',Temp)
+        }
+      //Set Moaqeet Alazan In Localstorge To Get It If No Network Connection
+      S.setItem('FAJ1',FAJ1)
+      S.setItem('FAJ2',FAJ2)
+      S.setItem('SUN1',SUN1)
+      S.setItem('SUN2',SUN2)
+      S.setItem('D1',D1)
+      S.setItem('D2',D2)
+      S.setItem('AS1',AS1)
+      S.setItem('AS2',AS2)
+      S.setItem('M1',M1)
+      S.setItem('M2',M2)
+      S.setItem('ISH1',ISH1)
+      S.setItem('ISH2',ISH2)
+      //Set Date In Localstorge To Get It If No Network Connection
+      S.setItem('getDay',getDay)
+      S.setItem('getDayEn',getDayEn)
+      S.setItem('getDate',getDate)
+      S.setItem('getMonths',getMonths)
+      S.setItem('getYers',getYers)
+    
+    
+
+
     //Get Moaqeet Alazan From Localstorge When No Network Connection
     moaqeet = {
       fajr: [Number(S.getItem('FAJ1')), Number(S.getItem('FAJ2'))],
@@ -241,11 +331,7 @@ btn[3].onclick = () => {
   }, 5000);
 };
 
-let getDay = ''
-    let getDayEn = ''
-    let getDate = ''
-    let getMonths = ''
-    let getYers = ''
+
 
      getDay = S.getItem('getDay')
      getDayEn = S.getItem('getDayEn')
@@ -516,8 +602,25 @@ setInterval(() => {
     pray[3].title=''
   }
   wornning_div_time.innerText=((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) 
+  setTimeout(()=>{
+  
+    if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) <= 15){
+      wornning.style.display ='block'
+    }
+    setInterval(()=>{
+      if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) >= 15){
+        wornning.style.visibility = 'hidden'
+        
+      }
+  
+    },1000)
+  },1*1000)
+  
 }, 1 * 1000);
 
+wornning_close.addEventListener('click',()=>{
+  wornning.style.visibility = 'hidden'
+})
 setInterval(() => {
   azan.style.backgroundImage = `url(${
     arrImage[Math.floor(Math.random() * arrImage.length)]
@@ -539,102 +642,5 @@ setInterval(() => {
   }
   
 }, 15 * 60 * 1000);
-wornning_close.onclick = ()=>{
-  wornning.style.display ='none'
-}
-setTimeout(()=>{
-  
-  if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) <= 15){
-    wornning.style.display ='block'
-  }
-  setInterval(()=>{
-    if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) >= 15){
-      wornning.style.display ='none'
-      
-    }
-
-  },1000)
-},5*1000)
 
     
-
-
-  if(window.navigator.onLine){
-    //Get Fajr Time
-    let FAJ1 = await fetch( api
-      ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Fajr).slice(0,2))
-    let FAJ2 = await fetch( api
-      ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Fajr).slice(3,5))
-      //Get SunRice Time
-    let SUN1 = await fetch( api
-      ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Sunrise).slice(0,2))
-    let SUN2 = await fetch( api
-      ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Sunrise).slice(3,5))
-    //Get Dohr Time
-    let D1 = await fetch( api
-      ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Dhuhr).slice(0,2))
-    let D2 = await fetch( api
-      ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Dhuhr).slice(3,5))
-    //Get Asr Time
-    let AS1 = await fetch( api
-      ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Asr).slice(0,2))
-      let AS2 = await fetch( api
-        ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Asr).slice(3,5))
-        //Get Maghrib Time
-        let M1 = await fetch( api
-          ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Maghrib).slice(0,2))
-          let M2 = await fetch( api
-            ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Maghrib).slice(3,5))
-    //Get Isha Time
-    let ISH1 = await fetch( api
-      ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Isha).slice(0,2))
-    let ISH2 = await fetch( api
-      ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Isha).slice(3,5))
-  
-
-      getDay = await fetch( api
-        ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.weekday.ar)
-       getDayEn = await fetch( api
-        ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.weekday.en)
-        getDate = await fetch( api
-        ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.day)
-        getMonths = await fetch( api
-        ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.month.ar)
-       getYers = await fetch( api
-        ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.year)
-      
-       let Temp =  await fetch(weather
-          ).then((res)=>res.json())
-          .then(res=>res.temperature  )
-
-      moaqeet = {
-          fajr: [Number(FAJ1), Number(FAJ2)],
-          sun:[Number(SUN1),Number(SUN2)],
-          zohr: [Number(D1), Number(D2)],
-          asr: [Number(AS1), Number(AS2)],
-          maqgreeb: [Number(M1), Number(M2)],
-          isha: [Number(ISH1),Number(ISH2)],
-        };
-        w_span[0].innerHTML = Temp
-        //Set Moaqeet Alazan In Localstorge To Get It If No Network Connection
-        S.setItem('FAJ1',FAJ1)
-        S.setItem('FAJ2',FAJ2)
-        S.setItem('SUN1',SUN1)
-        S.setItem('SUN2',SUN2)
-        S.setItem('D1',D1)
-        S.setItem('D2',D2)
-        S.setItem('AS1',AS1)
-        S.setItem('AS2',AS2)
-        S.setItem('M1',M1)
-        S.setItem('M2',M2)
-        S.setItem('ISH1',ISH1)
-        S.setItem('ISH2',ISH2)
-        //Set Date In Localstorge To Get It If No Network Connection
-        S.setItem('getDay',getDay)
-        S.setItem('getDayEn',getDayEn)
-        S.setItem('getDate',getDate)
-        S.setItem('getMonths',getMonths)
-        S.setItem('getYers',getYers)
-        //Set Weather Temp In Localstorge To Get It If No Network Connection
-        S.setItem('Temp',Temp)
-      }
