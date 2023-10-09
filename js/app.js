@@ -15,8 +15,8 @@ let notifaction = document.querySelector(".notifaction");
 let reset_span = document.querySelector(".reset-span");
 let yes_span = document.querySelector(".yes-span");
 // let select = document.querySelector(".select");
-let minutes = document.querySelector(".minutes");
-let seconds = document.querySelector(".seconds");
+// let minutes = document.querySelector(".minutes");
+// let seconds = document.querySelector(".seconds");
 let times_span = document.querySelectorAll(".times-span");
 let time_pm = document.querySelector(".time-pm");
 let hadith = document.querySelector(".hadith");
@@ -35,10 +35,10 @@ let audio2 = document.querySelector(".audio2");
 let audio3 = document.querySelector(".audio3");
 let wornning =document.querySelector('.wornning-div')
 let wornning_div_time =document.querySelector('.wornning-div-time')
-let wornning_close =document.querySelector('.wornning-div span')
+// let wornning_close =document.querySelector('.wornning-div span')
 
 let date = new Date()
-let dd = date.getDate()
+let dd = date.getDate() - 1
 
 let S = window.localStorage
 let moaqeet = {}
@@ -151,17 +151,17 @@ let arrImage = [
   "./Images/4.jpg",
   "./Images/5.jpg",
   "./Images/6.jpg",
-  "./Images/7.jpg",
-  "./Images/8.jpg",
+  // "./Images/7.jpg",
+  // "./Images/8.jpg",
 ];
-let arrAzan = [
-  "./Audio/azan2.mp3",
-  "./Audio/azan12.mp3",
-  "./Audio/azan14.mp3",
-  "./Audio/azan15.mp3",
-  "./Audio/azan16.mp3",
-  "./Audio/azan20.mp3",
-];
+// let arrAzan = [
+//   "./Audio/azan2.mp3",
+//   "./Audio/azan12.mp3",
+//   "./Audio/azan14.mp3",
+//   "./Audio/azan15.mp3",
+//   "./Audio/azan16.mp3",
+//   "./Audio/azan20.mp3",
+// ];
 container.style.backgroundImage = `url(${
   arrImage[Math.floor(Math.random() * arrImage.length)]
 })`;
@@ -602,13 +602,13 @@ setInterval(() => {
     pray[3].title=''
   }
   wornning_div_time.innerText=((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) 
-  setTimeout(()=>{
+     setTimeout(()=>{
   
-    if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) <= 15){
+    if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) <= 10){
       wornning.style.display ='block'
     }
     setInterval(()=>{
-      if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) >= 15){
+      if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) >= 10){
         wornning.style.visibility = 'hidden'
         
       }
@@ -618,29 +618,26 @@ setInterval(() => {
   
 }, 1 * 1000);
 
-wornning_close.addEventListener('click',()=>{
-  wornning.style.visibility = 'hidden'
-})
 setInterval(() => {
   azan.style.backgroundImage = `url(${
     arrImage[Math.floor(Math.random() * arrImage.length)]
   })`;
-  if(net_pray_name.innerText == 'الفجر') {
-    audio2.src = arrAzan[2]
-  }
-  if(net_pray_name.innerText == 'الظهر') {
-    audio2.src = arrAzan[1]
-  }
-  if(net_pray_name.innerText == 'العصر') {
-    audio2.src = arrAzan[3]
-  }
-  if(net_pray_name.innerText == 'المغرب') {
-    audio2.src = arrAzan[4]
-  }
-  if(net_pray_name.innerText == 'العشاء') {
-    audio2.src = arrAzan[5]
-  }
+},  1* 60 * 1000);
+  // if(net_pray_name.innerText == 'الفجر') {
+  //   audio2.src = arrAzan[2]
+  // }
+  // if(net_pray_name.innerText == 'الظهر') {
+  //   audio2.src = arrAzan[1]
+  // }
+  // if(net_pray_name.innerText == 'العصر') {
+  //   audio2.src = arrAzan[3]
+  // }
+  // if(net_pray_name.innerText == 'المغرب') {
+  //   audio2.src = arrAzan[4]
+  // }
+  // if(net_pray_name.innerText == 'العشاء') {
+  //   audio2.src = arrAzan[5]
+  // }
   
-}, 15 * 60 * 1000);
 
     
