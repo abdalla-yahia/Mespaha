@@ -602,19 +602,15 @@ setInterval(() => {
     pray[3].title=''
   }
   wornning_div_time.innerText=((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) 
-     setTimeout(()=>{
   
     if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) <= 10){
-      wornning.style.display ='block'
+      wornning.style.visibility = 'visible'
+      console.log('done')
     }
-    setInterval(()=>{
-      if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) >= 10){
+    if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) >= 10){
         wornning.style.visibility = 'hidden'
-        
       }
-  
-    },1000)
-  },1*1000)
+    
   
 }, 1 * 1000);
 

@@ -190,6 +190,7 @@ body {
 }
 .moshaf img {
   max-width: 60px;
+  border-radius: 15%;
 }
 .weather {
   width: 50%;
@@ -420,7 +421,8 @@ span.sp {
   animation: wor 1s infinite ease-in-out;
   position: relative;
   padding: 5px 20px;
-  display: none;
+  /* display: none; */
+  visibility: hidden;
 }
 .wornning-div span:nth-child(4){
   position: absolute;
