@@ -48,7 +48,7 @@ let getDay = ''
     let getMonths = ''
     let getYers = ''
     
-
+async function GetData(){
   //Get Fajr Time
   let FAJ1 = await fetch( api
     ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Fajr).slice(0,2))
@@ -129,8 +129,8 @@ let getDay = ''
       S.setItem('getMonths',getMonths)
       S.setItem('getYers',getYers)
     
-    
-
+      }
+GetData()
 
     //Get Moaqeet Alazan From Localstorge When No Network Connection
     moaqeet = {
