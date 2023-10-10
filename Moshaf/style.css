@@ -32,8 +32,8 @@ background-color: rgba(0, 0, 0, 0.77);
     /* background-color: black; */
     overflow: hidden;
     /* height: 650px; */
-    background-color: rgb(232, 210, 65);
-    
+    /* background-color: rgb(232, 210, 65); */
+    box-shadow: 10px 10px 10px rgba(146, 137, 137, 0.7);
 }
 .container .box .box-1 {
     /* color: white; */
@@ -41,6 +41,15 @@ background-color: rgba(0, 0, 0, 0.77);
     text-align:justify;
     overflow: auto;
     /* padding: 20px; */
+}
+.container .box .box-1{
+    border-radius:4% 0 0 4%;
+    transform:skewY(-2deg)
+}
+.container .box .box-2{
+    border-radius:0 4% 4% 0;
+    transform:skewY(2deg)
+    
 }
 .container .box .box-1 .span-basmalah {
     color: gray;
@@ -162,16 +171,17 @@ input:focus {
 }
 .sign-save-span {
 position: absolute;
-width: 2.5%;
-height: 18%;
+height: 28%;
 background-color: transparent;
-top: 0px;
+top: -6px;
 left: 12%;
 opacity: .90;
 border-style: solid ;
 border-width:1rem;
 border-color: orangered  orangered transparent orangered ;
 display: none;
+z-index: 1;
+transform: skew(-1deg);
 }
 
 .fehres {
