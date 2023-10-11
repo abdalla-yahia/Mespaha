@@ -2,7 +2,7 @@ import data from "../data/data.js";
 import api from '../data/MoaqeetApi.js'
 import weather from "../data/WeatherApi.js";
 
-
+GetData()
 let counter = document.getElementById("counter");
 let container = document.querySelector(".container");
 let tasbeh = document.querySelectorAll(".tasbeh");
@@ -41,6 +41,7 @@ let date = new Date()
 let dd = date.getDate() - 1
 
 let S = window.localStorage
+// S.clear()
 let moaqeet = {}
 let getDay = ''
     let getDayEn = ''
@@ -130,7 +131,7 @@ async function GetData(){
       S.setItem('getYers',getYers)
     
       }
-GetData()
+
 
     //Get Moaqeet Alazan From Localstorge When No Network Connection
     moaqeet = {
@@ -373,6 +374,8 @@ setInterval(() => {
 }, 1000);
 
 setInterval(() => {
+  
+
   let dateTime = new Date();
   let TimeNowHoures = dateTime.getHours();
   let TimeNowMinutes = dateTime.getMinutes();
