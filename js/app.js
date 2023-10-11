@@ -608,7 +608,7 @@ setInterval(() => {
   
     if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) <= 10){
       wornning.style.visibility = 'visible'
-      console.log('done')
+      
     }
     if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) >= 10){
         wornning.style.visibility = 'hidden'
