@@ -17,6 +17,12 @@ let audio4 = document.querySelector('.audio4')
 let e = 1
 audio4.style.visibility = 'hidden'
 if(window.localStorage.getItem('sign')){
+    sign_get.style.display ='block'
+}else{
+    sign_get.style.display ='none'
+
+}
+if(window.localStorage.getItem('sign')){
     if(window.localStorage.getItem('page') == window.localStorage.getItem('sign')){
         sign_save_span.style.display = 'block'
     }else
@@ -34,9 +40,11 @@ if(window.localStorage.getItem('page')){
     }
     
 } 
+
 sign_save.onclick=()=>{
     window.localStorage.setItem('sign',window.localStorage.getItem('page'))
     sign_save_span.style.display = 'block'
+    sign_get.style.display ='block'
 }
 box_2.onclick = ()=>{
     e+=2
@@ -250,6 +258,7 @@ goza_number.onchange=(el)=>{
 }
 
 sign_get.onclick =(el)=>{
+    if(window.localStorage.getItem('sign')){
     e=Number(window.localStorage.getItem('sign'))
     if(e%2 === 0){
         e-=1
@@ -267,4 +276,5 @@ sign_get.onclick =(el)=>{
         }else
         sign_save_span.style.display = 'none'
     }
+}
 }
