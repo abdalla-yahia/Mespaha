@@ -237,7 +237,7 @@ body {
 section,
 aside {
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-evenly; */
   flex-direction: column;
   align-items: center;
 }
@@ -285,6 +285,22 @@ button,
   font-weight: 700;
   font-size: 20px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+.tasbeh {
+  background-color: bisque;
+  width: 200px;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 5px;
+  
+}
+.tasbeh .mark{
+  width: 50px;
+  height: 50px;
+  background-color: red;
+  color:white;
+  border-radius: 50%;
+  padding: 2px;
 }
 button.btn {
   background-color: #2196f3;
@@ -354,14 +370,7 @@ button.btn:last-of-type div.reset-span::before {
 .yes-span{
   background-color: #e91e63;
 }
-.tasbeh {
-  background-color: bisque;
-  width: 200px;
-  text-align: center;
-  font-size: 1.5rem;
-  margin-top: 10px;
-  
-}
+
 
 
 span.sp {
@@ -421,8 +430,8 @@ span.sp {
   animation: wor 1s infinite ease-in-out;
   position: relative;
   padding: 5px 20px;
-  /* display: none; */
-  visibility: hidden;
+  display: none;
+
 }
 .wornning-div span:nth-child(4){
   position: absolute;

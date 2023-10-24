@@ -3,9 +3,15 @@ import api from '../data/MoaqeetApi.js'
 import weather from "../data/WeatherApi.js";
 
 GetData()
+let ss = setTimeout(()=>{
+
+  window.location.reload()
+},3000)
+clearTimeout(ss)
 let counter = document.getElementById("counter");
 let container = document.querySelector(".container");
 let tasbeh = document.querySelectorAll(".tasbeh");
+// let mark = document.querySelectorAll(".tasbeh .mark");
 let btn = document.getElementsByClassName("btn");
 let span = document.querySelector(".sp");
 let co = document.querySelector(".co");
@@ -491,6 +497,13 @@ setInterval(() => {
     let hh = heig.match(/[\d,.]/ig)
     bg[1].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت صلاة الضحى `
     }
+    if(((Houres*60) + Minutes)<=20){
+      pray[1].style.backgroundColor = '#F44336';
+      pray[1].title=' إنتبه أنت الأن في وقت تكره فيه الصلاة إلا صلاة قضاء'
+    }else{
+      pray[1].style.backgroundColor='#ddd'
+      pray[1].title=''
+    }
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -542,7 +555,13 @@ setInterval(() => {
       let hh = heig.match(/[\d,.]/ig)
       bg[3].title =`${Math.floor(hh.join(''))}% متبقي حتى خروج وقت صلاة العصر`
     }
-    
+    if(((Houres*60) + Minutes) <= 20){
+      pray[3].style.backgroundColor = '#F44336'
+      pray[3].title=' إنتبه أنت الأن في وقت تكره فيه الصلاة إلا صلاة قضاء'
+    }else{
+      pray[3].style.backgroundColor='#ddd'
+      pray[3].title=''
+    }
     net_time_pray[0].innerText = Houres;
     net_time_pray[1].innerText = Minutes;
     net_time_pray[2].innerText = 59 - TimeNowSeconds;
@@ -590,24 +609,13 @@ setInterval(() => {
       azan.style.display = "none";
     }, 3.36 * 60 * 1000);
   }
-  if(name === 'الظهر' && bg[1].style.height == ""){
-    pray[1].style.backgroundColor = '#F44336';
-    pray[1].title=' إنتبه أنت الأن في وقت تكره فيه الصلاة إلا صلاة قضاء'
-  }else{
-    pray[1].style.backgroundColor='#ddd'
-    pray[1].title=''
-  }
-  if(name === 'المغرب' && bg[3].style.height == ''){
-    pray[3].style.backgroundColor = '#F44336'
-    pray[3].title=' إنتبه أنت الأن في وقت تكره فيه الصلاة إلا صلاة قضاء'
-  }else{
-    pray[3].style.backgroundColor='#ddd'
-    pray[3].title=''
-  }
+  
+  
+ 
   wornning_div_time.innerText=((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) 
   
     if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) <= 10){
-      wornning.style.visibility = 'visible'
+      wornning.style.display= "block"
       
     }
     if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) >= 10){
