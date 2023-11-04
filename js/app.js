@@ -2,12 +2,7 @@ import data from "../data/data.js";
 import api from '../data/MoaqeetApi.js'
 import weather from "../data/WeatherApi.js";
 
-GetData()
-let ss = setTimeout(()=>{
 
-  window.location.reload()
-},3000)
-clearTimeout(ss)
 let counter = document.getElementById("counter");
 let container = document.querySelector(".container");
 let tasbeh = document.querySelectorAll(".tasbeh");
@@ -137,8 +132,8 @@ async function GetData(){
       S.setItem('getYers',getYers)
     
       }
-
-
+      // End GetData Function
+      GetData()
     //Get Moaqeet Alazan From Localstorge When No Network Connection
     moaqeet = {
       fajr: [Number(S.getItem('FAJ1')), Number(S.getItem('FAJ2'))],
@@ -611,16 +606,15 @@ setInterval(() => {
   }
   
   
- 
   wornning_div_time.innerText=((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) 
   
-    if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) <= 10){
-      wornning.style.display= "block"
+    if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) >= 10 ){
+      wornning.style.display= "none"
       
+    }else {
+      wornning.style.display= "block"
     }
-    if(((Number(net_time_pray[0].innerText) * 60) + Number(net_time_pray[1].innerText)) >= 10){
-        wornning.style.visibility = 'hidden'
-      }
+   
     
   
 }, 1 * 1000);
