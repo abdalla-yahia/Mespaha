@@ -25,6 +25,7 @@ background-color: rgba(0, 0, 0, 0.77);
     gap: 15px 2px;
     margin: -35px 170px 5px 10px;
     position: relative;
+    perspective: 1500px;
 }
 .container .box .box-1,
 .container .box .box-2 {
@@ -34,21 +35,27 @@ background-color: rgba(0, 0, 0, 0.77);
     /* height: 650px; */
     /* background-color: rgb(232, 210, 65); */
     box-shadow: 10px 10px 10px rgba(146, 137, 137, 0.7);
+    
 }
-.container .box .box-1 {
+.container .box  {
     /* color: white; */
     font-size: 25px;
     text-align:justify;
-    overflow: auto;
+    /* overflow: auto; */
     /* padding: 20px; */
+    transform: translateY(180deg);
+    transition: .5s;
+    
 }
 .container .box .box-1{
     border-radius:4% 0 0 4%;
-    transform:skewY(-2deg)
+    transform:skewY(-2deg);
+    background-color:white;
 }
 .container .box .box-2{
     border-radius:0 4% 4% 0;
-    transform:skewY(2deg)
+    transform:skewY(2deg);
+    background-color: #eee;
     
 }
 .container .box .box-1 .span-basmalah {

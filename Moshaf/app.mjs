@@ -47,6 +47,10 @@ sign_save.onclick=()=>{
     sign_get.style.display ='block'
 }
 box_2.onclick = ()=>{
+    box_2.style.transform = 'translateX(100%)';
+    setTimeout(()=>{
+        box_2.style.transform = 'translateX(0%)';
+    },50)
     e+=2
     audio4.play()
     img_1.setAttribute('src',`./quran-images/${e }.jpg`)
@@ -67,7 +71,11 @@ if(window.localStorage.getItem('sign')){
 }
 }
 box_1.onclick = ()=>{
-
+    box_1.style.transform = 'translateX(-100%)';
+    setTimeout(()=>{
+        
+        box_1.style.transform = 'translateX(0%)';
+    },50)
     img_1.setAttribute('src',`./quran-images/${e -2}.jpg`)
     img_2.setAttribute('src',`./quran-images/${e -1}.jpg`)
     e-=2

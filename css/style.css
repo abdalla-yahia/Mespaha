@@ -9,7 +9,7 @@ body {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  align-items: center;
+  align-items: center; 
   max-height: 100vh;
   user-select: none;
   position: relative;
@@ -26,18 +26,19 @@ body {
   z-index: 9999;
   display: none;
   overflow: hidden;
-}
-.azan .azan-title {
-  color: red;
-  font-size: 90px;
-  font-weight: bolder;
-  position: absolute;
-  top: 80px;
-  left: 25%;
-  font-family: 'Times New Roman', Times, serif;
-  animation: move 15s linear 1;
-  animation-delay: calc(18s * var(--i));
-  opacity: 0;
+
+  .azan-title {
+    color: red;
+    font-size: 90px;
+    font-weight: bolder;
+    position: absolute;
+    top: 80px;
+    left: 25%;
+    font-family: 'Times New Roman', Times, serif;
+    animation: move 15s linear 1;
+    animation-delay: calc(18s * var(--i));
+    opacity: 0;
+  }
 }
 @keyframes move {
   0%{
@@ -73,6 +74,19 @@ body {
   animation: show 7s ease-in-out;
   display: none;
   z-index: 111;
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(152, 241, 17);
+    height: 4px;
+    width: 0%;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    animation: decrease 4s 1 linear;
+    animation-delay: 1.5s;
+  }
 }
 
 @keyframes show {
@@ -97,19 +111,7 @@ body {
   }
 }
 
-.notifaction::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background-color: rgb(152, 241, 17);
-  height: 4px;
-  width: 0%;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  animation: decrease 4s 1 linear;
-  animation-delay: 1.5s;
-}
+
 
 @keyframes decrease {
   0% {
@@ -123,11 +125,13 @@ body {
 
 .container {
   position: relative;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px 10px;
   padding: 20px;
-  background-size: cover;
+  background-size: contain;
+  /* overflow: hidden; */
 }
 
 .clock,
@@ -158,7 +162,7 @@ body {
     10px 10px 10px rgba(0, 0, 0, 0.2);
   padding: 10px;
   text-align: center;
-  width: 100%;
+  max-width: 100%;
   min-height: 100px;
   direction: rtl;
   
@@ -195,9 +199,9 @@ body {
 .weather {
   width: 50%;
   min-height: fit-content;
-  /* background-image:linear-gradient(transparent  , #fff,transparent) ; */
   border-radius: 15px;
-  background-color: rgba(255,255,255,.3);
+  background-color: rgba(171, 167, 167, 0.23);
+  backdrop-filter:blur(5px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -207,7 +211,6 @@ body {
 .w-span {
   width: 70%;
   height: 40%;
-  /* background-color: rgba(250,250,250,.5); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -251,7 +254,7 @@ p span {
   color: red;
 }
 
-.countera {
+.counter {
   width: 350px;
   height: 350px;
   background-color: #9e9e9e;
@@ -284,7 +287,12 @@ button,
   cursor: pointer;
   font-weight: 700;
   font-size: 20px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2),
+  2px 2px 2px rgba(0, 0, 0, 0.2),
+  2px 2px 2px rgba(0, 0, 0, 0.2),
+  2px 2px 2px rgba(0, 0, 0, 0.2),
+  inset 2px 2px 2px #fff;
+  /* transition: .8s; */
 }
 .tasbeh {
   background-color: bisque;
@@ -391,7 +399,7 @@ span.sp {
   background-color: #cfcdcd;
   width: 100%;
   color: #361111;
-  font-size: 30px;
+  font-size: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -412,12 +420,17 @@ span.sp {
   display: flex;
   justify-content: space-evenly;
   align-items: flex-end;
+  flex-wrap: wrap;
   flex-direction: column;
   position: relative;
 }
 .mowaqeet-parent{
   display: flex;
   flex-direction: row-reverse;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
 }
 .wornning-div {
   background-color: red;
@@ -460,13 +473,13 @@ span.sp {
   height: 80px;
   color:#f5f3f3;
   background-color: rgb(64, 37, 37);
-  position: absolute;
-  top: 10px;
-  left: 0;
+  padding:0px 10px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: row-reverse;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
 }
 .net-time-pray {
   text-align: center;
@@ -475,17 +488,26 @@ span.sp {
   color: #076eff;
 }
 .times .mwaqeet .pray {
-  width: 100px;
+  width: calc(100% /4);
+  height: 70px;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   background-color: #ddd;
-  margin: 3px;
+  margin: 5px;
   border-radius: 5px;
-  font-size: 1.7rem;
+  font-size: 1.2rem;
   position: relative;
   border: 1px solid rgb(5, 100, 122);
+  .pray-time{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
 }
 .times .mwaqeet .pray .bg{
 position: absolute;
@@ -498,18 +520,7 @@ color: #4af905;
 font-size: 20px;
 
 }
-.getDay::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 38%;
-  bottom: 0;
-  left: 0;
-  background-color: #076eff8e;
-  opacity: .5;
-  border-bottom-left-radius:15px;
-  border-bottom-right-radius:15px;
-}
+
 .times .mwaqeet .pray .pray-name{
 color: red;
 text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
@@ -518,6 +529,7 @@ text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
 }
 .times .mwaqeet .pray .AM{
   color: #076eff;
+  margin:0px 2px;
 }
 .times-span {
   color: #134bb1;
@@ -538,6 +550,18 @@ text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
   color: #ff07c1;
 }
 
+.getDay::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 38%;
+  bottom: 0;
+  left: 0;
+  background-color: #076eff8e;
+  opacity: .5;
+  border-bottom-left-radius:15px;
+  border-bottom-right-radius:15px;
+}
 
 @media (min-width:1051px) {
   .container {

@@ -1,151 +1,78 @@
-import data from "../data/data.js";
-import api from '../data/MoaqeetApi.js'
+import data    from "../data/data.js";
+import Api     from '../data/MoaqeetApi.js'
 import weather from "../data/WeatherApi.js";
 
-
-let counter = document.getElementById("counter");
-let container = document.querySelector(".container");
-let tasbeh = document.querySelectorAll(".tasbeh");
-// let mark = document.querySelectorAll(".tasbeh .mark");
-let btn = document.getElementsByClassName("btn");
-let span = document.querySelector(".sp");
-let co = document.querySelector(".co");
-let cover = document.querySelector(".cover");
-let clock = document.querySelector(".clock");
-let notifaction = document.querySelector(".notifaction");
-let reset_span = document.querySelector(".reset-span");
-let yes_span = document.querySelector(".yes-span");
-// let select = document.querySelector(".select");
-// let minutes = document.querySelector(".minutes");
-// let seconds = document.querySelector(".seconds");
-let times_span = document.querySelectorAll(".times-span");
-let time_pm = document.querySelector(".time-pm");
-let hadith = document.querySelector(".hadith");
-let rawy = document.querySelector(".rawy");
-let num = document.querySelector(".num");
-let pray = document.querySelectorAll(".pray");
-let pra_time_houres = document.querySelectorAll(".pra-time-houres");
+let btn =              document.querySelectorAll(".btn");
+let times_span =       document.querySelectorAll(".times-span");
+let pray =             document.querySelectorAll(".pray");
+let pra_time_houres =  document.querySelectorAll(".pra-time-houres");
 let pra_time_minutes = document.querySelectorAll(".pra-time-minutes");
-let net_time_pray = document.querySelectorAll(".net-time-pray");
-let w_span = document.querySelectorAll(".w-span");
-let bg = document.querySelectorAll(".bg");
-let net_pray_name = document.querySelector(".net-pray-name");
-let azan = document.querySelector(".azan");
-let audio = document.querySelector(".audio");
-let audio2 = document.querySelector(".audio2");
-let audio3 = document.querySelector(".audio3");
-let wornning =document.querySelector('.wornning-div')
+let net_time_pray =    document.querySelectorAll(".net-time-pray");
+let w_span =           document.querySelectorAll(".w-span");
+let tasbeh =           document.querySelectorAll(".tasbeh");
+let bg =               document.querySelectorAll(".bg");
+let counter =          document.querySelector(".counter");
+let container =        document.querySelector(".container");
+let span =             document.querySelector(".sp");
+let co =               document.querySelector(".co");
+let cover =            document.querySelector(".cover");
+let notifaction =      document.querySelector(".notifaction");
+let reset_span =       document.querySelector(".reset-span");
+let yes_span =         document.querySelector(".yes-span");
+let time_pm =          document.querySelector(".time-pm");
+let hadith =           document.querySelector(".hadith");
+let rawy =             document.querySelector(".rawy");
+let num =              document.querySelector(".num");
+let net_pray_name =    document.querySelector(".net-pray-name");
+let azan =             document.querySelector(".azan");
+let audio =            document.querySelector(".audio");
+let audio2 =           document.querySelector(".audio2");
+let audio3 =           document.querySelector(".audio3");
+let wornning =         document.querySelector('.wornning-div')
 let wornning_div_time =document.querySelector('.wornning-div-time')
-// let wornning_close =document.querySelector('.wornning-div span')
 
 let date = new Date()
-let dd = date.getDate() - 1
-
-let S = window.localStorage
-// S.clear()
-let moaqeet = {}
-let getDay = ''
-    let getDayEn = ''
-    let getDate = ''
-    let getMonths = ''
-    let getYers = ''
+let dd   = date.getDate() - 1
     
-async function GetData(){
   //Get Fajr Time
-  let FAJ1 = await fetch( api
-    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Fajr).slice(0,2))
-  let FAJ2 = await fetch( api
-    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Fajr).slice(3,5))
-    //Get SunRice Time
-  let SUN1 = await fetch( api
-    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Sunrise).slice(0,2))
-  let SUN2 = await fetch( api
-    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Sunrise).slice(3,5))
+  let FAJ1      = await Api().then(res=>(res.data[dd].timings.Fajr).slice(0,2)   )
+  let FAJ2      = await Api().then(res=>(res.data[dd].timings.Fajr).slice(3,5)   )
+  //Get SunRice Time
+  let SUN1      = await Api().then(res=>(res.data[dd].timings.Sunrise).slice(0,2))
+  let SUN2      = await Api().then(res=>(res.data[dd].timings.Sunrise).slice(3,5))
   //Get Dohr Time
-  let D1 = await fetch( api
-    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Dhuhr).slice(0,2))
-  let D2 = await fetch( api
-    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Dhuhr).slice(3,5))
+  let D1        = await Api().then(res=>(res.data[dd].timings.Dhuhr).slice(0,2)  )
+  let D2        = await Api().then(res=>(res.data[dd].timings.Dhuhr).slice(3,5)  )
   //Get Asr Time
-  let AS1 = await fetch( api
-    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Asr).slice(0,2))
-    let AS2 = await fetch( api
-      ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Asr).slice(3,5))
-      //Get Maghrib Time
-      let M1 = await fetch( api
-        ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Maghrib).slice(0,2))
-        let M2 = await fetch( api
-          ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Maghrib).slice(3,5))
+  let AS1       = await Api().then(res=>(res.data[dd].timings.Asr).slice(0,2)    )
+  let AS2       = await Api().then(res=>(res.data[dd].timings.Asr).slice(3,5)    )
+  //Get Maghrib Time
+  let M1        = await Api().then(res=>(res.data[dd].timings.Maghrib).slice(0,2))
+  let M2        = await Api().then(res=>(res.data[dd].timings.Maghrib).slice(3,5))
   //Get Isha Time
-  let ISH1 = await fetch( api
-    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Isha).slice(0,2))
-  let ISH2 = await fetch( api
-    ).then((res)=>res.json()).then(res=>(res.data[dd].timings.Isha).slice(3,5))
-    getDay = await fetch( api
-      ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.weekday.ar)
-     getDayEn = await fetch( api
-      ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.weekday.en)
-      getDate = await fetch( api
-      ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.day)
-      getMonths = await fetch( api
-      ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.month.ar)
-     getYers = await fetch( api
-      ).then((res)=>res.json()).then(res=>res.data[dd].date.hijri.year)
-    
+  let ISH1      = await Api().then(res=>(res.data[dd].timings.Isha).slice(0,2)   )
+  let ISH2      = await Api().then(res=>(res.data[dd].timings.Isha).slice(3,5)   )
+  //Set Date Time Values 
+  let getDay    = await Api().then(res=>res.data[dd].date.hijri.weekday.ar       )
+  let getDayEn  = await Api().then(res=>res.data[dd].date.hijri.weekday.en       )
+  let getDate   = await Api().then(res=>res.data[dd].date.hijri.day              )
+  let getMonths = await Api().then(res=>res.data[dd].date.hijri.month.ar         )
+  let getYers   = await Api().then(res=>res.data[dd].date.hijri.year             )
 
+  // Set Times of the Prayers
+  let moaqeet = {
+    fajr:     [Number(FAJ1), Number(FAJ2)],
+    sun:      [Number(SUN1), Number(SUN2)],
+    zohr:     [Number(D1),   Number(D2)  ],
+    asr:      [Number(AS1),  Number(AS2) ],
+    maqgreeb: [Number(M1),   Number(M2)  ],
+    isha:     [Number(ISH1), Number(ISH2)],
+  };
+  //Set the Temperature 
+  let Temp =weather() ? await weather().then(res=>res.temperature  ):''
+    w_span[0].innerHTML = Temp
 
-    moaqeet = {
-        fajr: [Number(FAJ1), Number(FAJ2)],
-        sun:[Number(SUN1),Number(SUN2)],
-        zohr: [Number(D1), Number(D2)],
-        asr: [Number(AS1), Number(AS2)],
-        maqgreeb: [Number(M1), Number(M2)],
-        isha: [Number(ISH1),Number(ISH2)],
-      };
-      if(window.navigator.onLine){
-
-        let Temp =  await fetch(weather
-          ).then((res)=>res.json())
-          .then(res=>res.temperature  )
-          w_span[0].innerHTML = Temp
-            //Set Weather Temp In Localstorge To Get It If No Network Connection
-            S.setItem('Temp',Temp)
-        }
-      //Set Moaqeet Alazan In Localstorge To Get It If No Network Connection
-      S.setItem('FAJ1',FAJ1)
-      S.setItem('FAJ2',FAJ2)
-      S.setItem('SUN1',SUN1)
-      S.setItem('SUN2',SUN2)
-      S.setItem('D1',D1)
-      S.setItem('D2',D2)
-      S.setItem('AS1',AS1)
-      S.setItem('AS2',AS2)
-      S.setItem('M1',M1)
-      S.setItem('M2',M2)
-      S.setItem('ISH1',ISH1)
-      S.setItem('ISH2',ISH2)
-      //Set Date In Localstorge To Get It If No Network Connection
-      S.setItem('getDay',getDay)
-      S.setItem('getDayEn',getDayEn)
-      S.setItem('getDate',getDate)
-      S.setItem('getMonths',getMonths)
-      S.setItem('getYers',getYers)
-    
-      }
-      // End GetData Function
-      GetData()
-    //Get Moaqeet Alazan From Localstorge When No Network Connection
-    moaqeet = {
-      fajr: [Number(S.getItem('FAJ1')), Number(S.getItem('FAJ2'))],
-      sun: [Number(S.getItem('SUN1')),Number(S.getItem('SUN2'))],
-      zohr: [Number(S.getItem('D1')), Number(S.getItem('D2'))],
-      asr: [Number(S.getItem('AS1')), Number(S.getItem('AS2'))],
-      maqgreeb: [Number(S.getItem('M1')), Number(S.getItem('M2'))],
-      isha: [Number(S.getItem('ISH1')), Number(S.getItem('ISH2'))],
-    };
-
-w_span[0].innerText = S.getItem('Temp')
-
+  //Set Default Background Images
 let arrImage = [
   "./Images/1.jpg",
   "./Images/2.jpg",
@@ -153,17 +80,8 @@ let arrImage = [
   "./Images/4.jpg",
   "./Images/5.jpg",
   "./Images/6.jpg",
-  // "./Images/7.jpg",
-  // "./Images/8.jpg",
 ];
-// let arrAzan = [
-//   "./Audio/azan2.mp3",
-//   "./Audio/azan12.mp3",
-//   "./Audio/azan14.mp3",
-//   "./Audio/azan15.mp3",
-//   "./Audio/azan16.mp3",
-//   "./Audio/azan20.mp3",
-// ];
+
 container.style.backgroundImage = `url(${
   arrImage[Math.floor(Math.random() * arrImage.length)]
 })`;
@@ -192,11 +110,13 @@ pra_time_minutes.forEach((e) => {
   +e.innerText <= 9 ? (e.innerText = "0" + +e.innerText) : +e.innerText;
 });
 
+// Show Default Hadith From Database and Colorize 'Rawy Of Hadith' and 'Counter Of Hadith'
 let random = Math.floor(Math.random() * data.length);
 let str = data[random].match(/(\d)/gi).join("");
 hadith.innerText = data[random].substring(3, data[random].indexOf("رواه"));
 rawy.innerHTML = data[random].slice(data[random].indexOf("رواه"));
 num.innerText = data[random].substring(0, 3);
+
 setInterval(() => {
   let random = Math.floor(Math.random() * data.length);
   let str = data[random].match(/(\d)/gi).join("");
@@ -205,7 +125,7 @@ setInterval(() => {
   num.innerText = data[random].substring(0, 3);
 }, 10 * 1000);
 
-//Set Time  Of Notifacation Audio Of Saly Ala Mohamed
+//Set Time  Of Notifacation Audio Of 'Saly Ala Mohamed'
  setInterval(() => {
   audio.play();
   notifaction.style.display = "block";
@@ -236,6 +156,11 @@ btn[2].onclick = () => {
 
 tasbeh.forEach((e, ind) => {
   e.addEventListener("click", (es) => {
+    e.style.transform = 'scale(.9)';
+    setTimeout(()=>{
+      e.style.transform = 'scale(1)';
+
+    },100)
     container.style.backgroundImage = `url(${
       arrImage[Math.floor(Math.random() * arrImage.length)]
     })`;
@@ -294,33 +219,6 @@ btn[0].onclick = () => {
   counter.innerHTML = 0;
 };
 
-// setInterval(() => {
-  //   if (minutes.innerText > 0) {
-//     seconds.innerText -= 1;
-
-//     if (seconds.innerText <= 0) {
-//       minutes.innerText -= 1;
-//       seconds.innerText = 60;
-//     }
-//     if (seconds.innerText <= 9) {
-  //       seconds.innerText = "0" + +seconds.innerText;
-  //     }
-//     if (minutes.innerText <= 9) {
-  //       minutes.innerText = "0" + +minutes.innerText;
-  //     }
-  //   } else if (minutes.innerText == 0 && seconds.innerText == 0) {
-    //     minutes.innerText = 9;
-    //     seconds.innerText = 60;
-    //   } else {
-//     seconds.innerText -= 1;
-//     minutes.innerText = "0" + +minutes.innerText;
-//     if (seconds.innerText <= 9) {
-//       seconds.innerText = "0" + +seconds.innerText;
-//     }
-//   }
-//   document.title = clock.innerText;
-// }, 1000);
-
 btn[3].onclick = () => {
   reset_span.classList.toggle("disappear");
   yes_span.onclick = () => {
@@ -334,13 +232,6 @@ btn[3].onclick = () => {
 };
 
 
-
-     getDay = S.getItem('getDay')
-     getDayEn = S.getItem('getDayEn')
-     getDate = S.getItem('getDate')
-     getMonths = S.getItem('getMonths')
-     getYers = S.getItem('getYers')
-    
 times_span[0].innerHTML = `<div style="height:350px;"><span class="getDay" style=" text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2),
     10px 10px 10px rgba(0, 0, 0, 0.2),
     10px 10px 10px rgba(0, 0, 0, 0.2);border-radius:15px
@@ -378,20 +269,20 @@ setInterval(() => {
   
 
   let dateTime = new Date();
-  let TimeNowHoures = dateTime.getHours();
-  let TimeNowMinutes = dateTime.getMinutes();
-  let TimeNowSeconds = dateTime.getSeconds();
+  let TimeNowHoures         = dateTime.getHours();
+  let TimeNowMinutes        = dateTime.getMinutes();
+  let TimeNowSeconds        = dateTime.getSeconds();
   let TimeNowHouresByMinues = TimeNowHoures * 60 + TimeNowMinutes;
 
   let x = TimeNowHoures * 60 + TimeNowMinutes;
   let y = 0;
   
-  let Fajr = moaqeet.fajr[0] * 60 + moaqeet.fajr[1];
-  let SunRice = moaqeet.sun[0] * 60 + moaqeet.sun[1];
-  let Zohr = moaqeet.zohr[0] * 60 + moaqeet.zohr[1];
-  let Asr = moaqeet.asr[0] * 60 + moaqeet.asr[1];
+  let Fajr     = moaqeet.fajr[0]     * 60 + moaqeet.fajr[1];
+  let SunRice  = moaqeet.sun[0]      * 60 + moaqeet.sun[1];
+  let Zohr     = moaqeet.zohr[0]     * 60 + moaqeet.zohr[1];
+  let Asr      = moaqeet.asr[0]      * 60 + moaqeet.asr[1];
   let Maqhreeb = moaqeet.maqgreeb[0] * 60 + moaqeet.maqgreeb[1];
-  let Ishaa = moaqeet.isha[0] * 60 + moaqeet.isha[1];
+  let Ishaa    = moaqeet.isha[0]     * 60 + moaqeet.isha[1];
   
   bg.forEach((e) => {
     e.style.display = "none";
@@ -596,10 +487,9 @@ setInterval(() => {
     net_time_pray[2].innerText = "0" + +net_time_pray[2].innerText;
   }
 
-  if (x == y) {
+  if (x == y && name !== "الشروق") {
     azan.style.display = "block";
     audio2.play();
-    // clearInterval(Saly)
     setTimeout(() => {
       azan.style.display = "none";
     }, 3.36 * 60 * 1000);
@@ -624,21 +514,3 @@ setInterval(() => {
     arrImage[Math.floor(Math.random() * arrImage.length)]
   })`;
 },  1* 60 * 1000);
-  // if(net_pray_name.innerText == 'الفجر') {
-  //   audio2.src = arrAzan[2]
-  // }
-  // if(net_pray_name.innerText == 'الظهر') {
-  //   audio2.src = arrAzan[1]
-  // }
-  // if(net_pray_name.innerText == 'العصر') {
-  //   audio2.src = arrAzan[3]
-  // }
-  // if(net_pray_name.innerText == 'المغرب') {
-  //   audio2.src = arrAzan[4]
-  // }
-  // if(net_pray_name.innerText == 'العشاء') {
-  //   audio2.src = arrAzan[5]
-  // }
-  
-
-    
