@@ -115,13 +115,16 @@ hadith.innerText = data[random].substring(3, data[random].indexOf("رواه"));
 rawy.innerHTML = data[random].slice(data[random].indexOf("رواه"));
 num.innerText = data[random].substring(0, 3);
 
+
 setInterval(() => {
   let random = Math.floor(Math.random() * data.length);
   let str = data[random].match(/(\d)/gi).join("");
-  hadith.innerText = data[random].substring(3, data[random].indexOf("رواه"));
+  hadith.innerText = data[random].substring(3, data[random].indexOf("رواه"))
   rawy.innerHTML = data[random].slice(data[random].indexOf("رواه"));
   num.innerText = data[random].substring(0, 3);
 }, 10 * 1000);
+
+const speech = new SpeechSynthesisUtterance()
 
 //Set Time  Of Notifacation Audio Of 'Saly Ala Mohamed'
  setInterval(() => {
@@ -154,6 +157,9 @@ btn[2].onclick = () => {
 
 tasbeh.forEach((e, ind) => {
   e.addEventListener("click", (es) => {
+    speech.lang= 'ar-Ar';
+    speech.text =e.innerText
+    window.speechSynthesis.speak(speech)
     e.style.transform = 'scale(.9)';
     setTimeout(()=>{
       e.style.transform = 'scale(1)';

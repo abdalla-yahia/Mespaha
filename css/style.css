@@ -130,7 +130,7 @@ body {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px 10px;
   padding: 20px;
-  background-size: contain;
+  background-size:cover;
   /* overflow: hidden; */
 }
 
@@ -163,7 +163,7 @@ body {
   padding: 15px;
   text-align: center;
   width: 100%;
-  min-height: 100px;
+  height: 200px;
   direction: rtl;
   
 }
@@ -273,7 +273,7 @@ p span {
   cursor: pointer;
   transition: .05s;
   margin-bottom: 20px;
-   
+  
 }
 
 
@@ -366,7 +366,9 @@ button.btn:last-of-type div.reset-span::before {
   justify-content: center;
   align-items: center;
 }
+.reset-span{
 
+}
 .yes-span,.no-span {
   background-color: #1dc26a;
   padding: 10px;
@@ -592,11 +594,26 @@ aside {
 }
 }
 @media (max-width:715px) {
-.container,.parent-hadeth,.tasbeh,.times,.mwaqeet,.mowaqeet-paren {
+  body{
+    background-color: red;
+  }
+
+.moshaf,.tasbeh{
+  width: 100%;
+}
+
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  width: 100%;
+}
+.parent-hadeth{
+  height: 300px;
+}
+button.btn:last-of-type div.reset-span {
+  right: 250%;
 }
 .times .mwaqeet{
 height: 350px;
@@ -604,9 +621,7 @@ height: 350px;
 .mowaqeet-paren{
   flex-wrap: wrap;
 }
-.parent-hadeth {
-  height: 350px;
-}
+
 .child-hadeth {
   height: 250px;
 }
