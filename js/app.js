@@ -68,9 +68,7 @@ let dd   = date.getDate() - 1
     maqgreeb: [Number(M1),   Number(M2)  ],
     isha:     [Number(ISH1), Number(ISH2)],
   };
-  //Set the Temperature 
-  let Temp =weather() ? await weather().then(res=>res.temperature  ):''
-    w_span[0].innerHTML = Temp
+
 
   //Set Default Background Images
 let arrImage = [
@@ -514,3 +512,7 @@ setInterval(() => {
     arrImage[Math.floor(Math.random() * arrImage.length)]
   })`;
 },  1* 60 * 1000);
+
+  //Set the Temperature 
+  let Temp =weather() ? await weather().then(res=>res.temperature  ):''
+    w_span[0].innerHTML = Temp
