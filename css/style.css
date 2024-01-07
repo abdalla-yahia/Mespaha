@@ -594,9 +594,6 @@ aside {
 }
 }
 @media (max-width:715px) {
-  body{
-    background-color: red;
-  }
 
 .moshaf,.tasbeh,section{
   width: 90%;
