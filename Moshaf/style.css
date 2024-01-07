@@ -273,15 +273,39 @@ tbody td {
     .container .box {
         width: 100%;
         height: 90vh;
+        position: relative;
+        margin-top: 50px;
     }
-    .container .box .box-1 {
-        background-color: black;
-        width: 100%;
+    .sign-save-span {
         position: absolute;
+        height: 25%;
+        background-color: transparent;
+        top: 300px;
+        left: 48%;
+        opacity: .80;
+        border-style: solid ;
+        border-width:.5rem;
+        border-color: orangered  orangered transparent orangered ;
+        display: none;
+        z-index: 1;
+        transform: skew(0.5deg);
+        }
+    .header {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        position: absolute;
+        top: 100px;
+
     }
-    .container .box .box-1 {
-        background-color: red;
+    .search-by-thing{
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        z-index: 99;
     }
+
     .box img {
         object-fit:cover;
         width: 100%;
@@ -298,9 +322,7 @@ tbody td {
         gap: 5px 50px;
         bottom: 20px;
     }
-    .btn.lg{
-        display: none;
-    }
+
     .btn.sm {
     padding: 20px;
     border: none;
@@ -337,10 +359,10 @@ tbody td {
         top: 0px;
         color: rgb(134, 37, 230);
     }
-    label,
+    /* label,
     input {
     display: none;
-    }
+    } */
     table thead{
         position: static;
         
