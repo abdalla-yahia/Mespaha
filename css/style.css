@@ -598,8 +598,8 @@ aside {
     background-color: red;
   }
 
-.moshaf,.tasbeh{
-  width: 100%;
+.moshaf,.tasbeh,section{
+  width: 90%;
 }
 
 .container {
@@ -613,7 +613,7 @@ aside {
   height: 300px;
 }
 button.btn:last-of-type div.reset-span {
-  right: 250%;
+  right: 180%;
 }
 .times .mwaqeet{
 height: 350px;
