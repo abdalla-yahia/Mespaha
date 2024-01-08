@@ -300,7 +300,10 @@ button,
   text-align: center;
   font-size: 1.5rem;
   margin-top: 5px;
-  
+  transition: .5s;
+}
+.tasbeh:hover {
+  transform: scale(1.2);
 }
 .tasbeh .mark{
   width: 50px;
