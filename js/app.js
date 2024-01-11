@@ -1,6 +1,8 @@
 import data    from "../data/data.js";
 import Api     from '../data/MoaqeetApi.js'
 import weather from "../data/WeatherApi.js";
+import Radios from "../data/Radios.js";
+
 
 let btn =              document.querySelectorAll(".btn");
 let times_span =       document.querySelectorAll(".times-span");
@@ -28,8 +30,10 @@ let azan =             document.querySelector(".azan");
 let audio =            document.querySelector(".audio");
 let audio2 =           document.querySelector(".audio2");
 let audio3 =           document.querySelector(".audio3");
-let wornning =         document.querySelector('.wornning-div')
-let wornning_div_time =document.querySelector('.wornning-div-time')
+let wornning =         document.querySelector('.wornning-div');
+let wornning_div_time =document.querySelector('.wornning-div-time');
+const btn_radio = document.querySelector('.btn-radio');
+const Radio_audio = document.querySelector('.Radio_audio');
 
 let date = new Date()
 let dd   = date.getDate() - 1
@@ -69,7 +73,20 @@ let dd   = date.getDate() - 1
     isha:     [Number(ISH1), Number(ISH2)],
   };
 
+//Get Radios 
+let radiosData= await Radios().then(res=>res)
 
+radiosData.radios && radiosData.radios.map(e=>{
+  let option = document.createElement('option')
+  option.value = e.url
+option.innerText = e.name
+btn_radio.appendChild(option)
+})
+//Set Aspecific Radio
+btn_radio.onchange = (e)=>{
+  let val=e.target.value;
+  fetch(`${val}`).then(res=>Radio_audio.src = res.url)
+}
   //Set Default Background Images
 let arrImage = [
   "./Images/1.jpg",
@@ -239,9 +256,9 @@ btn[3].onclick = () => {
 times_span[0].innerHTML = `<div style="height:350px;"><span class="getDay" style=" text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2),
     10px 10px 10px rgba(0, 0, 0, 0.2),
     10px 10px 10px rgba(0, 0, 0, 0.2);border-radius:15px
-;font-family:arial;color:red;display:flex;justify-content:center;align-items:center;flex-direction: column;gap:2px;background:#ddd;height:250px;text-align:center;font-size:80px;position: relative">${getDay} <span style="font-size:25px;color:green;letter-spacing:10px">${getDayEn}</span></span><span style=" text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
+;font-family: 'Amiri', serif;color:red;display:flex;justify-content:center;align-items:center;flex-direction: column;gap:2px;background:#ddd;height:250px;text-align:center;font-size:80px;position: relative">${getDay} <span style="font-size:25px;color:green;letter-spacing:10px">${getDayEn}</span></span><span style=" text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
     2px 2px 5px rgba(0, 0, 0, 0.2),
-    2px 2px 5px rgba(0, 0, 0, 0.2);color:red;">${getDate}</span> ${getMonths} <span style="color:green">${getYers}</span>  <span style="color:red">هـ</span></div>`;
+    2px 2px 5px rgba(0, 0, 0, 0.2);color:red;">${getDate}</span><span style="font-family: 'Amiri', serif;"> ${getMonths}</span> <span style="color:green;font-family: 'Amiri', serif;">${getYers}</span>  <span style="color:red">هـ</span></div>`;
 
 setInterval(() => {
   let date = new Date();

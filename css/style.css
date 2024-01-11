@@ -13,6 +13,7 @@ body {
   max-height: 100vh;
   user-select: none;
   position: relative;
+
 }
 .azan {
   width: 100%;
@@ -175,6 +176,7 @@ body {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   transition: 2s;
   animation: opac 2s linear 1;
+  font-family: 'Amiri', serif;
 }
 @keyframes opac {
   0%{
@@ -292,6 +294,7 @@ button,
   2px 2px 2px rgba(0, 0, 0, 0.2),
   2px 2px 2px rgba(0, 0, 0, 0.2),
   inset 2px 2px 2px #fff;
+  font-family: 'Amiri', serif;
   /* transition: .8s; */
 }
 .tasbeh {
@@ -346,6 +349,7 @@ button.btn:last-of-type div.reset-span {
   transition: 1s;
   text-align: center;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Amiri', serif;
 }
 button.btn:last-of-type div.reset-span::before {
   content: '';
@@ -369,9 +373,7 @@ button.btn:last-of-type div.reset-span::before {
   justify-content: center;
   align-items: center;
 }
-.reset-span{
 
-}
 .yes-span,.no-span {
   background-color: #1dc26a;
   padding: 10px;
@@ -417,6 +419,26 @@ span.sp {
     5px 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 10px;
+  .btn-radio{
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
+    5px 5px 10px rgba(0, 0, 0, 0.1),
+    5px 5px 10px rgba(0, 0, 0, 0.1);
+    outline: none;
+    background-color: #aca9a9;
+    width: 100%;
+    height: 40px;
+    color: #d10590;
+    margin-top: 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    font-family: 'Amiri';
+    
+    option{
+      color: red !important;
+      font-family: 'Amiri';
+    }
+  }
 }
 .times .mwaqeet {
   width: 100%;
@@ -491,6 +513,7 @@ span.sp {
 }
 .net-pray-name {
   color: #076eff;
+  font-family: 'Amiri', serif;
 }
 .times .mwaqeet .pray {
   width: calc(100% /4);
@@ -531,6 +554,7 @@ color: red;
 text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
     5px 5px 10px rgba(0, 0, 0, 0.1),
     5px 5px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Amiri', serif;
 }
 .times .mwaqeet .pray .AM{
   color: #076eff;
@@ -544,6 +568,7 @@ text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
   line-height: 50px;
   font-size: 35px;
   font-weight: 700;
+  font-family: 'Amiri', serif;
 }
 .times-span:nth-child(2){
   color: #076eff;
@@ -566,6 +591,7 @@ text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
   opacity: .5;
   border-bottom-left-radius:15px;
   border-bottom-right-radius:15px;
+  
 }
 
 @media (min-width:1051px) {

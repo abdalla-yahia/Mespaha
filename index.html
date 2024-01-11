@@ -7,7 +7,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta rel="shortcut icon" href="./1.png"/>
         <title>المسبحة</title>
+        <!--Google Fonts-->
+    <!--Foont Amiri For Quran-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;800&family=Amaranth:ital,wght@1,400;1,700&family=Amiri+Quran&display=swap" rel="stylesheet">
+    <!--Foont Amiri For Tafseer-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css"/>
+
     </head>
     <body style="height: 100vh;">
         
@@ -24,8 +34,9 @@
             <span class="rawy" style="color: red;"></span>
             </div>
         </div>
+        
         <div class="container">
-                    
+               
                 
                 <aside>
                     <div data-tas ='#81d4fa ' class="tasbeh">سُبْحَانَ اللهُ
@@ -84,7 +95,10 @@
                     </div>
                 </section>
                 <div class="times" >
-                
+                    <select class="btn-radio" value="">
+                        <option disabled selected>إخترإذاعة لإستماعها....</option>
+                        
+                    </select>
                     <section class="mwaqeet">
                         <div class="azan">
                             
@@ -192,6 +206,7 @@
         <audio class="audio" src="./Audio/نغمة جوال صلي على محمد(MP3_160K).mp3"  controls ></audio>
         <audio class="audio2" src="./Audio/azan12.mp3"  controls ></audio>
         <audio class="audio3" src="./Audio/Pop-2.wav"  controls></audio>
+        <audio class="Radio_audio" src="" autoplay controls></audio>
         <!-- <audio class="audio" src="./audio/001/001.mp3" controls autoplay ></audio> -->
         <script crossorigin="anonymous" src="js/app.js" type="module"></script>
         <script crossorigin="anonymous" src="./data/MoaqeetApi.js" type="module"></script>

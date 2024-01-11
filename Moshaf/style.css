@@ -58,18 +58,68 @@ p.active{
 }
 .exit {
     position: relative;
-    font-size: 25px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-family: 'Amiri';
+    padding: 0;
 }
 
-.exit::before {
-    content: '';
+
+
+.tafsesr_box_parent{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: #d8c0c0;
+    z-index: 999;
+    height: 150px;
+    font-size: 28px;
+    text-align: justify;
+    padding:10px 40px;
+    line-height: 2;
+    overflow-y: auto;
+    color: #000000;
+    box-shadow: inset 5px 5px 15px #1b7dd8,
+    inset -5px -5px 15px #172e7a,
+    inset 5px 5px 15px #1b44d8,
+    inset -5px -5px 15px #0e1a49
+    ;
+
+
+#tafsesr_box{
+    margin-top: 30px;
+    font-family: 'Amiri', serif;
+}
+}
+.tafsesr_box_parent >div.parent-simbole{
     position: absolute;
-    top: 66%;
-    right: 330%;
+    top: 10%;
+    left: 50%;
     transform: translate(-50%,-50%);
-    border: 31px solid red;
-    border-color:transparent #6c757d transparent transparent ;
-
-
+    font-size: 60px;
 }
+.tafsesr_box_parent >div.parent-simbole:before{
+    content: '';
+    width: 200px;
+    height: 5px;
+    background-color: green;
+    top: 82px;
+    left: 82px;
+    position: absolute;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+.tafsesr_box_parent >div.parent-simbole:after{
+    content: '';
+    width: 200px;
+    height: 5px;
+    background-color: green;
+    top: 82px;
+    right: 82px;
+    position: absolute;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+/* div.parent-simbole {
+    font-family: 'Amiri Quran', serif;
+} */
