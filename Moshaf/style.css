@@ -1,376 +1,75 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    user-select: none;
-}
-body {
-height: auto;
-background-color: rgba(0, 0, 0, 0.77);
-}
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
-}
+body{
+    background-color: #ffffcc;
+    color: black;
+    
+font-family: 'Amaranth', sans-serif;
+font-family: 'Amiri Quran', serif;
 
-.container .box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 15px 2px;
-    margin: -35px 170px 5px 10px;
+}
+.ss{
+    margin: 20px;
+    margin-top: 110px;
+    padding: 40px;
+    text-align: justify;
+    line-height: 2.5;
+    border: 10px double #d81b60;
+}
+div.parent-simbole{
     position: relative;
-    perspective: 1500px;
+    display: inline-block;
+    font-size: 40px;
 }
-.container .box .box-1,
-.container .box .box-2 {
-    width: calc(42% - 15px);
-    /* background-color: black; */
-    overflow: hidden;
-    /* height: 650px; */
-    /* background-color: rgb(232, 210, 65); */
-    box-shadow: 10px 10px 10px rgba(146, 137, 137, 0.7);
-    
-}
-.container .box  {
-    /* color: white; */
-    font-size: 25px;
-    text-align:justify;
-    /* overflow: auto; */
-    /* padding: 20px; */
-    transform: translateY(180deg);
-    transition: .5s;
-    
-}
-.container .box .box-1{
-    border-radius:4% 0 0 4%;
-    transform:skewY(-2deg);
-    background-color:white;
-}
-.container .box .box-2{
-    border-radius:0 4% 4% 0;
-    transform:skewY(2deg);
-    background-color: #eee;
-    
-}
-.container .box .box-1 .span-basmalah {
-    color: gray;
-    text-align: center;
-    background-color: red;
-}
-.box img {
-    object-fit:cover;
-    width: 100%;
-    height: 70%;
-    user-zoom: zoom;
-    cursor: pointer;
-    /* filter: hue-rotate(110deg); */
-}
-.buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 68%;
-    gap: 5px 50px;
-}
-.btn.lg {
-    display: block;
-}
-.btn.sm {
-    display: none;
-}
-.buttons button {
-padding: 20px;
-border: none;
-color: black;
-border-radius: 10px;
-background-color: #eee;
-font-size: 25px;
-width: 25%;
-cursor: pointer;
-}
-.buttons button:nth-of-type(2){
-    color: red;
-}
-
-.fh-btn,.sahm {
-    padding: 15px;
-    color: rgb(37, 210, 230);
-    font-size: larger;
-    font-weight: 700;
-    cursor: pointer;
-    border-radius: 10px;
-    background-color: transparent;
-    top: 20px;
-    z-index: 1;
-    text-align: center;
-    width: 100%;
-    border: 2px dotted rgb(0, 255, 174);
-}
-.sahm {
-    border: 2px dotted red;
-    right: 20px;
-    top: 50px;
-    color: rgb(134, 37, 230);
-    margin-top: 20px;
-    position: fixed;
-    width: 170px;
-}
-.search-by-thing {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-label {
-    color: #fff;
-    width: 180px;
-    text-align: center;
-    padding: 15px;
-}
-input {
-    margin-top: 10px;
-    padding: 15px;
-    border: none;
-    color: red;
-    width: 180px;
-    text-align: center;
-    border-radius: 10px;
-    background: transparent;
-    border: 2px dotted rgb(0, 255, 174);
-    font-size: 20px;
-}
-input:focus {
-    outline: 2px solid rgb(33, 152, 168);
-    border: none;
-
-}
-.bage-btn {
-    padding: 10px;
-    border: none;
-    color: blue;
-    font-size: larger;
-    font-weight: 700;
-    cursor: pointer;
-    background-color: transparent;
-}
-.sign-save,
-.sign-get {
-    position: relative;
-    margin-top: 10px;
-    padding: 15px;
-    border: 1px solid orange;
-    border-radius: 10px;
-    width: 100%;
-    text-align: center;
-    color: #eee;
-    font-size: 30px;
-    cursor: pointer;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.77);
-   
-}
-.sign-get {
-    color: orangered;
-}
-.sign-save-span {
+span.child-simbole{
 position: absolute;
-height: 105%;
-background-color: transparent;
-top: 6px;
-left: 48.5%;
-opacity: .90;
-border-style: solid ;
-border-width:1rem;
-border-color: orangered  orangered transparent orangered ;
-display: none;
-z-index: 1;
-transform: skew(0.5deg);
+top: 60%;
+left: 45%;
+transform: translate(-50%, -50%);
+font-size: 30px;
+}
+p{
+    font-size: 40px;
+    font-weight: 400;
+    cursor: pointer;
+    display: inline;
+    margin-bottom: 50px;
+}
+p.active{
+    background-color: rgb(46, 46, 50) !important;
+    color:#ffffff;
+    border-radius: 10px;
+    padding: 5px;
+
 }
 
-.fehres {
-    position: absolute;
-    width: 100%;
+.navbar{
+    position: fixed;
     top: 0;
     left: 0;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    background-color: rgba(0,0,0,.9);
-    min-height: 100vh;
-    z-index: 9999;
-    overflow: auto;
+    width: 100%;
+    z-index: 999;
 }
-.close {
-    color: red;
-    font-size: 30px;
-    line-height: 1px;
-    background-color: rgb(95, 95, 95);
-    width: 40px;
-    height: 40px;
-    border: none;
-    text-align: center;
-    padding: 5px;
-    border-radius: 50%;
-    position: fixed;
-    top: 10px;
-    right: 0px;
-    cursor: pointer;
+.navbar span.active {
+    color: #d81b60 !important;
+    font-size: 30px !important;
+    font-weight: bolder !important;
 }
-table {
-    padding: 10px;
-    margin-top: 40px;
+.name-sora {
+    font-size: 30px !important;
 }
-table tbody {
-    margin-top: 0px;
-}
-table thead{
-    margin: auto;
-    padding: 10px;
-    position: fixed;
-    top: 0;
-    left: 120px;
-}
-table thead th {
-    background-color: #f9f8f8;
-    border: 2px solid rgb(246, 245, 245);
-    padding: 10px;
-    color: rgb(180, 24, 24);
-    gap: 10px;
-    width: 250px;
-    padding: 10px;
-    text-align: center;
-    
-}
-
-tbody td {
-    text-align: center;
-    font-size: large;
-    font-weight: 700;
-    background-color: rgb(182, 225, 225);
-    gap: 10px;
-    width: 250px;
-    padding: 10px;
-    color: rgb(46, 20, 32);
-    
-}
-
-@media (max-width:650px) {
-    .container {
-
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .container .box {
-        width: 100%;
-        height: 90vh;
-        position: relative;
-        margin-top: 50px;
-    }
-    .sign-save-span {
-        position: absolute;
-        height: 25%;
-        background-color: transparent;
-        top: 300px;
-        left: 48%;
-        opacity: .80;
-        border-style: solid ;
-        border-width:.5rem;
-        border-color: orangered  orangered transparent orangered ;
-        display: none;
-        z-index: 1;
-        transform: skew(0.5deg);
-        }
-    .header {
-        width: 100%;
-        display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        position: absolute;
-        top: 100px;
-
-    }
-    .search-by-thing{
-        flex-direction: row;
-        flex-wrap: wrap;
-        width: 100%;
-        z-index: 99;
-    }
-
-    .box img {
-        object-fit:cover;
-        width: 100%;
-        cursor: pointer;
-        pointer-events: none;
-    }
-
-    .buttons {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: absolute;
-        width: 68%;
-        gap: 5px 50px;
-        bottom: 20px;
-    }
-
-    .btn.sm {
-    padding: 20px;
-    border: none;
-    color: black;
-    border-radius: 10px;
-    background-color: #eee;
+.exit {
+    position: relative;
     font-size: 25px;
-    width: 50%;
-    cursor: pointer;
-    display: block;
-    }
-    .buttons button:nth-of-type(4)
-    {
-        color: rgb(201, 5, 5);
-    }
-    .fh-btn {
-        padding: 10px;
-        border: 2px dotted red;
-        color: rgb(37, 210, 230);
-        font-size: larger;
-        font-weight: 700;
-        cursor: pointer;
-        border-radius: 10px;
-        position: fixed;
-        background-color: transparent;
-        left: 20px;
-        top: 20px;
-        z-index: 1;
-        text-align: center;
-        width: 170px;
-    }
-    .sahm {
-        left: 200px;
-        top: 0px;
-        color: rgb(134, 37, 230);
-    }
-    /* label,
-    input {
-    display: none;
-    } */
-    table thead{
-        position: static;
-        
-    }
-    .close {
-        z-index: 9999;
-    }
-    body {
-        overflow: auto;
-    }
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.exit::before {
+    content: '';
+    position: absolute;
+    top: 66%;
+    right: 330%;
+    transform: translate(-50%,-50%);
+    border: 31px solid red;
+    border-color:transparent #6c757d transparent transparent ;
+
+
 }

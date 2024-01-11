@@ -1,61 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" dir="rtl">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=7">
-    <!-- <link rel="shortcut icon" href="./1.ico" /> -->
-    <title>moshaf
-    </title>
-    <link rel="stylesheet"  href="style.css"/>
-</head>
-<body>
-    <audio class="audio4" src="../Audio/Page-Flip.wav"  controls></audio>
-    <div class="container">
-        <div class="header">
-            <a href="../index.html">
-                <button class="sahm">&lt; الصفحة الرئيسية
-                </button>
-            </a>
-            <div class="search-by-thing">
-                
-                <button class="fh-btn ">الفهرس</button>
-                <label for="ind"> ابحث برقم الصفحة</label>
-                <input id="ind" class="page-number" type="number" min="1" max="604" placeholder="أدخل رقم الصفحة">
-                <label for="goza"> ابحث برقم الجزء</label>
-                <input id="goza" class="goza-number" type="number" min="1" max="30" placeholder="أدخل رقم الجزء">
-                <div class="sign-save">حفظ العلامة
-                </div>
-                <div class="sign-get">الإنتقال للعلامة 
-                </div>
-            </div>
+    <title>Document</title>
+    <!--Boot Strap CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;800&family=Amaranth:ital,wght@1,400;1,700&family=Amiri+Quran&display=swap" rel="stylesheet">
+  </head>
+  <body >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div class="navbar-brand name-sora" >سورة </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item  text-light fs-5 mx-4" > عدد أياتها
+              <span class="nav-link active  fs-5" id="Number_Sora_aya" ></span>
+            </li>
+            <li class="nav-item  text-light fs-5 mx-4" > عدد كلماتها
+              <span class="nav-link active  fs-5" id="Number_Sora_words" ></span>
+            </li>
+            <li class="nav-item  text-light fs-5 mx-4" > عدد حروفها
+              <span class="nav-link active  fs-5" id="Number_Sora_letters" ></span>
+            </li>
+            <li class="nav-item  text-light fs-5 mx-4" >موضع التنزيل
+              <span class="nav-link active  fs-5" id="Sora_type" ></span>
+            </li>
+            
+            
+            
+          </ul>
+          <form class="d-flex">
+            <select name="" id="Select_sora" class="form-control me-3 w-50">
+              <option selected disabled>أختر السورة</option>
+            </select>
+            <label for="Sora" class="text-light mx-3 text-center">رقم السورة</label>
+            <input class="btn btn-light w-50" type="number" id="Sora" min="1" max="114" placeholder="بحث برقم السورة" >
+            <label for="Sora-Aya" class="text-light mx-3 text-center">رقم الأية</label>
+            <input class="btn btn-light w-50" type="number" id="Sora-Aya" min="1" max="" placeholder="بحث برقم الأيه" >
+          </form>
+          <button class="btn btn-secondary mx-3 px-5 pb-3 fs-5 fw-bold">
+            <a href="../index.html" class="text-center text-decoration-none text-light exit">خروج</a>
+          </button>
         </div>
-        <div class="fehres" style="visibility: hidden;">
-            <button class="close">X</button>
-            <div class="one">
-            </div>
-        </div>
-        <div class="box">
-            <span class="sign-save-span"></span>
-            <div class="box-2">
-                <img src="./quran-images/2.jpg" alt="not Found"/>
-                
-            </div>
-            <div class="box-1">
-                <h3 class="span-basmalah"></h3>
-                <img src="./quran-images/1.jpg" alt="not Found"/>
-            </div>
-            <!-- <div class="buttons">
-                
-                <button class="btn lg" >التالي</button>
-                <button class="btn lg" >السابق</button>
-                <button class="btn sm" >التالي</button>
-                <button class="btn sm" >السابق</button>
-            </div> -->
-        </div>
-        
-    </div>
-    <script src="app.mjs" type="module"></script>
-    <!-- <script src="text.js"></script> -->
-</body>
-</html>
+      </div>
+    </nav>
+    
+    <div  class="ss"></div>
+    <audio class="audio" src="" controls autoplay style="display: none;"></audio>
+    <script src="app.js"></script>
+  </body>
+    </html>
