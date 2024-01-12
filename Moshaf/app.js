@@ -9,6 +9,7 @@ const Number_Sora_letters = document.querySelector('#Number_Sora_letters')
 const Sora_type = document.querySelector('#Sora_type')
 const Select_sora = document.querySelector('#Select_sora')
 const Tafsesr_box = document.querySelector('#tafsesr_box')
+const play_puse = document.querySelector('.play_puse')
 let data= ''
 fetch('./Api/Quran.json').then(res=>res.json()).then(res=>data =res)
 let tafseer =''
@@ -33,7 +34,13 @@ setTimeout(()=>{
     Number_Sora_letters.innerText =` ${data[num].letters}`
     Sora_type.innerText =` ${data[num].type}`
     Sora_Aya.setAttribute('max',data[num].array.length) 
+    setTimeout(()=>{
 
+        window.scrollTo({
+            top:(ss.children[z].offsetTop)-200,
+            behavior:'smooth'
+        })
+    },1000)
     let passmalla = document.createElement('h2')
     passmalla.innerText="بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ"
     passmalla.style.width = '100%';
@@ -166,3 +173,17 @@ setTimeout(()=>{
 
 },3000)
 
+document.forms[0].onsubmit = (e)=>{
+e.preventDefault();
+}
+play_puse.onclick = ()=>{
+    if(audio.classList.contains('play')){
+        audio.pause()
+        play_puse.innerText ='تشغيل'
+        audio.classList.toggle('play')
+    }else{
+        audio.play()
+        play_puse.innerText ='توقف'
+        audio.classList.toggle('play')
+    }
+}

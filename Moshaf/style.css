@@ -50,17 +50,16 @@ p.active{
 }
 .navbar span.active {
     color: #d81b60 !important;
-    font-size: 30px !important;
+    font-size: 25px !important;
     font-weight: bolder !important;
 }
 .name-sora {
     font-size: 30px !important;
 }
-.exit {
-    position: relative;
+.exit,.play_puse {
     font-size: 20px;
     font-family: 'Amiri';
-    padding: 0;
+    padding: 10px;
 }
 
 
@@ -72,7 +71,7 @@ p.active{
     left: 0;
     background-color: #d8c0c0;
     z-index: 999;
-    height: 150px;
+    height: 25%;
     font-size: 28px;
     text-align: justify;
     padding:10px 40px;
@@ -84,7 +83,6 @@ p.active{
     inset 5px 5px 15px #1b44d8,
     inset -5px -5px 15px #0e1a49
     ;
-
 
 #tafsesr_box{
     margin-top: 30px;
