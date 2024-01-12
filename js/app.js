@@ -35,6 +35,8 @@ let wornning_div_time =document.querySelector('.wornning-div-time');
 const btn_radio = document.querySelector('.btn-radio');
 const Radio_audio = document.querySelector('.Radio_audio');
 const play_pause = document.querySelector('.play_pause');
+const play_pause_text = document.querySelector('.play_pause_text');
+const spans = document.querySelector('.spans');
 
 let date = new Date()
 let dd   = date.getDate() - 1
@@ -89,19 +91,23 @@ btn_radio.onchange = (e)=>{
   fetch(`${val}`).then(res=>Radio_audio.src = res.url);
   Radio_audio.classList.add('play');
   play_pause.style.display = 'block';
-  play_pause.innerText= 'توقف'
+  play_pause_text.innerText= 'توقف'
+  spans.style.display = 'block'
 }
+console.log(spans)
 
   //Play And Pause Radio
   play_pause.onclick = ()=>{
     if(Radio_audio.classList.contains('play')){
       Radio_audio.classList.toggle('play')
       Radio_audio.pause()
-      play_pause.innerText = 'تشغيل'
+      play_pause_text.innerText = 'تشغيل'
+      spans.style.display = 'none'
     }else {
       Radio_audio.classList.toggle('play')
       Radio_audio.play()
-      play_pause.innerText= 'توقف'
+      play_pause_text.innerText= 'توقف'
+      spans.style.display = 'block'
     }
   }
   //Set Default Background Images

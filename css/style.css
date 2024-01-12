@@ -446,7 +446,58 @@ span.sp {
     .play_pause{
       padding: 0 10px;
       color: white;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 20px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2),
+      2px 2px 2px rgba(0, 0, 0, 0.2),
+      2px 2px 2px rgba(0, 0, 0, 0.2),
+      2px 2px 2px rgba(0, 0, 0, 0.2),
+      inset 2px 2px 2px #fff;
+      font-family: 'Amiri', serif;
+      background-color: #2196f3;
+      color: #fff;
       display: none;
+      position: relative;
+      .spans{
+        position: absolute;
+        top: -100%;
+        left: 15%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        height: 40px;
+        width: 100%;
+        /* background-color: #000000; */
+        display: none;
+        span{
+          background-color: rgba(169, 167, 167, 0.36);
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2),
+          1px 1px 2px rgba(0, 0, 0, 0.2),
+          1px 1px 2px rgba(0, 0, 0, 0.2),
+          1px 1px 2px rgba(0, 0, 0, 0.2),
+          inset 1px 1px 2px #fff;
+          width: 7px;
+          height: 80%;
+          border-radius: 5px;
+          position: absolute;
+          left: calc(9px * var(--i));
+          &:before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: rgb(254, 6, 159);
+            top: 80%;
+            left: 60%;
+            transform: translate(-50%,0);
+            animation: top-bootom .4s infinite linear alternate;
+            animation-delay: calc(.1s * var(--i));
+          }
+        }
+      }
     }
   }
 }
@@ -664,4 +715,15 @@ height: 350px;
 aside{
   flex-wrap: wrap;
 }
+}
+
+@keyframes top-bootom {
+  0%{
+    top: 85%;
+    filter: hue-rotate(0deg);
+  }
+  100%{
+    top: 0%;
+    filter: hue-rotate(360deg);
+  }
 }
