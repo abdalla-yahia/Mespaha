@@ -419,24 +419,34 @@ span.sp {
     5px 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 10px;
-  .btn-radio{
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
-    5px 5px 10px rgba(0, 0, 0, 0.1),
-    5px 5px 10px rgba(0, 0, 0, 0.1);
-    outline: none;
-    background-color: #aca9a9;
-    width: 100%;
-    height: 40px;
-    color: #d10590;
-    margin-top: 20px;
-    border-radius: 10px;
-    font-size: 18px;
-    text-align: center;
-    font-family: 'Amiri';
+  .Radio_parent{
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
     
-    option{
-      color: red !important;
+    .btn-radio{
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
+      5px 5px 10px rgba(0, 0, 0, 0.1),
+      5px 5px 10px rgba(0, 0, 0, 0.1);
+      outline: none;
+      background-color: #aca9a9;
+      width: 70%;
+      height: 40px;
+      color: #d10590;
+      border-radius: 10px;
+      font-size: 18px;
+      text-align: center;
       font-family: 'Amiri';
+      
+      option{
+        color: red !important;
+        font-family: 'Amiri';
+      }
+    }
+    .play_pause{
+      padding: 0 10px;
+      color: white;
+      display: none;
     }
   }
 }

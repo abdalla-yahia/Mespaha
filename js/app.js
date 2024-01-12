@@ -34,6 +34,7 @@ let wornning =         document.querySelector('.wornning-div');
 let wornning_div_time =document.querySelector('.wornning-div-time');
 const btn_radio = document.querySelector('.btn-radio');
 const Radio_audio = document.querySelector('.Radio_audio');
+const play_pause = document.querySelector('.play_pause');
 
 let date = new Date()
 let dd   = date.getDate() - 1
@@ -85,8 +86,24 @@ btn_radio.appendChild(option)
 //Set Aspecific Radio
 btn_radio.onchange = (e)=>{
   let val=e.target.value;
-  fetch(`${val}`).then(res=>Radio_audio.src = res.url)
+  fetch(`${val}`).then(res=>Radio_audio.src = res.url);
+  Radio_audio.classList.add('play');
+  play_pause.style.display = 'block';
+  play_pause.innerText= 'توقف'
 }
+
+  //Play And Pause Radio
+  play_pause.onclick = ()=>{
+    if(Radio_audio.classList.contains('play')){
+      Radio_audio.classList.toggle('play')
+      Radio_audio.pause()
+      play_pause.innerText = 'تشغيل'
+    }else {
+      Radio_audio.classList.toggle('play')
+      Radio_audio.play()
+      play_pause.innerText= 'توقف'
+    }
+  }
   //Set Default Background Images
 let arrImage = [
   "./Images/1.jpg",
@@ -538,4 +555,4 @@ setInterval(() => {
 
   //Set the Temperature 
   let Temp =weather() ? await weather().then(res=>res.temperature  ):''
-    w_span[0].innerHTML = Temp
+    w_span[0].innerHTML = Temp;
