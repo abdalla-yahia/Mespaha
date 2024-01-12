@@ -91,7 +91,7 @@ radiosData.radios && radiosData.radios.map(e=>{
 option.innerText = e.name
 btn_radio.appendChild(option)
 })
-//Set Aspecific Radio
+ //Set Aspecific Radio
 btn_radio.onchange = (e)=>{
   let val=e.target.value;
   fetch(`${val}`).then(res=>Radio_audio.src = res.url);
@@ -106,8 +106,6 @@ btn_radio.onchange = (e)=>{
     volume_span[j].classList.add('active')
   }
 }
-
-
   //Play And Pause Radio
   play_pause.onclick = ()=>{
     if(btn_radio.value === '0'){
@@ -141,7 +139,6 @@ btn_radio.onchange = (e)=>{
 
   }
 
-   
   //Volume change 
   volume_span.forEach((e,i)=>{
     e.addEventListener('mouseenter',()=>{
@@ -352,7 +349,7 @@ times_span[0].innerHTML = `<div style="height:350px;"><span class="getDay" style
     10px 10px 10px rgba(0, 0, 0, 0.2);border-radius:15px
 ;font-family: 'Amiri', serif;color:red;display:flex;justify-content:center;align-items:center;flex-direction: column;gap:2px;background:#ddd;height:250px;text-align:center;font-size:80px;position: relative">${getDay} <span style="font-size:25px;color:green;letter-spacing:10px">${getDayEn}</span></span><span style=" text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
     2px 2px 5px rgba(0, 0, 0, 0.2),
-    2px 2px 5px rgba(0, 0, 0, 0.2);color:red;">${getDate}</span><span style="font-family: 'Amiri', serif;"> ${getMonths}</span> <span style="color:green;font-family: 'Amiri', serif;">${getYers}</span>  <span style="color:red">هـ</span></div>`;
+    2px 2px 5px rgba(0, 0, 0, 0.2);color:red;">${getDate-1}</span><span style="font-family: 'Amiri', serif;"> ${getMonths}</span> <span style="color:green;font-family: 'Amiri', serif;">${getYers}</span>  <span style="color:red">هـ</span></div>`;
 
 setInterval(() => {
   let date = new Date();
