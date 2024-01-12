@@ -9,14 +9,18 @@ const Number_Sora_letters = document.querySelector('#Number_Sora_letters')
 const Sora_type = document.querySelector('#Sora_type')
 const Select_sora = document.querySelector('#Select_sora')
 const Tafsesr_box = document.querySelector('#tafsesr_box')
-const play_puse = document.querySelector('.play_puse')
+const spans = document.querySelector('.spans');
+let volume_span =      document.querySelectorAll(".volume_span");
+const play_pause = document.querySelector('.play_pause');
+const play_pause_text = document.querySelector('.play_pause_text');
+const mute = document.querySelector('.fa-solid');
+const volume = document.querySelector('.volume');
 let data= ''
 fetch('./Api/Quran.json').then(res=>res.json()).then(res=>data =res)
 let tafseer =''
 fetch('./Api/tafseer.json').then(res=>res.json()).then(res=>tafseer =res)
 
 setTimeout(()=>{
-    // console.log(tafseer[7+286])
     let num =localStorage.getItem('Sora_Number') || 0
     if(num > 113){
         localStorage.setItem('Sora_Number',0)
@@ -37,7 +41,7 @@ setTimeout(()=>{
     setTimeout(()=>{
 
         window.scrollTo({
-            top:(ss.children[z].offsetTop)-200,
+            top:(ss.children[z].offsetTop)-250,
             behavior:'smooth'
         })
     },1000)
@@ -81,7 +85,7 @@ setTimeout(()=>{
             Tafsesr_box.innerHTML = `<div class='parent-simbole' > &#x06DD; <span class='child-simbole'>${tafSora[Sora_Aya.value-1].aya} </span> </div> ${tafSora[Sora_Aya.value-1].text}`;
             localStorage.setItem('Aya_Number',z)
             window.scrollTo({
-                top:(ss.children[z].offsetTop)-200,
+                top:(ss.children[z].offsetTop)-250,
                 behavior:'smooth'
             })
             
@@ -119,7 +123,7 @@ setTimeout(()=>{
                 Tafsesr_box.innerHTML = `<div class='parent-simbole' > &#x06DD; <span class='child-simbole'>${tafSora[Sora_Aya.value-1].aya} </span> </div> ${tafSora[Sora_Aya.value-1].text}`;
                 localStorage.setItem('Aya_Number',z)
                 window.scrollTo({
-                    top:(ss.children[z].offsetTop)-200,
+                    top:(ss.children[z].offsetTop)-250,
                     behavior:'smooth'
                 })
                 z++
@@ -141,7 +145,7 @@ setTimeout(()=>{
                     localStorage.setItem('Aya_Number',z)
                     audio.setAttribute('src',src);
                     window.scrollTo({
-                        top:(ss.children[z].offsetTop)-200,
+                        top:(ss.children[z].offsetTop)-250,
                         behavior:'smooth'
                     })
                 }else{
@@ -176,14 +180,85 @@ setTimeout(()=>{
 document.forms[0].onsubmit = (e)=>{
 e.preventDefault();
 }
-play_puse.onclick = ()=>{
+// play_puse.onclick = ()=>{
+//     if(audio.classList.contains('play')){
+//         audio.pause()
+//         play_puse.innerText ='تشغيل'
+//         audio.classList.toggle('play')
+//     }else{
+//         audio.play()
+//         play_puse.innerText ='توقف'
+//         audio.classList.toggle('play')
+//     }
+// }
+
+  //Play And Pause Radio
+  play_pause.onclick = ()=>{
+    volume.style.visibility = 'visible';
+    play_pause.style.backgroundColor =''
     if(audio.classList.contains('play')){
-        audio.pause()
-        play_puse.innerText ='تشغيل'
-        audio.classList.toggle('play')
-    }else{
-        audio.play()
-        play_puse.innerText ='توقف'
-        audio.classList.toggle('play')
+      audio.classList.toggle('play')
+      audio.pause()
+      play_pause_text.innerText = 'تشغيل'
+      spans.style.display = 'none';
+      mute.classList.remove('fa-volume-high');
+      mute.classList.add('fa-volume-xmark');
+      audio.muted = true;
+      volume_span.forEach(e=>{
+        e.classList.remove('active')
+      })
+    }else {
+      audio.classList.toggle('play')
+      play_pause.style.backgroundColor ='#1dc26a'
+      audio.play()
+      play_pause_text.innerText= 'توقف';
+      spans.style.display = 'block';
+      mute.classList.remove('fa-volume-xmark');
+      mute.classList.add('fa-volume-high');
+      audio.muted = false;
+      for(let j = 0 ; j < (audio.volume*10) ; j++){
+          volume_span[j].classList.add('active')
+      }
     }
-}
+
+  }
+
+  //Volume change 
+  volume_span.forEach((e,i)=>{
+    e.addEventListener('mouseenter',()=>{
+        
+      volume_span.forEach((e,i)=>{
+        e.classList.remove('active')
+      })
+      e.classList.toggle('active')
+      audio.volume=`${(i+1)/10}`
+      for(let j = 0 ; j <= i ; j++){
+        if(e.classList.contains('active')){
+          volume_span[j].classList.add('active')
+        }else{
+          
+          volume_span[j].classList.remove('active')
+        }
+      }
+    })
+
+  })
+  // Mute Button Events
+  mute.onclick = ()=>{
+    if(mute.classList.contains('fa-volume-high')){
+      mute.classList.remove('fa-volume-high');
+      mute.classList.add('fa-volume-xmark');
+      audio.muted = true;
+      volume_span.forEach(e=>{
+        e.classList.remove('active')
+      })
+    }else{
+      mute.classList.remove('fa-volume-xmark');
+      mute.classList.add('fa-volume-high');
+      audio.muted = false;
+      for(let j = 0 ; j < (audio.volume*10) ; j++){
+        volume_span[j].classList.add('active')
+    }
+    }
+
+  }

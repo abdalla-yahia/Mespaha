@@ -430,7 +430,7 @@ span.sp {
       5px 5px 10px rgba(0, 0, 0, 0.1);
       outline: none;
       background-color: #aca9a9;
-      width: 70%;
+      width: 50%;
       height: 40px;
       color: #d10590;
       border-radius: 10px;
@@ -469,7 +469,6 @@ span.sp {
         align-items: flex-end;
         height: 40px;
         width: 100%;
-        /* background-color: #000000; */
         display: none;
         span{
           background-color: rgba(169, 167, 167, 0.36);
@@ -499,6 +498,39 @@ span.sp {
         }
       }
     }
+  }
+  .volume{
+    width: 20%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 1px;
+    align-items: flex-end;
+    position: relative;
+    visibility: hidden;
+
+    i.fa-volume-high{
+      color: #1dc26a;
+      cursor: pointer;
+    }
+    i.fa-volume-xmark{
+      color: #514f4f;
+      cursor: pointer;
+    }
+    span {
+      width: 5px;
+      bottom: 0;
+      background-color: #514f4f;
+      height: calc(5px * var(--v));
+      border-radius: 5px;
+      cursor: pointer;
+      &.active {
+        background-color: #1dc26a;
+        transition: .5s;
+      }
+      
+    }
+    
   }
 }
 .times .mwaqeet {

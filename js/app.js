@@ -13,6 +13,7 @@ let net_time_pray =    document.querySelectorAll(".net-time-pray");
 let w_span =           document.querySelectorAll(".w-span");
 let tasbeh =           document.querySelectorAll(".tasbeh");
 let bg =               document.querySelectorAll(".bg");
+let volume_span =      document.querySelectorAll(".volume_span");
 let counter =          document.querySelector(".counter");
 let container =        document.querySelector(".container");
 let span =             document.querySelector(".sp");
@@ -37,6 +38,8 @@ const Radio_audio = document.querySelector('.Radio_audio');
 const play_pause = document.querySelector('.play_pause');
 const play_pause_text = document.querySelector('.play_pause_text');
 const spans = document.querySelector('.spans');
+const mute = document.querySelector('.fa-solid');
+const volume = document.querySelector('.volume');
 
 let date = new Date()
 let dd   = date.getDate() - 1
@@ -91,10 +94,11 @@ btn_radio.onchange = (e)=>{
   fetch(`${val}`).then(res=>Radio_audio.src = res.url);
   Radio_audio.classList.add('play');
   play_pause.style.display = 'block';
-  play_pause_text.innerText= 'توقف'
-  spans.style.display = 'block'
+  play_pause_text.innerText= 'توقف';
+  spans.style.display = 'block';
+  volume.style.visibility = 'visible';
 }
-console.log(spans)
+
 
   //Play And Pause Radio
   play_pause.onclick = ()=>{
@@ -102,13 +106,65 @@ console.log(spans)
       Radio_audio.classList.toggle('play')
       Radio_audio.pause()
       play_pause_text.innerText = 'تشغيل'
-      spans.style.display = 'none'
+      spans.style.display = 'none';
+      mute.classList.remove('fa-volume-high');
+      mute.classList.add('fa-volume-xmark');
+      Radio_audio.muted = true;
+      volume_span.forEach(e=>{
+        e.classList.remove('active')
+      })
     }else {
       Radio_audio.classList.toggle('play')
       Radio_audio.play()
-      play_pause_text.innerText= 'توقف'
-      spans.style.display = 'block'
+      play_pause_text.innerText= 'توقف';
+      spans.style.display = 'block';
+      mute.classList.remove('fa-volume-xmark');
+      mute.classList.add('fa-volume-high');
+      Radio_audio.muted = false;
+      for(let j = 0 ; j < (Radio_audio.volume*10) ; j++){
+          volume_span[j].classList.add('active')
+      }
     }
+
+  }
+
+  //Volume change 
+  volume_span.forEach((e,i)=>{
+    e.addEventListener('mouseenter',()=>{
+      volume_span.forEach((e,i)=>{
+        e.classList.remove('active')
+      })
+      e.classList.toggle('active')
+      Radio_audio.volume=`${(i+1)/10}`
+      for(let j = 0 ; j <= i ; j++){
+        if(e.classList.contains('active')){
+          volume_span[j].classList.add('active')
+        }else{
+          
+          volume_span[j].classList.remove('active')
+        }
+      }
+    })
+
+  })
+  // Mute Button Events
+  mute.onclick = ()=>{
+    if(mute.classList.contains('fa-volume-high')){
+      mute.classList.remove('fa-volume-high');
+      mute.classList.add('fa-volume-xmark');
+      Radio_audio.muted = true;
+      volume_span.forEach(e=>{
+        e.classList.remove('active')
+      })
+    }else{
+      mute.classList.remove('fa-volume-xmark');
+      mute.classList.add('fa-volume-high');
+      Radio_audio.muted = false;
+      for(let j = 0 ; j < (Radio_audio.volume*10) ; j++){
+        volume_span[j].classList.add('active')
+    }
+    }
+
   }
   //Set Default Background Images
 let arrImage = [
