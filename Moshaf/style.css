@@ -9,6 +9,7 @@ font-family: 'Amiri Quran', serif;
 .ss{
     margin: 20px;
     margin-top: 110px;
+    margin-bottom: 25%;
     padding: 40px;
     text-align: justify;
     line-height: 2.5;
@@ -137,7 +138,7 @@ p.active{
     2px 2px 2px rgba(0, 0, 0, 0.2),
     inset 2px 2px 2px #fff;
     font-family: 'Amiri', serif;
-    background-color: #2196f3;
+    background-color: #1dc26a;
     color: #fff;
     margin-right: 15px;
     position: relative;
@@ -150,7 +151,6 @@ p.active{
       align-items: flex-end;
       height: 40px;
       width: 100%;
-      display: none;
       span{
         background-color: rgba(54, 53, 53, 0.36);
         box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2),
@@ -169,7 +169,7 @@ p.active{
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background-color: rgb(254, 6, 159);
+          background-color: #1dc26a;
           top: 80%;
           left: 60%;
           transform: translate(-50%,0);
@@ -182,6 +182,7 @@ p.active{
   .exit-parent{
     background-color: rgb(254, 6, 159);
   }
+  
 .volume{
   width: 20%;
   height: 50px;
@@ -190,7 +191,6 @@ p.active{
   gap: 1px;
   align-items: flex-end;
   position: relative;
-  visibility: hidden;
 
   i.fa-volume-high{
     color: #1dc26a;
@@ -221,10 +221,10 @@ p.active{
 @keyframes top-bootom {
     0%{
       top: 85%;
-      filter: hue-rotate(0deg);
+      /* filter: hue-rotate(0deg); */
     }
     100%{
       top: 0%;
-      filter: hue-rotate(360deg);
+      /* filter: hue-rotate(360deg); */
     }
   }

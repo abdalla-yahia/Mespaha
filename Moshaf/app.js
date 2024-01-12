@@ -18,13 +18,22 @@ const volume = document.querySelector('.volume');
 let data= ''
 fetch('./Api/Quran.json').then(res=>res.json()).then(res=>data =res)
 let tafseer =''
-fetch('./Api/tafseer.json').then(res=>res.json()).then(res=>tafseer =res)
+fetch('./Api/tafseer.json').then(res=>res.json()).then(res=>tafseer =res);
+
+localStorage.getItem('volume_audio')?audio.volume = +localStorage.getItem('volume_audio'):audio.volume=1
+
 
 setTimeout(()=>{
+
     let num =localStorage.getItem('Sora_Number') || 0
-    if(num > 113){
+    if(num > 113 ){
         localStorage.setItem('Sora_Number',0)
         window.location.reload()
+    }
+    if(localStorage.getItem('Sora_Number') < 0 || localStorage.getItem('Aya_Number') < 1){
+      localStorage.setItem('Sora_Number',0)
+      localStorage.setItem('Aya_Number',1)
+      window.location.reload()
     }
     let f =localStorage.getItem('Aya_Number') || 1
     Sora_Aya.value = f;
@@ -38,10 +47,11 @@ setTimeout(()=>{
     Number_Sora_letters.innerText =` ${data[num].letters}`
     Sora_type.innerText =` ${data[num].type}`
     Sora_Aya.setAttribute('max',data[num].array.length) 
+    
     setTimeout(()=>{
-
+      audio.pause && audio.play()
         window.scrollTo({
-            top:(ss.children[z].offsetTop)-250,
+            top:(ss.children[s].offsetTop)-250,
             behavior:'smooth'
         })
     },1000)
@@ -68,13 +78,15 @@ setTimeout(()=>{
         localStorage.setItem('Aya_Number', 1)
         window.location.reload()
     }
-    if(data[num].array[z]){
+    console.log(s)
+    if(data[num].array[s]){
+      console.log('data Finished')
         let src ='.'+ data[num].array[s].path
         audio.setAttribute('src',src);
+        audio.play()
         s++
         z++
     }
-
     audio.addEventListener('ended',()=>{
         ss.childNodes.forEach(el=>el.classList.remove('active'))
         if(ss.children[z]){
@@ -166,36 +178,24 @@ setTimeout(()=>{
     }
     
     ss.children[z-1].classList.add('active')
-    for(let i in (data[num].array)){
+    
+      for(let i in data){
         let option = document.createElement('option'); 
-        option.innerText = data[i].name;
-        option.value = data[i].id;
+        data[i] && (option.innerText = data[i].name);
+        data[i] && (option.value = data[i].id);
         Select_sora.appendChild(option)
-
-    }
-
+      }
 
 },3000)
 
 document.forms[0].onsubmit = (e)=>{
 e.preventDefault();
 }
-// play_puse.onclick = ()=>{
-//     if(audio.classList.contains('play')){
-//         audio.pause()
-//         play_puse.innerText ='تشغيل'
-//         audio.classList.toggle('play')
-//     }else{
-//         audio.play()
-//         play_puse.innerText ='توقف'
-//         audio.classList.toggle('play')
-//     }
-// }
 
-  //Play And Pause Radio
+
+  //Play And Pause Audio
   play_pause.onclick = ()=>{
-    volume.style.visibility = 'visible';
-    play_pause.style.backgroundColor =''
+    play_pause.style.backgroundColor ='#2196f3'
     if(audio.classList.contains('play')){
       audio.classList.toggle('play')
       audio.pause()
@@ -223,6 +223,12 @@ e.preventDefault();
 
   }
 
+  
+  //Set Active Spans
+  for(let j = 0 ; j < (audio.volume*10) ; j++){
+    volume_span[j].classList.add('active')
+  }
+  
   //Volume change 
   volume_span.forEach((e,i)=>{
     e.addEventListener('mouseenter',()=>{
@@ -232,11 +238,11 @@ e.preventDefault();
       })
       e.classList.toggle('active')
       audio.volume=`${(i+1)/10}`
+      localStorage.setItem('volume_audio',`${(i+1)/10}`)
       for(let j = 0 ; j <= i ; j++){
         if(e.classList.contains('active')){
           volume_span[j].classList.add('active')
         }else{
-          
           volume_span[j].classList.remove('active')
         }
       }

@@ -41,6 +41,9 @@ const spans = document.querySelector('.spans');
 const mute = document.querySelector('.fa-solid');
 const volume = document.querySelector('.volume');
 
+
+localStorage.getItem('volume_audio')?Radio_audio.volume = +localStorage.getItem('volume_audio'):Radio_audio.volume=1
+
 let date = new Date()
 let dd   = date.getDate() - 1
     
@@ -93,17 +96,26 @@ btn_radio.onchange = (e)=>{
   let val=e.target.value;
   fetch(`${val}`).then(res=>Radio_audio.src = res.url);
   Radio_audio.classList.add('play');
-  play_pause.style.display = 'block';
+  play_pause.style.backgroundColor = '#1dc26a';
   play_pause_text.innerText= 'توقف';
   spans.style.display = 'block';
-  volume.style.visibility = 'visible';
+  mute.classList.remove('fa-volume-xmark');
+  mute.classList.add('fa-volume-high');
+  //Set Active Spans
+  for(let j = 0 ; j < (Radio_audio.volume*10) ; j++){
+    volume_span[j].classList.add('active')
+  }
 }
 
 
   //Play And Pause Radio
   play_pause.onclick = ()=>{
+    if(btn_radio.value === '0'){
+      return ;
+    }
     if(Radio_audio.classList.contains('play')){
       Radio_audio.classList.toggle('play')
+      play_pause.style.backgroundColor='#2196f3'
       Radio_audio.pause()
       play_pause_text.innerText = 'تشغيل'
       spans.style.display = 'none';
@@ -115,6 +127,7 @@ btn_radio.onchange = (e)=>{
       })
     }else {
       Radio_audio.classList.toggle('play')
+      play_pause.style.backgroundColor = '#1dc26a';
       Radio_audio.play()
       play_pause_text.innerText= 'توقف';
       spans.style.display = 'block';
@@ -128,9 +141,11 @@ btn_radio.onchange = (e)=>{
 
   }
 
+   
   //Volume change 
   volume_span.forEach((e,i)=>{
     e.addEventListener('mouseenter',()=>{
+      localStorage.setItem('volume_audio',`${(i+1)/10}`)
       volume_span.forEach((e,i)=>{
         e.classList.remove('active')
       })
