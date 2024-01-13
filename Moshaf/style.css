@@ -46,11 +46,11 @@ p{
     margin-bottom: 50px;
 }
 p.active{
-    background-color: rgb(39, 8, 36) !important;
+    background-color: rgb(33, 36, 58) !important;
     color:#ffffff;
     border-radius: 10px;
     padding: 0px;
-
+  font-family: 'Amiri';
 }
 
 .navbar{
@@ -62,7 +62,11 @@ p.active{
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-
+    transition: 1s;
+    i{
+      color:#1b7dd8;
+      cursor: pointer;
+    }
 }
 .navbar span.active {
     color: #d81b60 !important;
@@ -99,6 +103,21 @@ p.active{
     inset 5px 5px 15px #1b44d8,
     inset -5px -5px 15px #0e1a49
     ;
+    transition: 1s;
+    i{
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      color: red;
+      cursor: pointer;
+    }
+    i.fa-window-minimize,
+    i.fa-window-maximize{
+      position: absolute;
+      left: 40px !important;
+      top: 5px !important;
+      color: rgb(68, 0, 255) !important;
+    }
 
 #tafsesr_box{
     margin-top: 30px;
@@ -136,16 +155,21 @@ p.active{
 }
 .search_results{
   top: 20%;
-  height: 60%;
+  height: 55%;
   background-color: #fff;
   box-shadow: inset 5px 5px 15px #4b4c4e,
     inset -5px -5px 15px #3b3b3c,
     inset 5px 5px 15px #454547,
     inset -5px -5px 15px #0e1a49;
+    padding-top: 50px;
     display: none;
     i{
-      color: red;
+      position: absolute ;
+      right: 15px;
+      top: 10px;
+      color: rgb(243, 4, 4);
       cursor: pointer;
+      transition: .5s;
       &:hover {
         font-size: 35px;
       }
@@ -168,7 +192,7 @@ p.active{
 }
 .search_results >div.parent-simbole{
   position: absolute;
-  top: 10%;
+  top: 5%;
   left: 50%;
   transform: translate(-50%,-50%);
   font-size: 60px;
@@ -441,5 +465,12 @@ font-size: 15px;
 
   display: none !important;
   
+  }
+}
+
+i{
+  transition: .5s;
+  &:hover {
+    font-size: 30px;
   }
 }

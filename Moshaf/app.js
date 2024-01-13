@@ -9,6 +9,11 @@ const Number_Sora_letters = document.querySelector('#Number_Sora_letters')
 const Sora_type = document.querySelector('#Sora_type')
 const Select_sora = document.querySelector('#Select_sora')
 const Tafsesr_box = document.querySelector('#tafsesr_box')
+const minimize_tafsesr = document.querySelector('.tafsesr_box_parent>i.mini-max')
+const minimize_navbar = document.querySelector('.navbar>i.mini-max')
+const navbar = document.querySelector('.navbar')
+const close_tafsesr = document.querySelector('.tafsesr_box_parent>i.fa-xmark')
+const tafsesr_box_parent = document.querySelector('.tafsesr_box_parent')
 const spans = document.querySelectorAll('.spans>span');
 let volume_span =      document.querySelectorAll(".volume_span");
 const play_pause = document.querySelector('.play_pause');
@@ -18,7 +23,7 @@ const volume = document.querySelector('.volume');
 const search_input = document.querySelector('.search_input');
 const search_btn = document.querySelector('.search_btn');
 const search_results = document.querySelector('.search_results');
-const close_search_results = document.querySelector('.search_results>i');
+const close_search_results = document.querySelector('.search_results>i.fa-xmark');
 const search_box_content= document.querySelector('#search_box');
 
 let data= '';
@@ -366,5 +371,41 @@ e.preventDefault();
   //Close Search Box
   close_search_results.onclick = ()=>{
     search_results.style.display = 'none';
-    console.log('clsed')
+    
   }
+
+  //Tafseer Section
+
+  minimize_tafsesr.addEventListener('click',()=>{
+    if(minimize_tafsesr.classList.contains('fa-window-minimize')){
+
+      tafsesr_box_parent.style.height = '6%';
+      minimize_tafsesr.classList.remove('fa-window-minimize');
+      minimize_tafsesr.classList.add('fa-window-maximize');
+    }else{
+
+      tafsesr_box_parent.style.height = '25%';
+      minimize_tafsesr.classList.remove('fa-window-maximize');
+      minimize_tafsesr.classList.add('fa-window-minimize');
+    }
+  })
+  
+  //Close the window of Tafsesr
+  
+  close_tafsesr.addEventListener('click', ()=>{
+    tafsesr_box_parent.style.display = 'none';
+  })
+
+  //Navbar minimize button
+
+  minimize_navbar.addEventListener('click',()=>{
+    if(minimize_navbar.classList.contains('fa-window-minimize')){
+      navbar.style.top = '-12%';
+      minimize_navbar.classList.remove('fa-window-minimize');
+      minimize_navbar.classList.add('fa-window-maximize');
+    }else{
+      navbar.style.top = '0%';
+      minimize_navbar.classList.remove('fa-window-maximize');
+      minimize_navbar.classList.add('fa-window-minimize');
+    }
+  })
