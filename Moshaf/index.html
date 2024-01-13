@@ -58,6 +58,11 @@
           </form>
         </div>
       </div>
+      <form class="d-flex">
+        <input class="form-control me-2 search_input" name="search" minlength="4" maxlength="70" aria-atomic="true" type="search" placeholder="بحث ...." aria-label="Search">
+        
+        <button class="btn btn-outline-success mx-3 search_btn" type="submit">بحث</button>
+      </form>
           <div class="play_pause " >
             <span class="play_pause_text">
                 توقف
@@ -108,7 +113,14 @@
     </button>
 
     </nav>
-    
+    <div class="search_results">
+      <i class="fa-solid fa-xmark"></i>
+      <div class="parent-simbole">&#x06DD;
+        <span class="child-simbole">النتيجة</span>
+      </div>
+      <div id="search_box">
+      </div>
+    </div>
     <div  class="ss"></div>
     <div class="tafsesr_box_parent">
       <div class="parent-simbole">&#x06DD;

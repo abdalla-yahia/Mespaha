@@ -46,8 +46,8 @@ p{
     margin-bottom: 50px;
 }
 p.active{
-    background-color: rgb(46, 46, 50) !important;
-    color:#ffffff;
+    background-color: rgba(49, 3, 44, 0.279) !important;
+    color:#f003f4;
     border-radius: 10px;
     padding: 5px;
 
@@ -80,7 +80,7 @@ p.active{
 
 
 
-.tafsesr_box_parent{
+.tafsesr_box_parent,.search_results{
     width: 100%;
     position: fixed;
     bottom: 0;
@@ -133,6 +133,67 @@ p.active{
     position: absolute;
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
+}
+.search_results{
+  top: 20%;
+  height: 60%;
+  background-color: #fff;
+  box-shadow: inset 5px 5px 15px #4b4c4e,
+    inset -5px -5px 15px #3b3b3c,
+    inset 5px 5px 15px #454547,
+    inset -5px -5px 15px #0e1a49;
+    display: none;
+    i{
+      color: red;
+      cursor: pointer;
+      &:hover {
+        font-size: 35px;
+      }
+    }
+    #search_box>p{
+    font-size: 25px;
+    margin-top: 30px;
+    font-family: 'Amiri', serif;
+    .sora-name{
+      color: #29b6f6;
+      font-size: larger;
+    }
+    >div.parent-simbole{
+      font-size: 30px;
+      .child-simbole{
+        font-size: 20px;
+      }
+    }
+  }
+}
+.search_results >div.parent-simbole{
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 60px;
+}
+.search_results >div.parent-simbole:before{
+  content: '';
+  width: 200px;
+  height: 5px;
+  background-color: green;
+  top: 82px;
+  left: 82px;
+  position: absolute;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+.search_results >div.parent-simbole:after{
+  content: '';
+  width: 200px;
+  height: 5px;
+  background-color: green;
+  top: 82px;
+  right: 82px;
+  position: absolute;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
 }
 /* div.parent-simbole {
     font-family: 'Amiri Quran', serif;
@@ -303,11 +364,7 @@ p.active{
     font-size: 25px;
   }
   p.active{
-    background-color: rgb(33, 33, 52) !important;
-    color:#ffffff;
     border-radius: 10px;
-    /* padding: 5px; */
-
 }
   div.parent-simbole{
     position: relative;

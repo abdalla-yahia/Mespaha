@@ -15,10 +15,18 @@ const play_pause = document.querySelector('.play_pause');
 const play_pause_text = document.querySelector('.play_pause_text');
 const mute = document.querySelector('.fa-solid');
 const volume = document.querySelector('.volume');
-let data= ''
+const search_input = document.querySelector('.search_input');
+const search_btn = document.querySelector('.search_btn');
+const search_results = document.querySelector('.search_results');
+const close_search_results = document.querySelector('.search_results>i');
+const search_box_content= document.querySelector('#search_box');
+
+let data= '';
 fetch('./Api/Quran.json').then(res=>res.json()).then(res=>data =res)
-let tafseer =''
+let tafseer ='';
 fetch('./Api/tafseer.json').then(res=>res.json()).then(res=>tafseer =res);
+let search = '';
+fetch('./Api/Search.json').then(res=>res.json()).then(res=>search =res);
 
 localStorage.getItem('volume_audio')?audio.volume = +localStorage.getItem('volume_audio'):audio.volume=1
 
@@ -214,9 +222,61 @@ setTimeout(()=>{
         Select_sora.value = +num + 1;
       }
 
+      //Search  Section By Word
+      let result =[]
+      search_btn.onclick = ()=>{
+        if(search_input.value === ''){
+          return;
+        }
+        else{
+          result=[];
+          search_box_content.innerHTML='';
+      for(let i in search){
+          search[i].aya_text_emlaey.includes(search_input.value)&&
+          result.push({
+          aya: search[i].aya_text_emlaey,
+          num:search[i].sura_no,
+          f:search[i].aya_no,
+          Sora: search[i].sura_name_ar
+          })
+        }
+      }
+    if(result.length){
+      search_results.style.display ='block';
+      result.map((res,index)=>{
+        //Create Elements 
+        let aya = document.createElement('p');
+        aya.innerHTML = `<span style="color:#29b6f6">[<span style="color:red">${+index+1}</span>] </span> ${res.aya.split(search_input.value).join(`<span style="color:rgb(254, 6, 159);font-weight:bolder">${search_input.value}</span>`)} <div class='parent-simbole' > &#x06DD; <span class='child-simbole'> ${res.f} </span> </div> <span class="sora-name">" ${res.Sora} "</span>`;
+        aya.style.padding = '2px';
+        aya.style.display='block';
+        
+        search_box_content.appendChild(aya);
+        aya.addEventListener('mouseenter',()=>{
+          aya.style.color = '#29b6f6'
+          aya.addEventListener('click',()=>{
+            localStorage.setItem('Sora_Number',+res.num-1)
+            localStorage.setItem('Aya_Number',res.f)
+            window.location.reload();
+          })
+        })
+        aya.addEventListener('mouseleave',()=>{
+          aya.style.color = '#000'
+        })
+      })
+      let span = document.createElement('span')
+      span.innerHTML = `يوجد <span style="color:red">${result.length} </span>${result.length === 1 || result.length >= 10 ? 'نتيجة':'نتائج'}`;
+      span.style.position = 'absolute';
+      span.style.top = '10px'
+      span.style.left = '10px'
+      search_box_content.prepend(span);
+    }
+    }
 },3000)
 
 document.forms[0].onsubmit = (e)=>{
+e.preventDefault();
+}
+document.forms[1].onsubmit = (e)=>{
 e.preventDefault();
 }
 
@@ -301,4 +361,10 @@ e.preventDefault();
     }
     }
 
+  }
+
+  //Close Search Box
+  close_search_results.onclick = ()=>{
+    search_results.style.display = 'none';
+    console.log('clsed')
   }
