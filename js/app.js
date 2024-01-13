@@ -37,7 +37,7 @@ const btn_radio = document.querySelector('.btn-radio');
 const Radio_audio = document.querySelector('.Radio_audio');
 const play_pause = document.querySelector('.play_pause');
 const play_pause_text = document.querySelector('.play_pause_text');
-const spans = document.querySelector('.spans');
+const spans = document.querySelectorAll('.spans>span');
 const mute = document.querySelector('.fa-solid');
 const volume = document.querySelector('.volume');
 
@@ -98,7 +98,9 @@ btn_radio.onchange = (e)=>{
   Radio_audio.classList.add('play');
   play_pause.style.backgroundColor = '#1dc26a';
   play_pause_text.innerText= 'توقف';
-  spans.style.display = 'block';
+  spans.forEach(e=>{
+    e.classList.add('active')
+  })
   mute.classList.remove('fa-volume-xmark');
   mute.classList.add('fa-volume-high');
   //Set Active Spans
@@ -116,7 +118,9 @@ btn_radio.onchange = (e)=>{
       play_pause.style.backgroundColor='#2196f3'
       Radio_audio.pause()
       play_pause_text.innerText = 'تشغيل'
-      spans.style.display = 'none';
+      spans.forEach(e=>{
+        e.classList.remove('active')
+      })
       mute.classList.remove('fa-volume-high');
       mute.classList.add('fa-volume-xmark');
       Radio_audio.muted = true;
@@ -128,7 +132,9 @@ btn_radio.onchange = (e)=>{
       play_pause.style.backgroundColor = '#1dc26a';
       Radio_audio.play()
       play_pause_text.innerText= 'توقف';
-      spans.style.display = 'block';
+      spans.forEach(e=>{
+        e.classList.add('active')
+      })
       mute.classList.remove('fa-volume-xmark');
       mute.classList.add('fa-volume-high');
       Radio_audio.muted = false;

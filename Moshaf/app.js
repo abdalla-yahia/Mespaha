@@ -9,7 +9,7 @@ const Number_Sora_letters = document.querySelector('#Number_Sora_letters')
 const Sora_type = document.querySelector('#Sora_type')
 const Select_sora = document.querySelector('#Select_sora')
 const Tafsesr_box = document.querySelector('#tafsesr_box')
-const spans = document.querySelector('.spans');
+const spans = document.querySelectorAll('.spans>span');
 let volume_span =      document.querySelectorAll(".volume_span");
 const play_pause = document.querySelector('.play_pause');
 const play_pause_text = document.querySelector('.play_pause_text');
@@ -43,6 +43,7 @@ setTimeout(()=>{
     let z = f
     let s = f-1
     Name_Sora.innerText =`سورة ${data[num].name}`
+    document.title = `سورة ${data[num].name}`
     Number_Sora_aya.innerText =` ${data[num].array.length}`
     Number_Sora_words.innerText =` ${data[num].words}`
     Number_Sora_letters.innerText =` ${data[num].letters}`
@@ -67,7 +68,6 @@ setTimeout(()=>{
     localStorage.getItem('volume_audio')?passmalla_audio.volume = +localStorage.getItem('volume_audio'):passmalla_audio.volume=1
     passmalla_audio.src ='./audio/basmalla.mp3';
     passmalla_audio.setAttribute('controls', 'true');
-    // passmalla_audio.setAttribute('autoplay', 'true');
     passmalla_audio.style.display = 'none';
     passmalla.appendChild(passmalla_audio)
 
@@ -228,7 +228,10 @@ e.preventDefault();
       audio.classList.toggle('play')
       audio.pause()
       play_pause_text.innerText = 'تشغيل'
-      spans.style.display = 'none';
+      spans.forEach(e=>{
+        e.classList.remove('active');
+
+      })
       mute.classList.remove('fa-volume-high');
       mute.classList.add('fa-volume-xmark');
       audio.muted = true;
@@ -240,7 +243,10 @@ e.preventDefault();
       play_pause.style.backgroundColor ='#1dc26a'
       audio.play()
       play_pause_text.innerText= 'توقف';
-      spans.style.display = 'block';
+      spans.forEach(e=>{
+        e.classList.add('active');
+
+      })
       mute.classList.remove('fa-volume-xmark');
       mute.classList.add('fa-volume-high');
       audio.muted = false;
