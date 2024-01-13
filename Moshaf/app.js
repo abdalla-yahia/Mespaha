@@ -276,6 +276,9 @@ setTimeout(()=>{
       search_box_content.prepend(span);
     }
     }
+
+    
+
 },3000)
 
 document.forms[0].onsubmit = (e)=>{
@@ -322,7 +325,48 @@ e.preventDefault();
 
   }
 
-  
+  //Document Event Keypress
+      document.onkeydown =(e)=>{
+        e.preventDefault();
+        if(e.keyCode === 32 ){
+        if(!audio.paused ){
+          play_pause.style.backgroundColor ='#2196f3'
+          audio.classList.toggle('play')
+          audio.pause()
+          play_pause_text.innerText = 'تشغيل'
+          spans.forEach(e=>{
+            e.classList.remove('active');
+    
+          })
+          mute.classList.remove('fa-volume-high');
+          mute.classList.add('fa-volume-xmark');
+          audio.muted = true;
+          volume_span.forEach(e=>{
+            e.classList.remove('active')
+          })
+          
+          }
+          else{ 
+            audio.classList.toggle('play')
+            play_pause.style.backgroundColor ='#1dc26a'
+            audio.play()
+            play_pause_text.innerText= 'توقف';
+            spans.forEach(e=>{
+              e.classList.add('active');
+      
+            })
+            mute.classList.remove('fa-volume-xmark');
+            mute.classList.add('fa-volume-high');
+            audio.muted = false;
+            for(let j = 0 ; j < (audio.volume*10) ; j++){
+                volume_span[j].classList.add('active')
+            }
+          }
+        
+          }
+        
+      } 
+
   //Set Active Spans
   for(let j = 0 ; j < (audio.volume*10) ; j++){
     volume_span[j].classList.add('active')
@@ -409,3 +453,5 @@ e.preventDefault();
       minimize_navbar.classList.add('fa-window-minimize');
     }
   })
+
+
