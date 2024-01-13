@@ -249,7 +249,7 @@ p.active{
     margin-bottom: 25%;
     padding: 12px;
     text-align: justify;
-    line-height: 2.1;
+    line-height: 2.5;
     border: 5px double #d81b60;
     .passmalla {
       font-size: 30px;
@@ -262,6 +262,13 @@ p.active{
   p{
     font-size: 25px;
   }
+  p.active{
+    background-color: rgb(33, 33, 52) !important;
+    color:#ffffff;
+    border-radius: 10px;
+    /* padding: 5px; */
+
+}
   div.parent-simbole{
     position: relative;
     display: inline-block;
@@ -331,4 +338,9 @@ font-size: 15px;
   border-bottom-left-radius: 50%;
 }
 
+.spans{
+
+  display: none !important;
+  
+  }
 }
