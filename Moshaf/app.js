@@ -38,6 +38,7 @@ setTimeout(()=>{
     let f =localStorage.getItem('Aya_Number') || 1
     Sora_Aya.value = f;
     Sora.value = +num + 1;
+   
     let tafSora = tafseer.filter(e=>e.number == (+num+1) )
     let z = f
     let s = f-1
@@ -55,42 +56,68 @@ setTimeout(()=>{
             behavior:'smooth'
         })
     },1000)
-    let passmalla = document.createElement('h2')
-    passmalla.innerText="بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ"
-    passmalla.style.width = '100%';
-    passmalla.style.textAlign = 'center';
-    passmalla.style.color = 'red';
-    passmalla.style.fontSize = '65px';
-    passmalla.style.marginBottom = '55px'
+
+    let passmalla = document.createElement('div')
+    passmalla.classList.add('passmalla');
+    if(+num !== 8 ){
+      passmalla.innerText="بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ";
+    }
     ss.appendChild(passmalla)
-    
+    let passmalla_audio = document.createElement('audio');
+    localStorage.getItem('volume_audio')?passmalla_audio.volume = +localStorage.getItem('volume_audio'):passmalla_audio.volume=1
+    passmalla_audio.src ='./audio/basmalla.mp3';
+    passmalla_audio.setAttribute('controls', 'true');
+    // passmalla_audio.setAttribute('autoplay', 'true');
+    passmalla_audio.style.display = 'none';
+    passmalla.appendChild(passmalla_audio)
+
     Sora_Aya.onchange= (el)=>{
+      if(!(el.target.value > data[num].array.length || el.target.value <= 0)){
         localStorage.setItem('Aya_Number', +el.target.value )
         window.location.reload()
+      }else{
+        Sora_Aya.value = f;
+        
+      }
     } 
     Sora.onchange = (e)=>{
+      if(!(e.target.value >= 115 || e.target.value <= 0)){
         localStorage.setItem('Sora_Number',+e.target.value - 1)
         localStorage.setItem('Aya_Number', 1)
         window.location.reload()
+      }else{
+        Sora.value = +num + 1;
+      }
     }
     Select_sora.onchange = (e)=>{
         localStorage.setItem('Sora_Number',+e.target.value - 1)
         localStorage.setItem('Aya_Number', 1)
         window.location.reload()
     }
-    console.log(s)
+    
     if(data[num].array[s]){
-      console.log('data Finished')
-        let src ='.'+ data[num].array[s].path
-        audio.setAttribute('src',src);
-        audio.play()
+      if(f == 1 && +num !== 8){
+        passmalla_audio.play();
+        audio.classList.remove('play');
+        audio.pause()
+        passmalla_audio.addEventListener('ended',()=>{
+          audio.classList.add('play')
+          let src ='.'+ data[num].array[s-1].path
+          audio.setAttribute('src',src);
+          audio.play()
+          })
+        }else{
+          let src ='.'+ data[num].array[s].path
+          audio.setAttribute('src',src);
+          audio.play()
+        }
         s++
         z++
     }
     audio.addEventListener('ended',()=>{
         ss.childNodes.forEach(el=>el.classList.remove('active'))
-        if(ss.children[z]){
-            Sora_Aya.value = z
+        if(ss.children[+z]){
+            Sora_Aya.value = +z
             let  src ='.'+ data[num].array[s].path
             audio.setAttribute('src',src);
             ss.children[z].classList.add('active')
@@ -126,16 +153,16 @@ setTimeout(()=>{
         Tafsesr_box.innerHTML = `<div class='parent-simbole' > &#x06DD; <span class='child-simbole'>${tafSora[Sora_Aya.value-1].aya} </span> </div> ${tafSora[Sora_Aya.value-1].text}`;
     
         aya.addEventListener('click',()=>{
-            Sora_Aya.value = z
+            Sora_Aya.value = +z
             ss.childNodes.forEach(el=>el.classList.remove('active'))
-            if(ss.children[z]){
+            if(ss.children[+z]){
                 let src ='.'+  data[num].array[s].path
                 audio.setAttribute('src',src)
-                ss.children[z].classList.add('active')
+                ss.children[+z].classList.add('active')
                 Tafsesr_box.innerHTML = `<div class='parent-simbole' > &#x06DD; <span class='child-simbole'>${tafSora[Sora_Aya.value-1].aya} </span> </div> ${tafSora[Sora_Aya.value-1].text}`;
                 localStorage.setItem('Aya_Number',z)
                 window.scrollTo({
-                    top:(ss.children[z].offsetTop)-250,
+                    top:(ss.children[+z].offsetTop)-250,
                     behavior:'smooth'
                 })
                 z++
@@ -184,6 +211,7 @@ setTimeout(()=>{
         data[i] && (option.innerText = data[i].name);
         data[i] && (option.value = data[i].id);
         Select_sora.appendChild(option)
+        Select_sora.value = +num + 1;
       }
 
 },3000)

@@ -1,11 +1,15 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 body{
     background-color: #ffffcc;
     color: black;
-    
-font-family: 'Amaranth', sans-serif;
-font-family: 'Amiri Quran', serif;
-
+    font-family: 'Amaranth', sans-serif;
+    font-family: 'Amiri Quran', serif;
 }
+
 .ss{
     margin: 20px;
     margin-top: 110px;
@@ -14,6 +18,13 @@ font-family: 'Amiri Quran', serif;
     text-align: justify;
     line-height: 2.5;
     border: 10px double #d81b60;
+    .passmalla {
+      font-size: 50px;
+      width: 100%;
+      margin-bottom: 50px;
+      text-align: center;
+      color: red;
+    }
 }
 div.parent-simbole{
     position: relative;
@@ -48,6 +59,10 @@ p.active{
     left: 0;
     width: 100%;
     z-index: 999;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
 }
 .navbar span.active {
     color: #d81b60 !important;
@@ -221,10 +236,99 @@ p.active{
 @keyframes top-bootom {
     0%{
       top: 85%;
-      /* filter: hue-rotate(0deg); */
     }
     100%{
       top: 0%;
-      /* filter: hue-rotate(360deg); */
     }
   }
+
+@media (max-width: 768px) {
+  .ss{
+    margin: 20px;
+    margin-top: 110px;
+    margin-bottom: 25%;
+    padding: 12px;
+    text-align: justify;
+    line-height: 2.1;
+    border: 5px double #d81b60;
+    .passmalla {
+      font-size: 30px;
+      width: 100%;
+      margin-bottom: 40px;
+      text-align: center;
+      color: red;
+    }
+}
+  p{
+    font-size: 25px;
+  }
+  div.parent-simbole{
+    position: relative;
+    display: inline-block;
+    font-size: 25px;
+}
+
+span.child-simbole{
+position: absolute;
+top: 60%;
+left: 45%;
+transform: translate(-50%, -50%);
+font-size: 15px;
+}
+
+.tafsesr_box_parent{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #d8c0c0;
+  z-index: 999;
+  height: 25%;
+  font-size: 20px;
+  text-align: justify;
+  padding:10px 10px;
+  line-height: 2;
+  overflow-y: auto;
+  color: #000000;
+  box-shadow: inset 2px 2px 2px #1b8cd8,
+  inset -2px -2px 2px #172e7a,
+  inset 2px 2px 2px #1b44d8,
+  inset -2px -2px 2px #0e1a49
+  ;
+
+#tafsesr_box{
+  margin-top: 20px;
+  font-family: 'Amiri', serif;
+}
+}
+.tafsesr_box_parent >div.parent-simbole{
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 30px;
+}
+.tafsesr_box_parent >div.parent-simbole:before{
+  content: '';
+  width: 100px;
+  height: 3px;
+  background-color: green;
+  top: 40px;
+  left: 42px;
+  position: absolute;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+.tafsesr_box_parent >div.parent-simbole:after{
+  content: '';
+  width: 100px;
+  height: 3px;
+  background-color: green;
+  top: 40px;
+  right: 42px;
+  position: absolute;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+
+}
