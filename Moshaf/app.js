@@ -26,6 +26,8 @@ const search_btn           = document.querySelector('.search_btn'               
 const search_results       = document.querySelector('.search_results'               );
 const close_search_results = document.querySelector('.search_results>i.fa-xmark'    );
 const search_box_content   = document.querySelector('#search_box'                   );
+const input_loop   = document.querySelector('.input_loop'                   );
+const btn_loop   = document.querySelector('.btn_loop'                   );
 
 //Fetch The Data From Api Folder
 let data= '';
@@ -39,6 +41,10 @@ localStorage.getItem('volume_audio')?audio.volume = +localStorage.getItem('volum
 
 //MAin Functions
 setTimeout(()=>{
+  let counter = localStorage.getItem('counter_aya_loop') || 0;
+  if(localStorage.getItem('counter_aya_loop')){
+    input_loop.value  = localStorage.getItem('counter_aya_loop')
+  }
     //Define Variable Of Number Of Sora In Database
     let num =localStorage.getItem('Sora_Number') || 0;
     //Set Loop To Restart From First Sora 
@@ -72,11 +78,43 @@ setTimeout(()=>{
     Sora_Aya.setAttribute('max',data[num].array.length) ;
     //Starting Play Sound When Page Load
     setTimeout(()=>{
-      audio.paused && audio.play()
+      // audio.paused && audio.play()
         window.scrollTo({
             top:(ss.children[s].offsetTop)-250,
             behavior:'smooth'
-        })
+        });
+        if(audio.paused){
+          play_pause.style.backgroundColor ='#2196f3'
+          audio.classList.toggle('play')
+          play_pause_text.innerText = 'تشغيل'
+          spans.forEach(e=>{
+            e.classList.remove('active');
+    
+          })
+          mute.classList.remove('fa-volume-high');
+          mute.classList.add('fa-volume-xmark');
+          audio.muted = true;
+          volume_span.forEach(e=>{
+            e.classList.remove('active')
+          })
+          
+          }
+          else{ 
+            audio.classList.toggle('play')
+            play_pause.style.backgroundColor ='#1dc26a'
+            audio.play()
+            play_pause_text.innerText= 'توقف';
+            spans.forEach(e=>{
+              e.classList.add('active');
+      
+            })
+            mute.classList.remove('fa-volume-xmark');
+            mute.classList.add('fa-volume-high');
+            audio.muted = false;
+            for(let j = 0 ; j < (audio.volume*10) ; j++){
+                volume_span[j].classList.add('active')
+            }
+          }
     },1000)
     //Set Passmalla Text Before Every Sora But Eltawba Sora
     let passmalla = document.createElement('div')
@@ -136,8 +174,10 @@ setTimeout(()=>{
           audio.setAttribute('src',src);
           audio.play()
         }
-        s++
-        z++
+        
+          z++
+          s++
+        
     }
     //Reload Next Aya Sound When This Audio Sound Is Ended
     audio.addEventListener('ended',()=>{
@@ -153,7 +193,12 @@ setTimeout(()=>{
                 top:(ss.children[z].offsetTop)-250,
                 behavior:'smooth'
             })
-            
+            if(counter > 0){
+              counter--;
+              btn_loop.innerText = `باقي ${counter} `;
+            }else{
+              counter = 0
+            }
         }else{
           //Go To Next Sora If Aya Number Not Found
             num++
@@ -161,8 +206,13 @@ setTimeout(()=>{
             localStorage.setItem('Aya_Number',1)
             window.location.reload()
         }
-        z++
-        s++
+        if(counter === 0){
+          z++
+          s++
+          counter = input_loop.value
+        }else{
+          return;
+        }
     })
     
 
@@ -190,8 +240,12 @@ setTimeout(()=>{
                     top:(ss.children[+z].offsetTop)-250,
                     behavior:'smooth'
                 })
-                z++
-                s++
+                if(counter == 0){
+                  z++
+                  s++
+                }else{
+                  return;
+                }
             
         })
         
@@ -259,16 +313,33 @@ setTimeout(()=>{
     }
     }
 
-    
+    input_loop.onchange =(e)=>{
+
+      btn_loop.addEventListener('click', () =>{
+        if(!(e.target.value >=0 && e.target.value <= 20)){
+          e.target.value = '';
+          return
+        }else{
+          counter = e.target.value;
+          localStorage.setItem('counter_aya_loop',e.target.value)
+        if(counter > 0){
+          btn_loop.innerText = `باقي ${counter} `;
+        }else {
+          btn_loop.innerText = 'ترديد'
+        }
+        
+      }
+    })
+  }
 
 },3000)
 
-document.forms[0].onsubmit = (e)=>{
-e.preventDefault();
-}
-document.forms[1].onsubmit = (e)=>{
-e.preventDefault();
-}
+// document.forms[0].onsubmit = (e)=>{
+// e.preventDefault();
+// }
+// document.forms[1].onsubmit = (e)=>{
+// e.preventDefault();
+// }
 
 
   //Play And Pause Audio

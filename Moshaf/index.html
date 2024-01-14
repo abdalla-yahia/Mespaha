@@ -23,7 +23,7 @@
 
 </head>
   <body >
-    <nav class="navbar active navbar-expand-lg navbar-dark bg-dark ">
+    <nav class="navbar  active navbar-expand-lg navbar-dark bg-dark ">
       <div class="container-fluid">
         <div class="navbar-brand name-sora" >سورة </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,16 +58,17 @@
           </form>
         </div>
       </div>
-      <form class="d-flex">
-        <input class="form-control me-2 search_input" name="search" minlength="3" maxlength="70" aria-atomic="true" type="search" placeholder="بحث ...." aria-label="Search">
-        
-        <button class="btn btn-outline-success mx-3 search_btn" type="submit">بحث</button>
-      </form>
-          <div class="play_pause " >
-            <span class="play_pause_text">
-                توقف
-            </span>
+      <!-- <form > -->
+        <div class="search_box">
+          <input class="form-control  w-100 search_input" name="search" minlength="3" maxlength="70" aria-atomic="true" type="search" placeholder="بحث ...." aria-label="Search">
+          <button class="btn btn-success w-100  search_btn" type="submit">بحث</button>
         </div>
+        <div class="loop_box">
+          <input class="input_loop w-100 " min="0" max="20" type="number" placeholder="عدد مرات الترديد ">
+          <button class="btn_loop w-100 btn btn-success">ترديد</button>
+        </div>
+      <!-- </form> -->
+          
         <div class="spans">
           <span class="active" style="--i:0"></span>
           <span class="active" style="--i:1"></span>
@@ -94,7 +95,14 @@
           <span class="active" style="--i:13"></span>
           <span class="active" style="--i:12"></span>
       </div>
-        <div class="volume">
+       
+        <div class="audio_buttons ">
+          <div class="play_pause " >
+            <span class="play_pause_text">
+                توقف
+            </span>
+        </div>
+          <div class="volume">
             <i class="fa-solid fa-volume-high"></i>
             <span class="volume_span " style="--v:1"></span>
             <span class="volume_span " style="--v:2"></span>
@@ -107,7 +115,7 @@
             <span class="volume_span " style="--v:9"></span>
             <span class="volume_span "  style="--v:10"></span>
         </div>
-
+        </div>
        
 
     <button class="exit-parent">
