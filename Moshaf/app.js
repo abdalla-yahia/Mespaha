@@ -1,89 +1,98 @@
-const ss = document.querySelector('.ss')
-const audio = document.querySelector('.audio')
-const Sora = document.querySelector('#Sora')
-const Sora_Aya = document.querySelector('#Sora-Aya')
-const Name_Sora = document.querySelector('.name-sora')
-const Number_Sora_aya = document.querySelector('#Number_Sora_aya')
-const Number_Sora_words = document.querySelector('#Number_Sora_words')
-const Number_Sora_letters = document.querySelector('#Number_Sora_letters')
-const Sora_type = document.querySelector('#Sora_type')
-const Select_sora = document.querySelector('#Select_sora')
-const Tafsesr_box = document.querySelector('#tafsesr_box')
-const minimize_tafsesr = document.querySelector('.tafsesr_box_parent>i.mini-max')
-const minimize_navbar = document.querySelector('.navbar>i.mini-max')
-const navbar = document.querySelector('.navbar')
-const close_tafsesr = document.querySelector('.tafsesr_box_parent>i.fa-xmark')
-const tafsesr_box_parent = document.querySelector('.tafsesr_box_parent')
-const spans = document.querySelectorAll('.spans>span');
-let volume_span =      document.querySelectorAll(".volume_span");
-const play_pause = document.querySelector('.play_pause');
-const play_pause_text = document.querySelector('.play_pause_text');
-const mute = document.querySelector('.fa-solid');
-const volume = document.querySelector('.volume');
-const search_input = document.querySelector('.search_input');
-const search_btn = document.querySelector('.search_btn');
-const search_results = document.querySelector('.search_results');
-const close_search_results = document.querySelector('.search_results>i.fa-xmark');
-const search_box_content= document.querySelector('#search_box');
+const volume_span          = document.querySelectorAll(".volume_span"               );
+const spans2               = document.querySelectorAll('.spans>span.active'         );
+const spans                = document.querySelectorAll('.spans>span'                );
+const ss                   = document.querySelector('.ss'                           );
+const audio                = document.querySelector('.audio'                        );
+const Sora                 = document.querySelector('#Sora'                         );
+const Sora_Aya             = document.querySelector('#Sora-Aya'                     );
+const Name_Sora            = document.querySelector('.name-sora'                    );
+const Number_Sora_aya      = document.querySelector('#Number_Sora_aya'              );
+const Number_Sora_words    = document.querySelector('#Number_Sora_words'            );
+const Number_Sora_letters  = document.querySelector('#Number_Sora_letters'          );
+const Sora_type            = document.querySelector('#Sora_type'                    );
+const Select_sora          = document.querySelector('#Select_sora'                  );
+const Tafsesr_box          = document.querySelector('#tafsesr_box'                  );
+const minimize_tafsesr     = document.querySelector('.tafsesr_box_parent>i.mini-max');
+const minimize_navbar      = document.querySelector('.navbar>i.mini-max'            );
+const navbar               = document.querySelector('.navbar'                       );
+const close_tafsesr        = document.querySelector('.tafsesr_box_parent>i.fa-xmark');
+const tafsesr_box_parent   = document.querySelector('.tafsesr_box_parent'           );
+const play_pause           = document.querySelector('.play_pause'                   );
+const play_pause_text      = document.querySelector('.play_pause_text'              );
+const mute                 = document.querySelector('.fa-solid'                     );
+const volume               = document.querySelector('.volume'                       );
+const search_input         = document.querySelector('.search_input'                 );
+const search_btn           = document.querySelector('.search_btn'                   );
+const search_results       = document.querySelector('.search_results'               );
+const close_search_results = document.querySelector('.search_results>i.fa-xmark'    );
+const search_box_content   = document.querySelector('#search_box'                   );
 
+//Fetch The Data From Api Folder
 let data= '';
 fetch('./Api/Quran.json').then(res=>res.json()).then(res=>data =res)
 let tafseer ='';
 fetch('./Api/tafseer.json').then(res=>res.json()).then(res=>tafseer =res);
 let search = '';
 fetch('./Api/Search.json').then(res=>res.json()).then(res=>search =res);
-
+//Get Audio Volume From LocalStorage
 localStorage.getItem('volume_audio')?audio.volume = +localStorage.getItem('volume_audio'):audio.volume=1
 
-
+//MAin Functions
 setTimeout(()=>{
-
-    let num =localStorage.getItem('Sora_Number') || 0
+    //Define Variable Of Number Of Sora In Database
+    let num =localStorage.getItem('Sora_Number') || 0;
+    //Set Loop To Restart From First Sora 
     if(num > 113 ){
         localStorage.setItem('Sora_Number',0)
         window.location.reload()
     }
+    //If User Set Number Of Sora Or Aya Manualy And It Was Wrong Number
     if(localStorage.getItem('Sora_Number') < 0 || localStorage.getItem('Aya_Number') < 1){
       localStorage.setItem('Sora_Number',0)
       localStorage.setItem('Aya_Number',1)
       window.location.reload()
     }
+    //Define Varibals To Get Number Of Aya In Specific Sora
     let f =localStorage.getItem('Aya_Number') || 1
     Sora_Aya.value = f;
     Sora.value = +num + 1;
-   
-    let tafSora = tafseer.filter(e=>e.number == (+num+1) )
+    //Define Varibals To Get Tafseer Of Aya In Specific Sora
+    let tafSora = tafseer.filter(e=>e.number == (+num+1) );
+    //Varibale To Use It For GEt Number Of Aya
     let z = f
+    //Define Variable To Get Sound Of Specific Aya
     let s = f-1
-    Name_Sora.innerText =`سورة ${data[num].name}`
-    document.title = `سورة ${data[num].name}`
-    Number_Sora_aya.innerText =` ${data[num].array.length}`
-    Number_Sora_words.innerText =` ${data[num].words}`
-    Number_Sora_letters.innerText =` ${data[num].letters}`
-    Sora_type.innerText =` ${data[num].type}`
-    Sora_Aya.setAttribute('max',data[num].array.length) 
-    
+    //Set Information Of Sora In Navbar
+    Name_Sora.innerText =`سورة ${data[num].name}`;
+    document.title = `سورة ${data[num].name}`;
+    Number_Sora_aya.innerText =` ${data[num].array.length}`;
+    Number_Sora_words.innerText =` ${data[num].words}`;
+    Number_Sora_letters.innerText =` ${data[num].letters}`;
+    Sora_type.innerText =` ${data[num].type}`;
+    Sora_Aya.setAttribute('max',data[num].array.length) ;
+    //Starting Play Sound When Page Load
     setTimeout(()=>{
-      audio.pause && audio.play()
+      audio.paused && audio.play()
         window.scrollTo({
             top:(ss.children[s].offsetTop)-250,
             behavior:'smooth'
         })
     },1000)
-
+    //Set Passmalla Text Before Every Sora But Eltawba Sora
     let passmalla = document.createElement('div')
     passmalla.classList.add('passmalla');
     if(+num !== 8 ){
       passmalla.innerText="بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ";
     }
     ss.appendChild(passmalla)
+    //Create Passmalla Sound 
     let passmalla_audio = document.createElement('audio');
     localStorage.getItem('volume_audio')?passmalla_audio.volume = +localStorage.getItem('volume_audio'):passmalla_audio.volume=1
     passmalla_audio.src ='./audio/basmalla.mp3';
     passmalla_audio.setAttribute('controls', 'true');
     passmalla_audio.style.display = 'none';
     passmalla.appendChild(passmalla_audio)
-
+    //When User Change Aya Number
     Sora_Aya.onchange= (el)=>{
       if(!(el.target.value > data[num].array.length || el.target.value <= 0)){
         localStorage.setItem('Aya_Number', +el.target.value )
@@ -92,7 +101,8 @@ setTimeout(()=>{
         Sora_Aya.value = f;
         
       }
-    } 
+    };
+    //When User Change Sora Number
     Sora.onchange = (e)=>{
       if(!(e.target.value >= 115 || e.target.value <= 0)){
         localStorage.setItem('Sora_Number',+e.target.value - 1)
@@ -102,17 +112,19 @@ setTimeout(()=>{
         Sora.value = +num + 1;
       }
     }
+    //When User Change Sora Name From Dropdown Selector
     Select_sora.onchange = (e)=>{
         localStorage.setItem('Sora_Number',+e.target.value - 1)
         localStorage.setItem('Aya_Number', 1)
         window.location.reload()
     }
-    
+    //Set Passmalla Sound Before Every Sora But Eltawba Sora
     if(data[num].array[s]){
       if(f == 1 && +num !== 8){
         passmalla_audio.play();
         audio.classList.remove('play');
         audio.pause()
+        //Reload Next Aya Sound When Pasmalla Sound Is Ended
         passmalla_audio.addEventListener('ended',()=>{
           audio.classList.add('play')
           let src ='.'+ data[num].array[s-1].path
@@ -127,6 +139,7 @@ setTimeout(()=>{
         s++
         z++
     }
+    //Reload Next Aya Sound When This Audio Sound Is Ended
     audio.addEventListener('ended',()=>{
         ss.childNodes.forEach(el=>el.classList.remove('active'))
         if(ss.children[+z]){
@@ -142,6 +155,7 @@ setTimeout(()=>{
             })
             
         }else{
+          //Go To Next Sora If Aya Number Not Found
             num++
             localStorage.setItem('Sora_Number',num) 
             localStorage.setItem('Aya_Number',1)
@@ -153,63 +167,31 @@ setTimeout(()=>{
     
 
     
-    //For First Openaing
+    //Set Ayat Text Information In Child
     for(let i in (data[num].array)){
-        let aya = document.createElement('p')
+      //Create Element To Set Text Of Aya Inside It
+        let aya = document.createElement('p');
         aya.innerHTML = ` ${data[num].array[i].ar}  <div class='parent-simbole' > &#x06DD; <span class='child-simbole'> ${data[num].array[i].id} </span> </div>`;
         aya.style.padding = '5px';
-        
-        j=i
-        let z =+i+1
-        let s = i;
-        
+        //Set Tafseer For This Aya 
         Tafsesr_box.innerHTML = `<div class='parent-simbole' > &#x06DD; <span class='child-simbole'>${tafSora[Sora_Aya.value-1].aya} </span> </div> ${tafSora[Sora_Aya.value-1].text}`;
-    
+        //When Prees On Aya Playing Sound Of It
         aya.addEventListener('click',()=>{
+          z =+i+1
+          s = i;
             Sora_Aya.value = +z
             ss.childNodes.forEach(el=>el.classList.remove('active'))
-            if(ss.children[+z]){
-                let src ='.'+  data[num].array[s].path
+              localStorage.setItem('Aya_Number',z)
+                let src ='.'+  data[num].array[i].path
                 audio.setAttribute('src',src)
-                ss.children[+z].classList.add('active')
+                ss.children[z].classList.add('active')
                 Tafsesr_box.innerHTML = `<div class='parent-simbole' > &#x06DD; <span class='child-simbole'>${tafSora[Sora_Aya.value-1].aya} </span> </div> ${tafSora[Sora_Aya.value-1].text}`;
-                localStorage.setItem('Aya_Number',z)
                 window.scrollTo({
                     top:(ss.children[+z].offsetTop)-250,
                     behavior:'smooth'
                 })
                 z++
                 s++
-            }else{
-                num++
-                localStorage.setItem('Sora_Number',num) 
-                localStorage.setItem('Aya_Number',1)
-                window.location.reload()
-            }
-            
-            audio.addEventListener('ended',()=>{
-                ss.childNodes.forEach(el=>el.classList.remove('active'))
-                if(ss.children[z]){ 
-                    ss.children[z].classList.add('active')
-                    Tafsesr_box.innerHTML = `<div class='parent-simbole' > &#x06DD; <span class='child-simbole'>${tafSora[Sora_Aya.value-1].aya} </span> </div> ${tafSora[Sora_Aya.value-1].text}`;
-                    Sora_Aya.value = z
-                    src ='.'+ data[num].array[s].path
-                    localStorage.setItem('Aya_Number',z)
-                    audio.setAttribute('src',src);
-                    window.scrollTo({
-                        top:(ss.children[z].offsetTop)-250,
-                        behavior:'smooth'
-                    })
-                }else{
-                    num++
-                    z=1
-                    localStorage.setItem('Sora_Number',num) 
-                    localStorage.setItem('Aya_Number',1)
-                    window.location.reload()
-                }
-                z++
-                s++
-            })
             
         })
         
@@ -327,8 +309,8 @@ e.preventDefault();
 
   //Document Event Keypress
       document.onkeydown =(e)=>{
-        e.preventDefault();
         if(e.keyCode === 32 ){
+          e.preventDefault();
         if(!audio.paused ){
           play_pause.style.backgroundColor ='#2196f3'
           audio.classList.toggle('play')
@@ -444,11 +426,11 @@ e.preventDefault();
 
   minimize_navbar.addEventListener('click',()=>{
     if(minimize_navbar.classList.contains('fa-window-minimize')){
-      navbar.style.top = '-12%';
+      navbar.classList.toggle('active');
       minimize_navbar.classList.remove('fa-window-minimize');
       minimize_navbar.classList.add('fa-window-maximize');
     }else{
-      navbar.style.top = '0%';
+      navbar.classList.toggle('active');
       minimize_navbar.classList.remove('fa-window-maximize');
       minimize_navbar.classList.add('fa-window-minimize');
     }

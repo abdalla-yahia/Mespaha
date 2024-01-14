@@ -1,3 +1,4 @@
+
 *{
   padding: 0;
   margin: 0;
@@ -55,9 +56,9 @@ p.active{
 
 .navbar{
     position: fixed;
-    top: -12%;
     left: 0;
     width: 100%;
+    padding-top: 25px ;
     z-index: 999;
     display: flex;
     justify-content: space-evenly;
@@ -81,8 +82,6 @@ p.active{
     font-family: 'Amiri';
     padding: 10px;
 }
-
-
 
 .tafsesr_box_parent,.search_results{
     width: 100%;
@@ -154,13 +153,13 @@ p.active{
     border-bottom-left-radius: 50%;
 }
 .search_results{
-  top: 20%;
-  height: 55%;
+  top: 8%;
+  height: 85%;
   background-color: #fff;
-  box-shadow: inset 5px 5px 15px #4b4c4e,
-    inset -5px -5px 15px #3b3b3c,
-    inset 5px 5px 15px #454547,
-    inset -5px -5px 15px #0e1a49;
+  box-shadow: inset 2px 2px 12px #868686,
+    inset -2px -2px 12px #9c9c9e,
+    inset 2px 2px 12px #9a9aa1,
+    inset -2px -2px 12px #5571e1;
     padding-top: 50px;
     display: none;
     i{
@@ -219,9 +218,7 @@ p.active{
   border-top-left-radius: 50%;
   border-bottom-left-radius: 50%;
 }
-/* div.parent-simbole {
-    font-family: 'Amiri Quran', serif;
-} */
+
 
 
 .play_pause,
@@ -325,7 +322,7 @@ p.active{
       left: 60%;
       transform: translate(-50%,0);
       animation: top-bootom 2s infinite ease-in-out alternate;
-      animation-delay: calc(.455s * var(--i));
+      animation-delay: calc(.3s * var(--i));
     }
   }
 }
@@ -368,7 +365,62 @@ p.active{
     }
   }
 
-@media (max-width: 768px) {
+@media (min-width: 1301px) {
+  .navbar{
+    top:0%;
+  &.active{
+    top: -14%;
+  }
+}
+}
+@media (min-width:1280px) and (max-width:1300px) {
+  .navbar{
+    top:0%;
+  &.active{
+    top: -21%;
+  } 
+ }
+}
+@media (min-width:991px) and (max-width: 1280px) {
+  .navbar{
+    top:0%;
+    &.active{
+      top: -25%;
+    }
+  }
+  .search_results{
+    top: 8%;
+  }
+}
+@media (min-width:881px) and (max-width: 991px) {
+  .navbar{
+    top:0%;
+    &.active{
+      top: -11%;
+    }
+  }
+  .search_results{
+    top: 10.6%;
+  }
+}
+@media (min-width:661px) and (max-width: 881px) {
+  .navbar{
+    top:0%;
+    &.active{
+      top: -16%;
+    }
+  }
+  .search_results{
+    top: 17%;
+  }
+}
+@media (max-width: 660px) {
+  .navbar{
+    top:0%;
+    &.active{
+      top: -16%;
+    }
+  }
   .ss{
     margin: 20px;
     margin-top: 110px;
@@ -460,17 +512,7 @@ font-size: 15px;
   border-top-left-radius: 50%;
   border-bottom-left-radius: 50%;
 }
-
-.spans{
-
-  display: none !important;
-  
-  }
+.search_results{
+  top: 17%;
 }
-
-i{
-  transition: .5s;
-  &:hover {
-    font-size: 30px;
-  }
 }
