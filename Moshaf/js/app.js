@@ -38,15 +38,32 @@ let search = '';
 fetch('./Api/Search.json').then(res=>res.json()).then(res=>search =res);
 //Get Audio Volume From LocalStorage
 localStorage.getItem('volume_audio')?audio.volume = +localStorage.getItem('volume_audio'):audio.volume=1
+ //Set Counter Of Loop Aya Count
+ let counter = localStorage.getItem('counter_aya_loop') || 0;
 
 //MAin Functions
 setTimeout(()=>{
-  let counter = localStorage.getItem('counter_aya_loop') || 0;
+      //Define Variable Of Number Of Sora In Database
+      let num =localStorage.getItem('Sora_Number') || 0;
+      //Define Varibals To Get Number Of Aya In Specific Sora
+      let f =localStorage.getItem('Aya_Number') || 1
+      Sora_Aya.value = f;
+      Sora.value = +num + 1;
+      //Varibale To Use It For GEt Number Of Aya
+      let z = f
+      //Define Variable To Get Sound Of Specific Aya
+      let s = f-1
+  if(!localStorage.getItem('Aya_Number')){
+    localStorage.setItem('Aya_Number',1)
+    localStorage.setItem('Sora_Number',0)
+    audio.src ='.'+ data[0].array[0].path;
+    // audio.play();
+  }
+ 
   if(localStorage.getItem('counter_aya_loop')){
     input_loop.value  = localStorage.getItem('counter_aya_loop')
   }
-    //Define Variable Of Number Of Sora In Database
-    let num =localStorage.getItem('Sora_Number') || 0;
+
     //Set Loop To Restart From First Sora 
     if(num > 113 ){
         localStorage.setItem('Sora_Number',0)
@@ -58,16 +75,9 @@ setTimeout(()=>{
       localStorage.setItem('Aya_Number',1)
       window.location.reload()
     }
-    //Define Varibals To Get Number Of Aya In Specific Sora
-    let f =localStorage.getItem('Aya_Number') || 1
-    Sora_Aya.value = f;
-    Sora.value = +num + 1;
+
     //Define Varibals To Get Tafseer Of Aya In Specific Sora
     let tafSora = tafseer.filter(e=>e.number == (+num+1) );
-    //Varibale To Use It For GEt Number Of Aya
-    let z = f
-    //Define Variable To Get Sound Of Specific Aya
-    let s = f-1
     //Set Information Of Sora In Navbar
     Name_Sora.innerText =`سورة ${data[num].name}`;
     document.title = `سورة ${data[num].name}`;
@@ -76,53 +86,36 @@ setTimeout(()=>{
     Number_Sora_letters.innerText =` ${data[num].letters}`;
     Sora_type.innerText =` ${data[num].type}`;
     Sora_Aya.setAttribute('max',data[num].array.length) ;
-    //Starting Play Sound When Page Load
-    setTimeout(()=>{
-      // audio.paused && audio.play()
-        window.scrollTo({
-            top:(ss.children[s].offsetTop)-250,
-            behavior:'smooth'
-        });
-        if(audio.paused){
-          play_pause.style.backgroundColor ='#2196f3'
-          audio.classList.toggle('play')
-          play_pause_text.innerText = 'تشغيل'
-          spans.forEach(e=>{
-            e.classList.remove('active');
     
-          })
-          mute.classList.remove('fa-volume-high');
-          mute.classList.add('fa-volume-xmark');
-          audio.muted = true;
-          volume_span.forEach(e=>{
-            e.classList.remove('active')
-          })
-          
-          }
-          else{ 
-            audio.classList.toggle('play')
-            play_pause.style.backgroundColor ='#1dc26a'
-            audio.play()
-            play_pause_text.innerText= 'توقف';
-            spans.forEach(e=>{
-              e.classList.add('active');
-      
-            })
-            mute.classList.remove('fa-volume-xmark');
-            mute.classList.add('fa-volume-high');
-            audio.muted = false;
-            for(let j = 0 ; j < (audio.volume*10) ; j++){
-                volume_span[j].classList.add('active')
-            }
-          }
-    },1000)
     //Set Passmalla Text Before Every Sora But Eltawba Sora
     let passmalla = document.createElement('div')
+    let passmallaText = document.createElement('span');
+    passmallaText.innerText ="بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ"
+    passmallaText.classList.add('passmallaText')
+    let sora_name = document.createElement('span')
+    sora_name.classList.add('sora_name','passmalla_title')
+    sora_name.innerText = `سورة ${data[num].name}`;
+    let sora_mak_mad = document.createElement('span')
+    sora_mak_mad.classList.add('sora_mak_mad','passmalla_title')
+    sora_mak_mad.innerText = `التنزيل ${data[num].type}`;
+    let sora_ayas_num = document.createElement('span');
+    sora_ayas_num.classList.add('sora_ayas_num','passmalla_title')
+    sora_ayas_num.innerText = `أياتها ${data[num].array.length}`;
     passmalla.classList.add('passmalla');
-    if(+num !== 8 ){
-      passmalla.innerText="بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ";
+
+    passmalla.appendChild(sora_name)
+    passmalla.appendChild(sora_mak_mad)
+    if(+num !== 8 && +num !== 0){
+      passmalla.appendChild(passmallaText)
     }
+    passmalla.appendChild(sora_ayas_num)
     ss.appendChild(passmalla)
+    if(+num ===0){
+      ss.style.border = '120px solid transparent'
+      ss.style.borderImage = "url(./images/round-2.avif) 180 round";
+      ss.style.textAlign = 'center';
+      ss.style.fontSize ='80px'
+    }
     //Create Passmalla Sound 
     let passmalla_audio = document.createElement('audio');
     localStorage.getItem('volume_audio')?passmalla_audio.volume = +localStorage.getItem('volume_audio'):passmalla_audio.volume=1
@@ -164,21 +157,43 @@ setTimeout(()=>{
         audio.pause()
         //Reload Next Aya Sound When Pasmalla Sound Is Ended
         passmalla_audio.addEventListener('ended',()=>{
-          audio.classList.add('play')
-          let src ='.'+ data[num].array[s-1].path
-          audio.setAttribute('src',src);
-          audio.play()
-          })
-        }else{
-          let src ='.'+ data[num].array[s].path
-          audio.setAttribute('src',src);
-          audio.play()
-        }
-        
+          audio.src ='.'+ data[+num].array[s].path
+          audio.play();
+          counter--;
+          if(counter <= 0){
           z++
           s++
-        
+          }else{
+            return
+          }
+          })
+        }else{
+          if(counter > 0){
+            counter--;
+            audio.classList.add('play')
+            let src ='.'+ data[+num].array[s].path
+            audio.setAttribute('src',src);
+            audio.play();
+            }else{
+              audio.classList.add('play')
+              let src ='.'+ data[+num].array[s].path
+              audio.setAttribute('src',src);
+              audio.play();
+              z++
+              s++
+            }
+          }
     }
+    //Starting Play Sound When Page Load
+    setTimeout(()=>{
+      // audio.paused && audio.play()
+        
+        window.scrollTo({
+            top:(ss.children[s].offsetTop)-250,
+            behavior:'smooth'
+        });
+        // isAudioPlaying()
+    },1000)
     //Reload Next Aya Sound When This Audio Sound Is Ended
     audio.addEventListener('ended',()=>{
         ss.childNodes.forEach(el=>el.classList.remove('active'))
@@ -195,10 +210,13 @@ setTimeout(()=>{
             })
             if(counter > 0){
               counter--;
-              btn_loop.innerText = `باقي ${counter} `;
-            }else{
-              counter = 0
+              btn_loop.innerText = `باقي ${+counter} `;
+              btn_loop.style.backgroundColor = '#1b8cd8';
+              btn_loop.style.color = 'white';
             }
+              else{
+                counter = input_loop.value
+              }
         }else{
           //Go To Next Sora If Aya Number Not Found
             num++
@@ -206,7 +224,7 @@ setTimeout(()=>{
             localStorage.setItem('Aya_Number',1)
             window.location.reload()
         }
-        if(counter === 0){
+        if(counter <= 0){
           z++
           s++
           counter = input_loop.value
@@ -215,8 +233,6 @@ setTimeout(()=>{
         }
     })
     
-
-    
     //Set Ayat Text Information In Child
     for(let i in (data[num].array)){
       //Create Element To Set Text Of Aya Inside It
@@ -224,23 +240,25 @@ setTimeout(()=>{
         aya.innerHTML = ` ${data[num].array[i].ar}  <div class='parent-simbole' > &#x06DD; <span class='child-simbole'> ${data[num].array[i].id} </span> </div>`;
         aya.style.padding = '5px';
         //Set Tafseer For This Aya 
-        Tafsesr_box.innerHTML = `<div class='parent-simbole' > &#x06DD; <span class='child-simbole'>${tafSora[Sora_Aya.value-1].aya} </span> </div> ${tafSora[Sora_Aya.value-1].text}`;
+        Tafsesr_box.innerHTML = `<div class='parent-simbole' > &#x06DD; <span class='child-simbole'>${tafSora[f-1].aya} </span> </div> ${tafSora[f-1].text}`;
         //When Prees On Aya Playing Sound Of It
         aya.addEventListener('click',()=>{
+          counter = input_loop.value
           z =+i+1
           s = i;
             Sora_Aya.value = +z
             ss.childNodes.forEach(el=>el.classList.remove('active'))
               localStorage.setItem('Aya_Number',z)
-                let src ='.'+  data[num].array[i].path
+              let src ='.'+  data[num].array[i].path
                 audio.setAttribute('src',src)
                 ss.children[z].classList.add('active')
                 Tafsesr_box.innerHTML = `<div class='parent-simbole' > &#x06DD; <span class='child-simbole'>${tafSora[Sora_Aya.value-1].aya} </span> </div> ${tafSora[Sora_Aya.value-1].text}`;
                 window.scrollTo({
-                    top:(ss.children[+z].offsetTop)-250,
-                    behavior:'smooth'
+                  top:(ss.children[+z].offsetTop)-250,
+                  behavior:'smooth'
                 })
-                if(counter == 0){
+                counter--
+                if(counter <= 0){
                   z++
                   s++
                 }else{
@@ -253,7 +271,7 @@ setTimeout(()=>{
         ss.appendChild(aya)
     }
     
-    ss.children[z-1].classList.add('active')
+    ss.children[f].classList.add('active')
     
       for(let i in data){
         let option = document.createElement('option'); 
@@ -312,7 +330,7 @@ setTimeout(()=>{
       search_box_content.prepend(span);
     }
     }
-
+      //Set Loop Event Handler 
     input_loop.onchange =(e)=>{
 
       btn_loop.addEventListener('click', () =>{
@@ -322,26 +340,28 @@ setTimeout(()=>{
         }else{
           counter = e.target.value;
           localStorage.setItem('counter_aya_loop',e.target.value)
-        if(counter > 0){
-          btn_loop.innerText = `باقي ${counter} `;
-        }else {
-          btn_loop.innerText = 'ترديد'
+          if(counter > 1){
+            btn_loop.innerText = `باقي ${+counter+1} `;
+            btn_loop.style.backgroundColor = '#1b8cd8';
+            
+          }else{
+            btn_loop.innerText = 'الأخيرة'
+            btn_loop.style.backgroundColor = '#1dc26a';
         }
         
       }
     })
   }
-
 },3000)
 
-// document.forms[0].onsubmit = (e)=>{
-// e.preventDefault();
-// }
-// document.forms[1].onsubmit = (e)=>{
-// e.preventDefault();
-// }
-
-
+setInterval(() => {
+  isAudioPlaying()
+  if(+counter === +input_loop.value){
+    btn_loop.innerText = 'الأخيرة'
+    btn_loop.style.backgroundColor = '#f4511e';
+    btn_loop.style.color = '#fff';
+  }
+}, 1000);
   //Play And Pause Audio
   play_pause.onclick = ()=>{
     play_pause.style.backgroundColor ='#2196f3'
@@ -476,7 +496,7 @@ setTimeout(()=>{
   minimize_tafsesr.addEventListener('click',()=>{
     if(minimize_tafsesr.classList.contains('fa-window-minimize')){
 
-      tafsesr_box_parent.style.height = '6%';
+      tafsesr_box_parent.style.height = '10%';
       minimize_tafsesr.classList.remove('fa-window-minimize');
       minimize_tafsesr.classList.add('fa-window-maximize');
     }else{
@@ -507,4 +527,36 @@ setTimeout(()=>{
     }
   })
 
+//Function To Check if Audio is playing
 
+function isAudioPlaying(){
+  if(audio.paused){
+    play_pause.style.backgroundColor ='#2196f3'
+    // audio.classList.toggle('play')
+    play_pause_text.innerText = 'تشغيل'
+    spans.forEach(e=>{
+      e.classList.remove('active');
+    })
+    mute.classList.remove('fa-volume-high');
+    mute.classList.add('fa-volume-xmark');
+    volume_span.forEach(e=>{
+      e.classList.remove('active')
+    })
+    
+    }
+    else{ 
+      // audio.classList.toggle('play')
+      play_pause.style.backgroundColor ='#1dc26a'
+      audio.play()
+      play_pause_text.innerText= 'توقف';
+      spans.forEach(e=>{
+        e.classList.add('active');
+      })
+      mute.classList.remove('fa-volume-xmark');
+      mute.classList.add('fa-volume-high');
+      audio.muted = false;
+      for(let j = 0 ; j < (audio.volume*10) ; j++){
+          volume_span[j].classList.add('active')
+      }
+    }
+}

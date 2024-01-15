@@ -8,16 +8,25 @@
     <!--Boot Strap CDN-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+    <!--Main Style File-->
+    <link rel="stylesheet" href="./css/style.css">
     <!--Google Fonts-->
+    <!--Kufi Foont For Sora Name-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400..700&display=swap" rel="stylesheet">
+    <!--Font Kofi Foor Bassmala-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi+Ink&display=swap" rel="stylesheet">
     <!--Foont Amiri For Quran-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;800&family=Amaranth:ital,wght@1,400;1,700&family=Amiri+Quran&display=swap" rel="stylesheet">
     <!--Foont Amiri For Tafseer-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <!--Font Awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -58,7 +67,7 @@
           </form>
         </div>
       </div>
-      <!-- <form > -->
+      
         <div class="search_box">
           <input class="form-control  w-100 search_input" name="search" minlength="3" maxlength="70" aria-atomic="true" type="search" placeholder="بحث ...." aria-label="Search">
           <button class="btn btn-success w-100  search_btn" type="submit">بحث</button>
@@ -67,7 +76,7 @@
           <input class="input_loop w-100 " min="0" max="20" type="number" placeholder="عدد مرات الترديد ">
           <button class="btn_loop w-100 btn btn-success">ترديد</button>
         </div>
-      <!-- </form> -->
+      
           
         <div class="spans">
           <span class="active" style="--i:0"></span>
@@ -133,6 +142,7 @@
       <div id="search_box">
       </div>
     </div>
+    <!-- <div class="cover"></div> -->
     <div  class="ss"></div>
     <div class="tafsesr_box_parent">
       <i class="fa-solid fa-xmark"></i>
@@ -146,6 +156,6 @@
       </div>
     </div>
     <audio class="audio play" src="" controls autoplay style="display: none;"></audio>
-    <script src="app.js"></script>
+    <script src="./js/app.js"></script>
   </body>
     </html>
