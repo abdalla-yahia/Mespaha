@@ -579,9 +579,9 @@ p{
 }
 @media (max-width: 660px) {
   .navbar{
-    top:-12%;
+    top:-5%;
     &.active{
-      top: -5%;
+      top: -22%;
     }
   }
   .ss{
