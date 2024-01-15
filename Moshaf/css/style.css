@@ -594,22 +594,19 @@ p{
     border: 30px solid transparent;
     border-image:url('../images/round-3.avif') 140 round  ;
     .passmalla {
-      /* font-size: 30px; */
       width: 100%;
       margin-bottom: 20px;
       text-align: center;
       justify-content: space-around;
-      border: 6px solid rgb(13, 11, 11);
-      border-image: url('../images/title-3.jpg') 90 90 round ;
+      border: 5px solid rgb(13, 11, 11);
+      border-image: url('../images/title-3.jpg') 80 round ;
       >.passmallaText {
-        font-size: 15px;
-        font-family: 'Amiri Quran';
+        font-size: 10px;
         color: rgb(243, 2, 14);
         font-weight: bolder;
       }
       >.passmalla_title{
-        font-size: 8px;
-        width: 1%;
+        font-size: 5px;
       }
      
     }

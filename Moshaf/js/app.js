@@ -110,7 +110,7 @@ setTimeout(()=>{
     }
     passmalla.appendChild(sora_ayas_num)
     ss.appendChild(passmalla)
-    if(+num ===0){
+    if(+num ===0 && !matchMedia('only screen and (max-width: 660px)').matches){
       ss.style.border = '120px solid transparent'
       ss.style.borderImage = "url(./images/round-2.avif) 180 round";
       ss.style.textAlign = 'center';
