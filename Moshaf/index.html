@@ -32,7 +32,7 @@
 
 </head>
   <body >
-    <nav class="navbar  active navbar-expand-lg navbar-dark bg-dark ">
+    <nav class="navbar active navbar-expand-lg navbar-dark bg-dark ">
       <div class="container-fluid">
         <div class="navbar-brand name-sora" >سورة </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,27 +56,50 @@
             
             
           </ul>
-          <form class="d-flex">
+          <form class="d-flex w-50">
+            <label for="Select_jozz" class="text-light mx-3 text-center">اختر الجزء</label>
+            <select name="" id="Select_jozz" class="form-control me-3 w-50" value="">
+              <option selected disabled>اختر الجزء</option>
+            </select>
+            <label for="Select_part" class="text-light mx-3 text-center">اختر الربع</label>
+            <select name="" id="Select_part" class="form-control me-3 w-50" value="">
+              <option selected disabled>اختر الربع</option>
+            </select>
+            <label for="Select_sora" class="text-light mx-3 text-center">السورة</label>
             <select name="" id="Select_sora" class="form-control me-3 w-50" value="">
-              <option selected disabled>أختر السورة</option>
+              <option selected disabled>اختر السورة</option>
             </select>
             <label for="Sora" class="text-light mx-3 text-center">رقم السورة</label>
-            <input class="btn btn-light w-50" type="number" id="Sora" min="1" max="114" placeholder="بحث برقم السورة" >
+            <input class="btn btn-light w-50" type="text" id="Sora" min="1" max="114" placeholder="بحث برقم السورة" >
             <label for="Sora-Aya" class="text-light mx-3 text-center">رقم الأية</label>
-            <input class="btn btn-light w-50" type="number" id="Sora-Aya" min="1" max="" placeholder="بحث برقم الأيه" >
+            <input class="btn btn-light w-50" type="text" id="Sora-Aya" min="1" max="" placeholder="بحث برقم الأيه" >
           </form>
         </div>
       </div>
       
         <div class="search_box">
-          <input class="form-control  w-100 search_input" name="search" minlength="3" maxlength="70" aria-atomic="true" type="search" placeholder="بحث ...." aria-label="Search">
+          <input ariaAutoComplete="true" class="form-control  w-100 search_input" name="search" minlength="3" maxlength="70" aria-atomic="true" type="search" placeholder="بحث ...." aria-label="Search">
           <button class="btn btn-success w-100  search_btn" type="submit">بحث</button>
         </div>
         <div class="loop_box">
           <input class="input_loop w-100 " min="0" max="20" type="number" placeholder="عدد مرات الترديد ">
           <button class="btn_loop w-100 btn btn-success">ترديد</button>
         </div>
-      
+        <div class="qaryea_box">
+          <select name="" id="" class="select_input w-100">
+            <option value="saad-ghamdy" selected >سعد الغامدي</option>
+            <option value="mshary-rashed"  >مشاري راشد </option>
+            <option value="menshawy-moalem"  >المنشاوي المصحف المعلم</option>
+            <option value="menshawy-moratal"  >المنشاوي - مرتل</option>
+            <option value="abdelbaset-mojawad"  >عبدالباسط - مجود</option>
+            <option value="abdelbaset-moratal"  >عبدالباسط - مرتل</option>
+            <option value="elhosary-moratal"  >الحصري - مرتل</option>
+            <option value="elhosary-mojawad"  >الحصري - مجود  </option>
+            <option value="albana-moratal"  >محمود علي البنا - مرتل  </option>
+          </select>
+          <button class="btn select_btn w-100">إختر القارىء</button>
+          <img src="./images/Qarea_images/saad-ghamdy.jpg" class="qaryea_image" alt="">
+        </div>
           
         <div class="spans">
           <span class="active" style="--i:0"></span>
